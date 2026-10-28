@@ -1,0 +1,134 @@
+{
+  "experiment_version": "phase4-v1",
+  "status": "frozen",
+  "selected_model": "defensible_logistic",
+  "threshold": 0.6152401422448208,
+  "model_criterion": "highest validation average precision; model name breaks ties",
+  "threshold_criterion": "maximum crash F1 on the selected model's validation scores; the lowest score wins ties",
+  "use_case_note": "No missed-crash versus false-alarm cost ratio was specified. Average precision ranks crash scores without an operating point. Crash F1 is the documented balanced threshold. Precision, recall, false positives, and false negatives are reported beside that choice.",
+  "random_state": 0,
+  "candidates": {
+    "peak_baseline": {
+      "kind": "peak",
+      "features": [
+        "peak_horizontal_g"
+      ],
+      "score": "max over time of hypot(accel_x, accel_y)"
+    },
+    "accel_logistic": {
+      "kind": "logistic",
+      "features": [
+        "peak_horizontal_g",
+        "peak_magnitude_g",
+        "min_ax_g",
+        "max_ax_g",
+        "std_horizontal_g"
+      ],
+      "imputer": "median fit on training rows",
+      "scaler": "standard scaler fit on training rows",
+      "scaler_mean": [
+        1.3194589921917115,
+        1.9686928980279212,
+        -1.039260478254789,
+        0.6898215203184668,
+        0.16972126715891397
+      ],
+      "scaler_scale": [
+        1.3325597627412968,
+        1.294484813028426,
+        1.0911391498469494,
+        0.9575270604120752,
+        0.14436425176232984
+      ],
+      "logistic_C": 1.0,
+      "class_weight": "balanced",
+      "solver": "lbfgs",
+      "random_state": 0,
+      "max_iter": 1000,
+      "intercept": -1.479930093266309,
+      "coefficients": {
+        "peak_horizontal_g": 2.6564977123282962,
+        "peak_magnitude_g": 0.3538248530829053,
+        "min_ax_g": -0.8236415308786735,
+        "max_ax_g": -0.7576964789839428,
+        "std_horizontal_g": 0.8599312944069697
+      }
+    },
+    "defensible_logistic": {
+      "kind": "logistic",
+      "features": [
+        "peak_horizontal_g",
+        "peak_magnitude_g",
+        "min_ax_g",
+        "max_ax_g",
+        "std_horizontal_g",
+        "gps_start_kmh",
+        "gps_end_kmh",
+        "gps_min_kmh",
+        "gps_drop_kmh",
+        "size_light",
+        "size_medium",
+        "size_heavy"
+      ],
+      "imputer": "median fit on training rows",
+      "scaler": "standard scaler fit on training rows",
+      "scaler_mean": [
+        1.3194589921917115,
+        1.9686928980279212,
+        -1.039260478254789,
+        0.6898215203184668,
+        0.16972126715891397,
+        62.001565739304404,
+        26.930984241123852,
+        19.733759079113327,
+        42.26780666019108,
+        0.1426489989416762,
+        0.3539803122780057,
+        0.1617133247314322
+      ],
+      "scaler_scale": [
+        1.3325597627412968,
+        1.294484813028426,
+        1.0911391498469494,
+        0.9575270604120752,
+        0.14436425176232984,
+        31.041474829926752,
+        31.631375329279294,
+        29.909293338517006,
+        29.295368251726114,
+        0.3497145436532686,
+        0.4782031480423057,
+        0.36818762246406195
+      ],
+      "logistic_C": 1.0,
+      "class_weight": "balanced",
+      "solver": "lbfgs",
+      "random_state": 0,
+      "max_iter": 1000,
+      "intercept": -1.9189504041075385,
+      "coefficients": {
+        "peak_horizontal_g": 2.5497373845640143,
+        "peak_magnitude_g": 0.3382274688955427,
+        "min_ax_g": -0.809039220403663,
+        "max_ax_g": -0.7320628624763436,
+        "std_horizontal_g": 0.7266595625730423,
+        "gps_start_kmh": 0.7126853140357942,
+        "gps_end_kmh": -1.856823953961768,
+        "gps_min_kmh": 1.134261145958396,
+        "gps_drop_kmh": -0.40286730647110036,
+        "size_light": 0.534291181016059,
+        "size_medium": 0.8446131178120592,
+        "size_heavy": 0.5072468040579278
+      }
+    }
+  },
+  "excluded_features": {
+    "gps_samples": "GPS list length is a storage count, not a speed. Standardizing it turns a one-sample format gap into a large score when one length dominates training.",
+    "imu_samples": "Accelerometer list length is a storage count, not an acceleration.",
+    "gyro_samples": "Gyroscope list length is a storage count, not a rotation.",
+    "gyro_is_hd": "This is a sensor-resolution flag. Standardization does not put high-definition and standard gyroscope samples on one scale.",
+    "peak_abs_gyro_deg_s": "Standard gyroscope rows can saturate near the int16 full scale, while high-definition rows use a finer resolution. One standardized column does not correct that encoding.",
+    "std_gyro_magnitude_deg_s": "Same gyroscope encoding mismatch as the peak gyroscope feature."
+  },
+  "test_metrics_included": false
+}

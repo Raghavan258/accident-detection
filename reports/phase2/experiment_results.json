@@ -1,0 +1,612 @@
+{
+  "command": "python -m accident_detection.experiment --data-dir data/VZCrash/data --output-dir reports/phase2",
+  "rows_removed": 0,
+  "feature_names": [
+    "peak_horizontal_g",
+    "peak_magnitude_g",
+    "min_ax_g",
+    "max_ax_g",
+    "std_horizontal_g",
+    "peak_abs_gyro_deg_s",
+    "std_gyro_magnitude_deg_s",
+    "imu_samples",
+    "gyro_samples",
+    "gps_start_kmh",
+    "gps_end_kmh",
+    "gps_min_kmh",
+    "gps_drop_kmh",
+    "gps_samples",
+    "gyro_is_hd",
+    "size_light",
+    "size_medium",
+    "size_heavy"
+  ],
+  "limitations": [
+    "The paper uses vehicle-disjoint shares of 72% train, 14% validation, and 14% test, stratified by crash and vehicle size.",
+    "Official parquet shard counts are train 11, validation 3, test 2.",
+    "This run found train 1, validation 0, test 2.",
+    "The released columns do not include a vehicle id, so the vehicle split cannot be rebuilt inside one shard.",
+    "Validation files are left unused. They are not fit and they are not added to the test set.",
+    "The paper reports 31,090 verified crashes in the full release. A single training shard is not one eleventh of that crash count.",
+    "The training files in this run contain 245 crash events.",
+    "Metrics below are a first pass, not the ITSC benchmark and not a tuned final model."
+  ],
+  "rules": [
+    "Crash is the positive class. Near-miss and normal driving stay negative. No class is resampled.",
+    "GPS lists stay at their stored length. They are not truncated to 16 or padded to 17.",
+    "IMU windows stay at their stored length. They are not resampled to 1600 samples.",
+    "Accelerometer and gyroscope features are reduced separately when their lengths differ.",
+    "Gyroscope samples are not clipped, including values near the int16 full scale.",
+    "Median imputation and standardization are fit on training rows only.",
+    "The peak threshold is chosen on training rows only. Logistic regression uses probability 0.5.",
+    "Test rows are scored once and are not used to change features, the scaler, or the threshold."
+  ],
+  "quality": [
+    {
+      "file_name": "train-00000-of-00011.parquet",
+      "split": "train",
+      "rows": 12542,
+      "gps": [
+        {
+          "length": 15,
+          "rows": 17,
+          "gyro_is_hd": 0,
+          "crash": 0,
+          "last_equals_previous": 4
+        },
+        {
+          "length": 16,
+          "rows": 12519,
+          "gyro_is_hd": 0,
+          "crash": 239,
+          "last_equals_previous": 4398
+        },
+        {
+          "length": 17,
+          "rows": 6,
+          "gyro_is_hd": 0,
+          "crash": 6,
+          "last_equals_previous": 3
+        }
+      ],
+      "imu": {
+        "rows": 12542,
+        "unusual_rows": 25,
+        "mismatch_rows": 0,
+        "max_gsensor_length": 1600,
+        "max_gyro_length": 1600,
+        "mismatch_examples": []
+      },
+      "gyro": {
+        "by_resolution": [
+          {
+            "gyro_is_hd": false,
+            "rows": 12542,
+            "max_abs_deg_s": 1885.0,
+            "p50_abs_deg_s": 10.0,
+            "rows_above_1000": 2,
+            "rows_above_30000": 0
+          },
+          {
+            "gyro_is_hd": true,
+            "rows": 0,
+            "max_abs_deg_s": null,
+            "p50_abs_deg_s": null,
+            "rows_above_1000": 0,
+            "rows_above_30000": 0
+          }
+        ],
+        "rows_above_30000_deg_s": []
+      }
+    },
+    {
+      "file_name": "test-00000-of-00002.parquet",
+      "split": "test",
+      "rows": 12087,
+      "gps": [
+        {
+          "length": 11,
+          "rows": 1,
+          "gyro_is_hd": 1,
+          "crash": 1,
+          "last_equals_previous": 0
+        },
+        {
+          "length": 12,
+          "rows": 1,
+          "gyro_is_hd": 1,
+          "crash": 1,
+          "last_equals_previous": 0
+        },
+        {
+          "length": 13,
+          "rows": 1,
+          "gyro_is_hd": 1,
+          "crash": 1,
+          "last_equals_previous": 0
+        },
+        {
+          "length": 14,
+          "rows": 3,
+          "gyro_is_hd": 3,
+          "crash": 3,
+          "last_equals_previous": 0
+        },
+        {
+          "length": 15,
+          "rows": 9,
+          "gyro_is_hd": 2,
+          "crash": 2,
+          "last_equals_previous": 4
+        },
+        {
+          "length": 16,
+          "rows": 7733,
+          "gyro_is_hd": 0,
+          "crash": 110,
+          "last_equals_previous": 2628
+        },
+        {
+          "length": 17,
+          "rows": 4337,
+          "gyro_is_hd": 4117,
+          "crash": 4101,
+          "last_equals_previous": 2486
+        },
+        {
+          "length": 42,
+          "rows": 2,
+          "gyro_is_hd": 2,
+          "crash": 2,
+          "last_equals_previous": 2
+        }
+      ],
+      "imu": {
+        "rows": 12087,
+        "unusual_rows": 19,
+        "mismatch_rows": 0,
+        "max_gsensor_length": 4100,
+        "max_gyro_length": 4100,
+        "mismatch_examples": []
+      },
+      "gyro": {
+        "by_resolution": [
+          {
+            "gyro_is_hd": false,
+            "rows": 7960,
+            "max_abs_deg_s": 32762.0,
+            "p50_abs_deg_s": 11.0,
+            "rows_above_1000": 7,
+            "rows_above_30000": 2
+          },
+          {
+            "gyro_is_hd": true,
+            "rows": 4127,
+            "max_abs_deg_s": 1360.303955078125,
+            "p50_abs_deg_s": 50.165000915527344,
+            "rows_above_1000": 7,
+            "rows_above_30000": 0
+          }
+        ],
+        "rows_above_30000_deg_s": [
+          {
+            "row_index": 7115,
+            "peak_abs_deg_s": 32762.0,
+            "gyro_is_hd": false,
+            "label": 2
+          },
+          {
+            "row_index": 7212,
+            "peak_abs_deg_s": 32654.0,
+            "gyro_is_hd": false,
+            "label": 2
+          }
+        ]
+      }
+    },
+    {
+      "file_name": "test-00001-of-00002.parquet",
+      "split": "test",
+      "rows": 12087,
+      "gps": [
+        {
+          "length": 11,
+          "rows": 2,
+          "gyro_is_hd": 0,
+          "crash": 0,
+          "last_equals_previous": 0
+        },
+        {
+          "length": 12,
+          "rows": 3,
+          "gyro_is_hd": 0,
+          "crash": 0,
+          "last_equals_previous": 0
+        },
+        {
+          "length": 13,
+          "rows": 7,
+          "gyro_is_hd": 2,
+          "crash": 0,
+          "last_equals_previous": 2
+        },
+        {
+          "length": 14,
+          "rows": 2,
+          "gyro_is_hd": 1,
+          "crash": 0,
+          "last_equals_previous": 1
+        },
+        {
+          "length": 15,
+          "rows": 5,
+          "gyro_is_hd": 1,
+          "crash": 0,
+          "last_equals_previous": 3
+        },
+        {
+          "length": 16,
+          "rows": 1120,
+          "gyro_is_hd": 2,
+          "crash": 0,
+          "last_equals_previous": 330
+        },
+        {
+          "length": 17,
+          "rows": 10948,
+          "gyro_is_hd": 8702,
+          "crash": 0,
+          "last_equals_previous": 5281
+        }
+      ],
+      "imu": {
+        "rows": 12087,
+        "unusual_rows": 31,
+        "mismatch_rows": 1,
+        "max_gsensor_length": 1600,
+        "max_gyro_length": 1600,
+        "mismatch_examples": [
+          {
+            "gsensor_length": 1280,
+            "gyro_length": 1270,
+            "label": 2
+          }
+        ]
+      },
+      "gyro": {
+        "by_resolution": [
+          {
+            "gyro_is_hd": false,
+            "rows": 3379,
+            "max_abs_deg_s": 880.0,
+            "p50_abs_deg_s": 12.0,
+            "rows_above_1000": 0,
+            "rows_above_30000": 0
+          },
+          {
+            "gyro_is_hd": true,
+            "rows": 8708,
+            "max_abs_deg_s": 1253.470947265625,
+            "p50_abs_deg_s": 7.5325000286102295,
+            "rows_above_1000": 2,
+            "rows_above_30000": 0
+          }
+        ],
+        "rows_above_30000_deg_s": []
+      }
+    }
+  ],
+  "unused_validation_files": [],
+  "ignored_non_split_files": [],
+  "peak_baseline": {
+    "score": "max over time of hypot(accel_x, accel_y)",
+    "threshold_g": 2.2016214332978348,
+    "threshold_selection": "maximum crash F1 on the training rows; lowest threshold wins ties",
+    "train_f1_at_selection": 0.788
+  },
+  "feature_model": {
+    "imputer": "median fit on training rows",
+    "scaler": "standard scaler fit on training rows",
+    "scaler_mean": [
+      0.8396890315716765,
+      1.4996072546446533,
+      -0.7770145914549161,
+      0.3308642960311946,
+      0.15201901151131694,
+      16.007973210014352,
+      3.1131326349032635,
+      1599.7759527985968,
+      1599.7759527985968,
+      60.30712804975283,
+      16.59360548556849,
+      10.030856322755541,
+      50.27627172699729,
+      15.99912294689842,
+      0.0,
+      0.0641046085153883,
+      0.1659225003986605,
+      0.06530059001754106
+    ],
+    "logistic_C": 1.0,
+    "class_weight": "balanced",
+    "probability_threshold": 0.5,
+    "intercept": -3.536549478359871,
+    "coefficients": {
+      "peak_horizontal_g": 1.4830780781410093,
+      "peak_magnitude_g": 0.5059410844991438,
+      "min_ax_g": -0.15686626193057177,
+      "max_ax_g": 0.04289154824902308,
+      "std_horizontal_g": 0.6623753010805646,
+      "peak_abs_gyro_deg_s": -0.09423367635043167,
+      "std_gyro_magnitude_deg_s": -0.0857075054114444,
+      "imu_samples": 0.09134791926162066,
+      "gyro_samples": 0.09134791926162066,
+      "gps_start_kmh": 0.3350298796474707,
+      "gps_end_kmh": -1.1969243277769208,
+      "gps_min_kmh": 0.9995674373501182,
+      "gps_drop_kmh": -0.33381725884297614,
+      "gps_samples": 0.3200303114505969,
+      "gyro_is_hd": 0.0,
+      "size_light": 0.10283720744633648,
+      "size_medium": 0.38557131315880155,
+      "size_heavy": 0.039579167236826474
+    },
+    "iterations": 19
+  },
+  "train_diagnostics": {
+    "name": "train",
+    "role": "fit_diagnostic",
+    "rows": 12542,
+    "peak_baseline": {
+      "rows": 12542,
+      "precision_crash": 0.7725490196078432,
+      "recall_crash": 0.8040816326530612,
+      "f1_crash": 0.788,
+      "balanced_accuracy": 0.8996825175544724,
+      "balanced_accuracy_note": "",
+      "confusion_matrix": {
+        "labels": [
+          "non_crash",
+          "crash"
+        ],
+        "matrix": [
+          [
+            12239,
+            58
+          ],
+          [
+            48,
+            197
+          ]
+        ]
+      },
+      "support_non_crash": 12297,
+      "support_crash": 245,
+      "average_precision_crash": 0.8201103067850962,
+      "average_precision_note": "",
+      "average_precision_excluded_nonfinite": 0
+    },
+    "logistic_regression": {
+      "rows": 12542,
+      "precision_crash": 0.43144424131627057,
+      "recall_crash": 0.963265306122449,
+      "f1_crash": 0.5959595959595959,
+      "balanced_accuracy": 0.9689872924041536,
+      "balanced_accuracy_note": "",
+      "confusion_matrix": {
+        "labels": [
+          "non_crash",
+          "crash"
+        ],
+        "matrix": [
+          [
+            11986,
+            311
+          ],
+          [
+            9,
+            236
+          ]
+        ]
+      },
+      "support_non_crash": 12297,
+      "support_crash": 245,
+      "average_precision_crash": 0.8445029199984995,
+      "average_precision_note": "",
+      "average_precision_excluded_nonfinite": 0
+    }
+  },
+  "test_files": [
+    {
+      "name": "test-00000-of-00002.parquet",
+      "role": "single_preliminary_evaluation",
+      "rows": 12087,
+      "peak_baseline": {
+        "rows": 12087,
+        "precision_crash": 0.9396373056994819,
+        "recall_crash": 0.8592750533049041,
+        "f1_crash": 0.897661180546962,
+        "balanced_accuracy": 0.9148269494848955,
+        "balanced_accuracy_note": "",
+        "confusion_matrix": {
+          "labels": [
+            "non_crash",
+            "crash"
+          ],
+          "matrix": [
+            [
+              7633,
+              233
+            ],
+            [
+              594,
+              3627
+            ]
+          ]
+        },
+        "support_non_crash": 7866,
+        "support_crash": 4221,
+        "average_precision_crash": 0.9660268004314271,
+        "average_precision_note": "",
+        "average_precision_excluded_nonfinite": 0
+      },
+      "logistic_regression": {
+        "rows": 12087,
+        "precision_crash": 0.8766152563568154,
+        "recall_crash": 0.9964463397299218,
+        "f1_crash": 0.9326976383191041,
+        "balanced_accuracy": 0.9605928622117699,
+        "balanced_accuracy_note": "",
+        "confusion_matrix": {
+          "labels": [
+            "non_crash",
+            "crash"
+          ],
+          "matrix": [
+            [
+              7274,
+              592
+            ],
+            [
+              15,
+              4206
+            ]
+          ]
+        },
+        "support_non_crash": 7866,
+        "support_crash": 4221,
+        "average_precision_crash": 0.9899908760784822,
+        "average_precision_note": "",
+        "average_precision_excluded_nonfinite": 0
+      }
+    },
+    {
+      "name": "test-00001-of-00002.parquet",
+      "role": "single_preliminary_evaluation",
+      "rows": 12087,
+      "peak_baseline": {
+        "rows": 12087,
+        "precision_crash": 0.0,
+        "recall_crash": 0.0,
+        "f1_crash": 0.0,
+        "balanced_accuracy": null,
+        "balanced_accuracy_note": "undefined because this slice contains only one class",
+        "confusion_matrix": {
+          "labels": [
+            "non_crash",
+            "crash"
+          ],
+          "matrix": [
+            [
+              11501,
+              586
+            ],
+            [
+              0,
+              0
+            ]
+          ]
+        },
+        "support_non_crash": 12087,
+        "support_crash": 0,
+        "average_precision_crash": null,
+        "average_precision_note": "undefined because this slice does not contain both classes",
+        "average_precision_excluded_nonfinite": 0
+      },
+      "logistic_regression": {
+        "rows": 12087,
+        "precision_crash": 0.0,
+        "recall_crash": 0.0,
+        "f1_crash": 0.0,
+        "balanced_accuracy": null,
+        "balanced_accuracy_note": "undefined because this slice contains only one class",
+        "confusion_matrix": {
+          "labels": [
+            "non_crash",
+            "crash"
+          ],
+          "matrix": [
+            [
+              1494,
+              10593
+            ],
+            [
+              0,
+              0
+            ]
+          ]
+        },
+        "support_non_crash": 12087,
+        "support_crash": 0,
+        "average_precision_crash": null,
+        "average_precision_note": "undefined because this slice does not contain both classes",
+        "average_precision_excluded_nonfinite": 0
+      }
+    }
+  ],
+  "test_pooled": {
+    "name": "test",
+    "role": "single_preliminary_evaluation",
+    "rows": 24174,
+    "peak_baseline": {
+      "rows": 24174,
+      "precision_crash": 0.8157894736842105,
+      "recall_crash": 0.8592750533049041,
+      "f1_crash": 0.8369678089304258,
+      "balanced_accuracy": 0.9091142970629167,
+      "balanced_accuracy_note": "",
+      "confusion_matrix": {
+        "labels": [
+          "non_crash",
+          "crash"
+        ],
+        "matrix": [
+          [
+            19134,
+            819
+          ],
+          [
+            594,
+            3627
+          ]
+        ]
+      },
+      "support_non_crash": 19953,
+      "support_crash": 4221,
+      "average_precision_crash": 0.8962169214763558,
+      "average_precision_note": "",
+      "average_precision_excluded_nonfinite": 0
+    },
+    "logistic_regression": {
+      "rows": 24174,
+      "precision_crash": 0.27327659021506073,
+      "recall_crash": 0.9964463397299218,
+      "f1_crash": 0.4289210687334285,
+      "balanced_accuracy": 0.717939503248412,
+      "balanced_accuracy_note": "",
+      "confusion_matrix": {
+        "labels": [
+          "non_crash",
+          "crash"
+        ],
+        "matrix": [
+          [
+            8768,
+            11185
+          ],
+          [
+            15,
+            4206
+          ]
+        ]
+      },
+      "support_non_crash": 19953,
+      "support_crash": 4221,
+      "average_precision_crash": 0.9242558840594945,
+      "average_precision_note": "",
+      "average_precision_excluded_nonfinite": 0
+    }
+  },
+  "json_path": "reports\\phase2\\experiment_results.json",
+  "report_path": "reports\\phase2\\phase2_report.md"
+}

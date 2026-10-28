@@ -1,0 +1,915 @@
+{
+  "command": "python -m accident_detection.phase3 --data-dir data/VZCrash/data --output-dir reports/phase3",
+  "rows_removed": 0,
+  "selected_model": null,
+  "decision": {
+    "selected_model": null,
+    "status": "blocked",
+    "reason": "validation split is absent or has no defined average precision"
+  },
+  "full_feature_names": [
+    "peak_horizontal_g",
+    "peak_magnitude_g",
+    "min_ax_g",
+    "max_ax_g",
+    "std_horizontal_g",
+    "peak_abs_gyro_deg_s",
+    "std_gyro_magnitude_deg_s",
+    "imu_samples",
+    "gyro_samples",
+    "gps_start_kmh",
+    "gps_end_kmh",
+    "gps_min_kmh",
+    "gps_drop_kmh",
+    "gps_samples",
+    "gyro_is_hd",
+    "size_light",
+    "size_medium",
+    "size_heavy"
+  ],
+  "accel_feature_names": [
+    "peak_horizontal_g",
+    "peak_magnitude_g",
+    "min_ax_g",
+    "max_ax_g",
+    "std_horizontal_g"
+  ],
+  "download_plan": {
+    "missing_train": [
+      "train-00001-of-00011.parquet",
+      "train-00002-of-00011.parquet",
+      "train-00003-of-00011.parquet",
+      "train-00004-of-00011.parquet",
+      "train-00005-of-00011.parquet",
+      "train-00006-of-00011.parquet",
+      "train-00007-of-00011.parquet",
+      "train-00008-of-00011.parquet",
+      "train-00009-of-00011.parquet",
+      "train-00010-of-00011.parquet"
+    ],
+    "missing_validation": [
+      "validation-00000-of-00003.parquet",
+      "validation-00001-of-00003.parquet",
+      "validation-00002-of-00003.parquet"
+    ],
+    "already_present": [
+      "test-00000-of-00002.parquet",
+      "test-00001-of-00002.parquet",
+      "train-00000-of-00011.parquet"
+    ],
+    "command": "hf download vzc-research-chapter/VZCrash data/train-00001-of-00011.parquet data/train-00002-of-00011.parquet data/train-00003-of-00011.parquet data/train-00004-of-00011.parquet data/train-00005-of-00011.parquet data/train-00006-of-00011.parquet data/train-00007-of-00011.parquet data/train-00008-of-00011.parquet data/train-00009-of-00011.parquet data/train-00010-of-00011.parquet data/validation-00000-of-00003.parquet data/validation-00001-of-00003.parquet data/validation-00002-of-00003.parquet --repo-type dataset --local-dir data/VZCrash",
+    "approximate_gib": 6.1,
+    "rules": [
+      "Leave every file name unchanged so train, validation, and test stay in their official shards.",
+      "Do not copy a training row into validation or test.",
+      "Do not download the test shards again.",
+      "Fit on the training shards, select the model and threshold on validation, then score test once."
+    ]
+  },
+  "distributions": [
+    {
+      "rows": 12542,
+      "crash_rows": 245,
+      "gyro_is_hd_rows": 0,
+      "gps_length_16": 12519,
+      "gps_length_17": 6,
+      "columns": {
+        "peak_horizontal_g": {
+          "count": 12542,
+          "mean": 0.8396890315716732,
+          "std": 0.5019007211846205,
+          "p50": 0.7300619805456416,
+          "p95": 1.42257967822938
+        },
+        "peak_magnitude_g": {
+          "count": 12542,
+          "mean": 1.4996072546446524,
+          "std": 0.49375680610960204,
+          "p50": 1.382047025059114,
+          "p95": 2.0640695419789914
+        },
+        "std_horizontal_g": {
+          "count": 12542,
+          "mean": 0.15201901151131722,
+          "std": 0.04891767324736748,
+          "p50": 0.14836271846506344,
+          "p95": 0.21544032510653857
+        },
+        "peak_abs_gyro_deg_s": {
+          "count": 12542,
+          "mean": 16.007973210014352,
+          "std": 27.82611279419834,
+          "p50": 10.0,
+          "p95": 40.0
+        },
+        "std_gyro_magnitude_deg_s": {
+          "count": 12542,
+          "mean": 3.1131326349032546,
+          "std": 3.834300348753174,
+          "p50": 1.6566560237231798,
+          "p95": 9.780140446226046
+        },
+        "gps_end_kmh": {
+          "count": 12542,
+          "mean": 16.59360548556849,
+          "std": 20.084770133659823,
+          "p50": 8.0,
+          "p95": 56.0
+        },
+        "gps_min_kmh": {
+          "count": 12542,
+          "mean": 10.030856322755541,
+          "std": 16.275761711190924,
+          "p50": 2.0,
+          "p95": 45.0
+        },
+        "gps_samples": {
+          "count": 12542,
+          "mean": 15.99912294689842,
+          "std": 0.042814356017087545,
+          "p50": 16.0,
+          "p95": 16.0
+        },
+        "gyro_is_hd": {
+          "count": 12542,
+          "mean": 0.0,
+          "std": 0.0,
+          "p50": 0.0,
+          "p95": 0.0
+        }
+      },
+      "file_name": "train-00000-of-00011.parquet"
+    },
+    {
+      "rows": 12087,
+      "crash_rows": 4221,
+      "gyro_is_hd_rows": 4127,
+      "gps_length_16": 7733,
+      "gps_length_17": 4337,
+      "columns": {
+        "peak_horizontal_g": {
+          "count": 12087,
+          "mean": 1.8540362811143476,
+          "std": 1.6621449329952092,
+          "p50": 0.9601510211349032,
+          "p95": 5.085927644684647
+        },
+        "peak_magnitude_g": {
+          "count": 12087,
+          "mean": 2.44227048550532,
+          "std": 1.6374404254766453,
+          "p50": 1.5753605945511742,
+          "p95": 5.592305348684056
+        },
+        "std_horizontal_g": {
+          "count": 12087,
+          "mean": 0.22014439595573732,
+          "std": 0.173618301862612,
+          "p50": 0.16987262846236684,
+          "p95": 0.5186860900842731
+        },
+        "peak_abs_gyro_deg_s": {
+          "count": 12087,
+          "mean": 49.13424033677597,
+          "std": 428.446310787688,
+          "p50": 19.0,
+          "p95": 162.4211044311521
+        },
+        "std_gyro_magnitude_deg_s": {
+          "count": 12087,
+          "mean": 7.767357188427898,
+          "std": 131.76267127674535,
+          "p50": 2.735475491703178,
+          "p95": 22.658509970248048
+        },
+        "gps_end_kmh": {
+          "count": 12087,
+          "mean": 17.65673864482502,
+          "std": 22.90042836527507,
+          "p50": 6.0,
+          "p95": 65.0
+        },
+        "gps_min_kmh": {
+          "count": 12087,
+          "mean": 11.524695954331099,
+          "std": 19.7358672861786,
+          "p50": 1.0,
+          "p95": 57.0
+        },
+        "gps_samples": {
+          "count": 12087,
+          "mean": 16.360883593943907,
+          "std": 0.5884794644006159,
+          "p50": 16.0,
+          "p95": 17.0
+        },
+        "gyro_is_hd": {
+          "count": 12087,
+          "mean": 0.34144121783734593,
+          "std": 0.47419311741008646,
+          "p50": 0.0,
+          "p95": 1.0
+        }
+      },
+      "file_name": "test-00000-of-00002.parquet"
+    },
+    {
+      "rows": 12087,
+      "crash_rows": 0,
+      "gyro_is_hd_rows": 8708,
+      "gps_length_16": 1120,
+      "gps_length_17": 10948,
+      "columns": {
+        "peak_horizontal_g": {
+          "count": 12087,
+          "mean": 0.8376405947895251,
+          "std": 0.6720634507601532,
+          "p50": 0.6380415122823068,
+          "p95": 2.157602865830667
+        },
+        "peak_magnitude_g": {
+          "count": 12087,
+          "mean": 1.5399785844959735,
+          "std": 0.624044388991283,
+          "p50": 1.3482107044430238,
+          "p95": 2.798781221480795
+        },
+        "std_horizontal_g": {
+          "count": 12087,
+          "mean": 0.11447809356376092,
+          "std": 0.057584518107183374,
+          "p50": 0.11155028385113701,
+          "p95": 0.20810370648430784
+        },
+        "peak_abs_gyro_deg_s": {
+          "count": 12087,
+          "mean": 25.217635553020127,
+          "std": 57.28188615384286,
+          "p50": 8.487000465393066,
+          "p95": 119.0
+        },
+        "std_gyro_magnitude_deg_s": {
+          "count": 12087,
+          "mean": 4.923886176825497,
+          "std": 10.251002021642693,
+          "p50": 1.4210925205716698,
+          "p95": 23.765327208282216
+        },
+        "gps_end_kmh": {
+          "count": 12087,
+          "mean": 40.32175064118474,
+          "std": 37.36389128047024,
+          "p50": 31.0,
+          "p95": 112.0
+        },
+        "gps_min_kmh": {
+          "count": 12087,
+          "mean": 32.01183089269463,
+          "std": 37.28088108308726,
+          "p50": 15.0,
+          "p95": 109.0
+        },
+        "gps_samples": {
+          "count": 12087,
+          "mean": 16.901464383221644,
+          "std": 0.3279087121027785,
+          "p50": 17.0,
+          "p95": 17.0
+        },
+        "gyro_is_hd": {
+          "count": 12087,
+          "mean": 0.7204434516422603,
+          "std": 0.4487813327535432,
+          "p50": 1.0,
+          "p95": 1.0
+        }
+      },
+      "file_name": "test-00001-of-00002.parquet"
+    }
+  ],
+  "models": {
+    "full_logistic": {
+      "imputer": "median fit on training rows",
+      "scaler": "standard scaler fit on training rows",
+      "scaler_mean": [
+        0.8396890315716765,
+        1.4996072546446533,
+        -0.7770145914549161,
+        0.3308642960311946,
+        0.15201901151131694,
+        16.007973210014352,
+        3.1131326349032635,
+        1599.7759527985968,
+        1599.7759527985968,
+        60.30712804975283,
+        16.59360548556849,
+        10.030856322755541,
+        50.27627172699729,
+        15.99912294689842,
+        0.0,
+        0.0641046085153883,
+        0.1659225003986605,
+        0.06530059001754106
+      ],
+      "scaler_scale": [
+        0.5019007211846199,
+        0.49375680610960326,
+        0.40904605985827724,
+        0.3952446810598417,
+        0.04891767324736746,
+        27.82611279419926,
+        3.8343003487531684,
+        5.470018217108297,
+        5.470018217108297,
+        25.290663890363568,
+        20.08477013365998,
+        16.275761711189745,
+        23.352876877013237,
+        0.042814356017094664,
+        1.0,
+        0.2449391918058155,
+        0.37201105394885076,
+        0.2470555058299487
+      ],
+      "logistic_C": 1.0,
+      "class_weight": "balanced",
+      "probability_threshold": 0.5,
+      "intercept": -3.536549478359871,
+      "coefficients": {
+        "peak_horizontal_g": 1.4830780781410093,
+        "peak_magnitude_g": 0.5059410844991438,
+        "min_ax_g": -0.15686626193057177,
+        "max_ax_g": 0.04289154824902308,
+        "std_horizontal_g": 0.6623753010805646,
+        "peak_abs_gyro_deg_s": -0.09423367635043167,
+        "std_gyro_magnitude_deg_s": -0.0857075054114444,
+        "imu_samples": 0.09134791926162066,
+        "gyro_samples": 0.09134791926162066,
+        "gps_start_kmh": 0.3350298796474707,
+        "gps_end_kmh": -1.1969243277769208,
+        "gps_min_kmh": 0.9995674373501182,
+        "gps_drop_kmh": -0.33381725884297614,
+        "gps_samples": 0.3200303114505969,
+        "gyro_is_hd": 0.0,
+        "size_light": 0.10283720744633648,
+        "size_medium": 0.38557131315880155,
+        "size_heavy": 0.039579167236826474
+      },
+      "iterations": 19
+    },
+    "accel_logistic": {
+      "imputer": "median fit on training rows",
+      "scaler": "standard scaler fit on training rows",
+      "scaler_mean": [
+        0.8396890315716732,
+        1.4996072546446524,
+        -0.7770145914549161,
+        0.3308642960311946,
+        0.15201901151131722
+      ],
+      "scaler_scale": [
+        0.5019007211846205,
+        0.49375680610960204,
+        0.40904605985827447,
+        0.395244681059837,
+        0.04891767324736748
+      ],
+      "logistic_C": 1.0,
+      "class_weight": "balanced",
+      "probability_threshold": 0.5,
+      "intercept": -3.236078091209151,
+      "coefficients": {
+        "peak_horizontal_g": 1.771279260429841,
+        "peak_magnitude_g": 0.40547788866278467,
+        "min_ax_g": -0.09570019677762034,
+        "max_ax_g": 0.0703418186440827,
+        "std_horizontal_g": 0.5879990905464026
+      },
+      "iterations": 15
+    }
+  },
+  "train_diagnostics": {
+    "name": "train",
+    "role": "fit_diagnostic",
+    "rows": 12542,
+    "models": {
+      "peak_baseline": {
+        "rows": 12542,
+        "precision_crash": 0.7725490196078432,
+        "recall_crash": 0.8040816326530612,
+        "f1_crash": 0.788,
+        "balanced_accuracy": 0.8996825175544724,
+        "balanced_accuracy_note": "",
+        "confusion_matrix": {
+          "labels": [
+            "non_crash",
+            "crash"
+          ],
+          "matrix": [
+            [
+              12239,
+              58
+            ],
+            [
+              48,
+              197
+            ]
+          ]
+        },
+        "support_non_crash": 12297,
+        "support_crash": 245,
+        "average_precision_crash": 0.8201103067850962,
+        "average_precision_note": "",
+        "average_precision_excluded_nonfinite": 0
+      },
+      "full_logistic": {
+        "rows": 12542,
+        "precision_crash": 0.43144424131627057,
+        "recall_crash": 0.963265306122449,
+        "f1_crash": 0.5959595959595959,
+        "balanced_accuracy": 0.9689872924041536,
+        "balanced_accuracy_note": "",
+        "confusion_matrix": {
+          "labels": [
+            "non_crash",
+            "crash"
+          ],
+          "matrix": [
+            [
+              11986,
+              311
+            ],
+            [
+              9,
+              236
+            ]
+          ]
+        },
+        "support_non_crash": 12297,
+        "support_crash": 245,
+        "average_precision_crash": 0.8445029199984995,
+        "average_precision_note": "",
+        "average_precision_excluded_nonfinite": 0
+      },
+      "accel_logistic": {
+        "rows": 12542,
+        "precision_crash": 0.38704318936877075,
+        "recall_crash": 0.9510204081632653,
+        "f1_crash": 0.5501770956316411,
+        "balanced_accuracy": 0.9605065446525036,
+        "balanced_accuracy_note": "",
+        "confusion_matrix": {
+          "labels": [
+            "non_crash",
+            "crash"
+          ],
+          "matrix": [
+            [
+              11928,
+              369
+            ],
+            [
+              12,
+              233
+            ]
+          ]
+        },
+        "support_non_crash": 12297,
+        "support_crash": 245,
+        "average_precision_crash": 0.8258091507288398,
+        "average_precision_note": "",
+        "average_precision_excluded_nonfinite": 0
+      }
+    }
+  },
+  "exploratory_test": {
+    "per_file": [
+      {
+        "name": "test-00000-of-00002.parquet",
+        "role": "exploratory_not_for_selection",
+        "rows": 12087,
+        "models": {
+          "peak_baseline": {
+            "rows": 12087,
+            "precision_crash": 0.9396373056994819,
+            "recall_crash": 0.8592750533049041,
+            "f1_crash": 0.897661180546962,
+            "balanced_accuracy": 0.9148269494848955,
+            "balanced_accuracy_note": "",
+            "confusion_matrix": {
+              "labels": [
+                "non_crash",
+                "crash"
+              ],
+              "matrix": [
+                [
+                  7633,
+                  233
+                ],
+                [
+                  594,
+                  3627
+                ]
+              ]
+            },
+            "support_non_crash": 7866,
+            "support_crash": 4221,
+            "average_precision_crash": 0.9660268004314271,
+            "average_precision_note": "",
+            "average_precision_excluded_nonfinite": 0
+          },
+          "full_logistic": {
+            "rows": 12087,
+            "precision_crash": 0.8766152563568154,
+            "recall_crash": 0.9964463397299218,
+            "f1_crash": 0.9326976383191041,
+            "balanced_accuracy": 0.9605928622117699,
+            "balanced_accuracy_note": "",
+            "confusion_matrix": {
+              "labels": [
+                "non_crash",
+                "crash"
+              ],
+              "matrix": [
+                [
+                  7274,
+                  592
+                ],
+                [
+                  15,
+                  4206
+                ]
+              ]
+            },
+            "support_non_crash": 7866,
+            "support_crash": 4221,
+            "average_precision_crash": 0.9899908760784822,
+            "average_precision_note": "",
+            "average_precision_excluded_nonfinite": 0
+          },
+          "accel_logistic": {
+            "rows": 12087,
+            "precision_crash": 0.897909790979098,
+            "recall_crash": 0.966832504145937,
+            "f1_crash": 0.9310974218571755,
+            "balanced_accuracy": 0.9539222271556027,
+            "balanced_accuracy_note": "",
+            "confusion_matrix": {
+              "labels": [
+                "non_crash",
+                "crash"
+              ],
+              "matrix": [
+                [
+                  7402,
+                  464
+                ],
+                [
+                  140,
+                  4081
+                ]
+              ]
+            },
+            "support_non_crash": 7866,
+            "support_crash": 4221,
+            "average_precision_crash": 0.9659728334519417,
+            "average_precision_note": "",
+            "average_precision_excluded_nonfinite": 0
+          }
+        }
+      },
+      {
+        "name": "test-00001-of-00002.parquet",
+        "role": "exploratory_not_for_selection",
+        "rows": 12087,
+        "models": {
+          "peak_baseline": {
+            "rows": 12087,
+            "precision_crash": 0.0,
+            "recall_crash": 0.0,
+            "f1_crash": 0.0,
+            "balanced_accuracy": null,
+            "balanced_accuracy_note": "undefined because this slice contains only one class",
+            "confusion_matrix": {
+              "labels": [
+                "non_crash",
+                "crash"
+              ],
+              "matrix": [
+                [
+                  11501,
+                  586
+                ],
+                [
+                  0,
+                  0
+                ]
+              ]
+            },
+            "support_non_crash": 12087,
+            "support_crash": 0,
+            "average_precision_crash": null,
+            "average_precision_note": "undefined because this slice does not contain both classes",
+            "average_precision_excluded_nonfinite": 0
+          },
+          "full_logistic": {
+            "rows": 12087,
+            "precision_crash": 0.0,
+            "recall_crash": 0.0,
+            "f1_crash": 0.0,
+            "balanced_accuracy": null,
+            "balanced_accuracy_note": "undefined because this slice contains only one class",
+            "confusion_matrix": {
+              "labels": [
+                "non_crash",
+                "crash"
+              ],
+              "matrix": [
+                [
+                  1494,
+                  10593
+                ],
+                [
+                  0,
+                  0
+                ]
+              ]
+            },
+            "support_non_crash": 12087,
+            "support_crash": 0,
+            "average_precision_crash": null,
+            "average_precision_note": "undefined because this slice does not contain both classes",
+            "average_precision_excluded_nonfinite": 0
+          },
+          "accel_logistic": {
+            "rows": 12087,
+            "precision_crash": 0.0,
+            "recall_crash": 0.0,
+            "f1_crash": 0.0,
+            "balanced_accuracy": null,
+            "balanced_accuracy_note": "undefined because this slice contains only one class",
+            "confusion_matrix": {
+              "labels": [
+                "non_crash",
+                "crash"
+              ],
+              "matrix": [
+                [
+                  10981,
+                  1106
+                ],
+                [
+                  0,
+                  0
+                ]
+              ]
+            },
+            "support_non_crash": 12087,
+            "support_crash": 0,
+            "average_precision_crash": null,
+            "average_precision_note": "undefined because this slice does not contain both classes",
+            "average_precision_excluded_nonfinite": 0
+          }
+        }
+      }
+    ],
+    "pooled": {
+      "name": "pooled_test",
+      "role": "exploratory_not_for_selection",
+      "rows": 24174,
+      "models": {
+        "peak_baseline": {
+          "rows": 24174,
+          "precision_crash": 0.8157894736842105,
+          "recall_crash": 0.8592750533049041,
+          "f1_crash": 0.8369678089304258,
+          "balanced_accuracy": 0.9091142970629167,
+          "balanced_accuracy_note": "",
+          "confusion_matrix": {
+            "labels": [
+              "non_crash",
+              "crash"
+            ],
+            "matrix": [
+              [
+                19134,
+                819
+              ],
+              [
+                594,
+                3627
+              ]
+            ]
+          },
+          "support_non_crash": 19953,
+          "support_crash": 4221,
+          "average_precision_crash": 0.8962169214763558,
+          "average_precision_note": "",
+          "average_precision_excluded_nonfinite": 0
+        },
+        "full_logistic": {
+          "rows": 24174,
+          "precision_crash": 0.27327659021506073,
+          "recall_crash": 0.9964463397299218,
+          "f1_crash": 0.4289210687334285,
+          "balanced_accuracy": 0.717939503248412,
+          "balanced_accuracy_note": "",
+          "confusion_matrix": {
+            "labels": [
+              "non_crash",
+              "crash"
+            ],
+            "matrix": [
+              [
+                8768,
+                11185
+              ],
+              [
+                15,
+                4206
+              ]
+            ]
+          },
+          "support_non_crash": 19953,
+          "support_crash": 4221,
+          "average_precision_crash": 0.9242558840594945,
+          "average_precision_note": "",
+          "average_precision_excluded_nonfinite": 0
+        },
+        "accel_logistic": {
+          "rows": 24174,
+          "precision_crash": 0.722173066713856,
+          "recall_crash": 0.966832504145937,
+          "f1_crash": 0.8267828200972447,
+          "balanced_accuracy": 0.9440737973042621,
+          "balanced_accuracy_note": "",
+          "confusion_matrix": {
+            "labels": [
+              "non_crash",
+              "crash"
+            ],
+            "matrix": [
+              [
+                18383,
+                1570
+              ],
+              [
+                140,
+                4081
+              ]
+            ]
+          },
+          "support_non_crash": 19953,
+          "support_crash": 4221,
+          "average_precision_crash": 0.9044844204014484,
+          "average_precision_note": "",
+          "average_precision_excluded_nonfinite": 0
+        }
+      }
+    },
+    "figures": "reports\\phase3\\figures"
+  },
+  "insufficiency": [
+    "The training matrix has 245 crashes and 0 high-definition gyroscope rows.",
+    "One shard is 1 of 11 official training shards, and this schema has no vehicle id.",
+    "No validation shard is present, so a model or threshold cannot be frozen without using test labels.",
+    "The second official test shard has no crashes, so its precision is a stress check rather than a tuning target.",
+    "Train-only standardization of a near-constant length or resolution column does not transfer to a shard with a different encoding."
+  ],
+  "encoding": {
+    "gps_samples_z_at_17": 23.377136694569337,
+    "gps_samples_logit_at_17": 7.481392337186202,
+    "gyro_is_hd_coefficient": 0.0,
+    "gyro_is_hd_train_scale": 1.0
+  },
+  "shard2_contributions": [
+    {
+      "name": "gps_samples",
+      "coefficient": 0.3200303114505969,
+      "train_mean": 15.99912294689842,
+      "train_scale": 0.042814356017094664,
+      "mean_contribution": 7.419296083738437
+    },
+    {
+      "name": "gps_min_kmh",
+      "coefficient": 0.9995674373501182,
+      "train_mean": 10.030856322755541,
+      "train_scale": 16.275761711189745,
+      "mean_contribution": 1.5140332533635203
+    },
+    {
+      "name": "gps_end_kmh",
+      "coefficient": -1.1969243277769208,
+      "train_mean": 16.59360548556849,
+      "train_scale": 20.08477013365998,
+      "mean_contribution": -1.4884057883452344
+    },
+    {
+      "name": "std_horizontal_g",
+      "coefficient": 0.6623753010805646,
+      "train_mean": 0.15201901151131694,
+      "train_scale": 0.04891767324736746,
+      "mean_contribution": -0.5027057634143176
+    },
+    {
+      "name": "gps_drop_kmh",
+      "coefficient": -0.33381725884297614,
+      "train_mean": 50.27627172699729,
+      "train_scale": 23.352876877013237,
+      "mean_contribution": 0.31225141900136527
+    },
+    {
+      "name": "size_medium",
+      "coefficient": 0.38557131315880155,
+      "train_mean": 0.1659225003986605,
+      "train_scale": 0.37201105394885076,
+      "mean_contribution": 0.27663971772641005
+    },
+    {
+      "name": "min_ax_g",
+      "coefficient": -0.15686626193057177,
+      "train_mean": -0.7770145914549161,
+      "train_scale": 0.40904605985827724,
+      "mean_contribution": -0.07286993567311932
+    },
+    {
+      "name": "peak_magnitude_g",
+      "coefficient": 0.5059410844991438,
+      "train_mean": 1.4996072546446533,
+      "train_scale": 0.49375680610960326,
+      "mean_contribution": 0.06746135372575159
+    },
+    {
+      "name": "size_light",
+      "coefficient": 0.10283720744633648,
+      "train_mean": 0.0641046085153883,
+      "train_scale": 0.2449391918058155,
+      "mean_contribution": 0.05548587102876044
+    },
+    {
+      "name": "peak_horizontal_g",
+      "coefficient": 1.4830780781410093,
+      "train_mean": 0.8396890315716765,
+      "train_scale": 0.5019007211846199,
+      "mean_contribution": 0.05516558077966648
+    },
+    {
+      "name": "gps_start_kmh",
+      "coefficient": 0.3350298796474707,
+      "train_mean": 60.30712804975283,
+      "train_scale": 25.290663890363568,
+      "mean_contribution": 0.037204884404258946
+    },
+    {
+      "name": "std_gyro_magnitude_deg_s",
+      "coefficient": -0.0857075054114444,
+      "train_mean": 3.1131326349032635,
+      "train_scale": 3.8343003487531684,
+      "mean_contribution": -0.0362323148748296
+    },
+    {
+      "name": "peak_abs_gyro_deg_s",
+      "coefficient": -0.09423367635043167,
+      "train_mean": 16.007973210014352,
+      "train_scale": 27.82611279419926,
+      "mean_contribution": -0.029717332179395487
+    },
+    {
+      "name": "size_heavy",
+      "coefficient": 0.039579167236826474,
+      "train_mean": 0.06530059001754106,
+      "train_scale": 0.2470555058299487,
+      "mean_contribution": 0.026984471915762413
+    },
+    {
+      "name": "max_ax_g",
+      "coefficient": 0.04289154824902308,
+      "train_mean": 0.3308642960311946,
+      "train_scale": 0.3952446810598417,
+      "mean_contribution": 0.019552731743833936
+    },
+    {
+      "name": "imu_samples",
+      "coefficient": 0.09134791926162066,
+      "train_mean": 1599.7759527985968,
+      "train_scale": 5.470018217108297,
+      "mean_contribution": 0.0035838826475396795
+    },
+    {
+      "name": "gyro_samples",
+      "coefficient": 0.09134791926162066,
+      "train_mean": 1599.7759527985968,
+      "train_scale": 5.470018217108297,
+      "mean_contribution": 0.0035838826475396795
+    },
+    {
+      "name": "gyro_is_hd",
+      "coefficient": 0.0,
+      "train_mean": 0.0,
+      "train_scale": 1.0,
+      "mean_contribution": 0.0
+    }
+  ],
+  "json_path": "reports\\phase3\\diagnosis.json",
+  "report_path": "reports\\phase3\\phase3_report.md"
+}

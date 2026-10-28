@@ -1,0 +1,4041 @@
+{
+  "command": "python -m accident_detection.phase4 --data-dir data/VZCrash/data --output-dir reports/phase4",
+  "rows_removed": 0,
+  "coverage": {
+    "files": [
+      {
+        "file_name": "test-00000-of-00002.parquet",
+        "split": "test",
+        "bytes": 494437326,
+        "hardlink_count": 1
+      },
+      {
+        "file_name": "test-00001-of-00002.parquet",
+        "split": "test",
+        "bytes": 494255434,
+        "hardlink_count": 1
+      },
+      {
+        "file_name": "train-00000-of-00011.parquet",
+        "split": "train",
+        "bytes": 512916857,
+        "hardlink_count": 1
+      },
+      {
+        "file_name": "train-00001-of-00011.parquet",
+        "split": "train",
+        "bytes": 512949454,
+        "hardlink_count": 2
+      },
+      {
+        "file_name": "train-00002-of-00011.parquet",
+        "split": "train",
+        "bytes": 512949841,
+        "hardlink_count": 2
+      },
+      {
+        "file_name": "train-00003-of-00011.parquet",
+        "split": "train",
+        "bytes": 512838950,
+        "hardlink_count": 2
+      },
+      {
+        "file_name": "train-00004-of-00011.parquet",
+        "split": "train",
+        "bytes": 512835365,
+        "hardlink_count": 2
+      },
+      {
+        "file_name": "train-00005-of-00011.parquet",
+        "split": "train",
+        "bytes": 513139543,
+        "hardlink_count": 2
+      },
+      {
+        "file_name": "train-00006-of-00011.parquet",
+        "split": "train",
+        "bytes": 512796422,
+        "hardlink_count": 2
+      },
+      {
+        "file_name": "train-00007-of-00011.parquet",
+        "split": "train",
+        "bytes": 512746735,
+        "hardlink_count": 2
+      },
+      {
+        "file_name": "train-00008-of-00011.parquet",
+        "split": "train",
+        "bytes": 512753396,
+        "hardlink_count": 2
+      },
+      {
+        "file_name": "train-00009-of-00011.parquet",
+        "split": "train",
+        "bytes": 512819118,
+        "hardlink_count": 2
+      },
+      {
+        "file_name": "train-00010-of-00011.parquet",
+        "split": "train",
+        "bytes": 512796165,
+        "hardlink_count": 2
+      },
+      {
+        "file_name": "validation-00000-of-00003.parquet",
+        "split": "validation",
+        "bytes": 370491448,
+        "hardlink_count": 2
+      },
+      {
+        "file_name": "validation-00001-of-00003.parquet",
+        "split": "validation",
+        "bytes": 370432581,
+        "hardlink_count": 2
+      },
+      {
+        "file_name": "validation-00002-of-00003.parquet",
+        "split": "validation",
+        "bytes": 370368262,
+        "hardlink_count": 2
+      }
+    ],
+    "missing_train": [],
+    "missing_validation": [],
+    "missing_test": [],
+    "ready_to_select": true,
+    "ready_to_test": true,
+    "download_plan": {
+      "missing_train": [],
+      "missing_validation": [],
+      "already_present": [
+        "test-00000-of-00002.parquet",
+        "test-00001-of-00002.parquet",
+        "train-00000-of-00011.parquet",
+        "train-00001-of-00011.parquet",
+        "train-00002-of-00011.parquet",
+        "train-00003-of-00011.parquet",
+        "train-00004-of-00011.parquet",
+        "train-00005-of-00011.parquet",
+        "train-00006-of-00011.parquet",
+        "train-00007-of-00011.parquet",
+        "train-00008-of-00011.parquet",
+        "train-00009-of-00011.parquet",
+        "train-00010-of-00011.parquet",
+        "validation-00000-of-00003.parquet",
+        "validation-00001-of-00003.parquet",
+        "validation-00002-of-00003.parquet"
+      ],
+      "command": "",
+      "approximate_gib": 0.0,
+      "rules": [
+        "Leave every file name unchanged so train, validation, and test stay in their official shards.",
+        "Do not copy a training row into validation or test.",
+        "Do not download the test shards again.",
+        "Fit on the training shards, select the model and threshold on validation, then score test once."
+      ]
+    }
+  },
+  "duplicates": {
+    "within_file": {},
+    "across_files": [],
+    "vehicle_identifier": "absent",
+    "vehicle_identifier_note": "The schema has event_id, label, vehiclesize, gyro_is_hd, gsensor, gyro, and gps_speed. There is no vehicle id, so the paper's vehicle-disjoint split cannot be rebuilt. Official shard names are preserved instead."
+  },
+  "audits": [
+    {
+      "file_name": "train-00000-of-00011.parquet",
+      "split": "train",
+      "rows": 12542,
+      "matrix_rows": 12542,
+      "rows_removed": 0,
+      "schema_problems": [],
+      "column_types": {
+        "event_id": "int64",
+        "label": "int64",
+        "vehiclesize": "string",
+        "gyro_is_hd": "bool",
+        "gsensor": "list<element: fixed_size_list<element: float>[3]>",
+        "gyro": "list<element: fixed_size_list<element: float>[3]>",
+        "gps_speed": "list<element: float>"
+      },
+      "extra_columns": [],
+      "label_counts": {
+        "0": 245,
+        "1": 1496,
+        "2": 10801
+      },
+      "null_counts": {
+        "event_id": 0,
+        "label": 0,
+        "vehiclesize": 0,
+        "gyro_is_hd": 0,
+        "gsensor": 0,
+        "gyro": 0,
+        "gps_speed": 0
+      },
+      "nonfinite_totals": {
+        "gsensor": 0,
+        "gyro": 0,
+        "gps_speed": 0
+      },
+      "gps": [
+        {
+          "length": 15,
+          "rows": 17,
+          "gyro_is_hd": 0,
+          "crash": 0,
+          "last_equals_previous": 4
+        },
+        {
+          "length": 16,
+          "rows": 12519,
+          "gyro_is_hd": 0,
+          "crash": 239,
+          "last_equals_previous": 4398
+        },
+        {
+          "length": 17,
+          "rows": 6,
+          "gyro_is_hd": 0,
+          "crash": 6,
+          "last_equals_previous": 3
+        }
+      ],
+      "gps_structure": [
+        {
+          "length": 15,
+          "rows": 17,
+          "last_equals_previous": 4,
+          "first_equals_second": 5,
+          "any_adjacent_duplicate": 13,
+          "no_adjacent_duplicate": 4
+        },
+        {
+          "length": 16,
+          "rows": 12519,
+          "last_equals_previous": 4398,
+          "first_equals_second": 3025,
+          "any_adjacent_duplicate": 10971,
+          "no_adjacent_duplicate": 1548
+        },
+        {
+          "length": 17,
+          "rows": 6,
+          "last_equals_previous": 3,
+          "first_equals_second": 4,
+          "any_adjacent_duplicate": 6,
+          "no_adjacent_duplicate": 0
+        }
+      ],
+      "imu": {
+        "rows": 12542,
+        "unusual_rows": 25,
+        "mismatch_rows": 0,
+        "max_gsensor_length": 1600,
+        "max_gyro_length": 1600,
+        "mismatch_examples": []
+      },
+      "gyro": {
+        "by_resolution": [
+          {
+            "gyro_is_hd": false,
+            "rows": 12542,
+            "max_abs_deg_s": 1885.0,
+            "p50_abs_deg_s": 10.0,
+            "rows_above_1000": 2,
+            "rows_above_30000": 0
+          },
+          {
+            "gyro_is_hd": true,
+            "rows": 0,
+            "max_abs_deg_s": null,
+            "p50_abs_deg_s": null,
+            "rows_above_1000": 0,
+            "rows_above_30000": 0
+          }
+        ],
+        "rows_above_30000_deg_s": []
+      },
+      "feature_ranges": {
+        "peak_horizontal_g": {
+          "nonfinite": 0,
+          "min": 0.24149741629241217,
+          "p50": 0.7300619805456416,
+          "p95": 1.42257967822938,
+          "max": 6.313503297960359
+        },
+        "gps_end_kmh": {
+          "nonfinite": 0,
+          "min": 0.0,
+          "p50": 8.0,
+          "p95": 56.0,
+          "max": 152.0
+        },
+        "gps_samples": {
+          "nonfinite": 0,
+          "min": 15.0,
+          "p50": 16.0,
+          "p95": 16.0,
+          "max": 17.0
+        },
+        "gyro_is_hd": {
+          "nonfinite": 0,
+          "min": 0.0,
+          "p50": 0.0,
+          "p95": 0.0,
+          "max": 0.0
+        },
+        "peak_abs_gyro_deg_s": {
+          "nonfinite": 0,
+          "min": 1.0,
+          "p50": 10.0,
+          "p95": 40.0,
+          "max": 1885.0
+        },
+        "imu_samples": {
+          "nonfinite": 0,
+          "min": 1410.0,
+          "p50": 1600.0,
+          "p95": 1600.0,
+          "max": 1600.0
+        }
+      },
+      "label_nulls": 0,
+      "event_id_nulls": 0
+    },
+    {
+      "file_name": "train-00001-of-00011.parquet",
+      "split": "train",
+      "rows": 12542,
+      "matrix_rows": 12542,
+      "rows_removed": 0,
+      "schema_problems": [],
+      "column_types": {
+        "event_id": "int64",
+        "label": "int64",
+        "vehiclesize": "string",
+        "gyro_is_hd": "bool",
+        "gsensor": "list<element: fixed_size_list<element: float>[3]>",
+        "gyro": "list<element: fixed_size_list<element: float>[3]>",
+        "gps_speed": "list<element: float>"
+      },
+      "extra_columns": [],
+      "label_counts": {
+        "0": 63,
+        "1": 2789,
+        "2": 9690
+      },
+      "null_counts": {
+        "event_id": 0,
+        "label": 0,
+        "vehiclesize": 0,
+        "gyro_is_hd": 0,
+        "gsensor": 0,
+        "gyro": 0,
+        "gps_speed": 0
+      },
+      "nonfinite_totals": {
+        "gsensor": 0,
+        "gyro": 0,
+        "gps_speed": 0
+      },
+      "gps": [
+        {
+          "length": 15,
+          "rows": 9,
+          "gyro_is_hd": 0,
+          "crash": 0,
+          "last_equals_previous": 2
+        },
+        {
+          "length": 16,
+          "rows": 12533,
+          "gyro_is_hd": 0,
+          "crash": 63,
+          "last_equals_previous": 4382
+        }
+      ],
+      "gps_structure": [
+        {
+          "length": 15,
+          "rows": 9,
+          "last_equals_previous": 2,
+          "first_equals_second": 1,
+          "any_adjacent_duplicate": 4,
+          "no_adjacent_duplicate": 5
+        },
+        {
+          "length": 16,
+          "rows": 12533,
+          "last_equals_previous": 4382,
+          "first_equals_second": 2982,
+          "any_adjacent_duplicate": 10933,
+          "no_adjacent_duplicate": 1600
+        }
+      ],
+      "imu": {
+        "rows": 12542,
+        "unusual_rows": 14,
+        "mismatch_rows": 0,
+        "max_gsensor_length": 1600,
+        "max_gyro_length": 1600,
+        "mismatch_examples": []
+      },
+      "gyro": {
+        "by_resolution": [
+          {
+            "gyro_is_hd": false,
+            "rows": 12542,
+            "max_abs_deg_s": 419.0,
+            "p50_abs_deg_s": 10.0,
+            "rows_above_1000": 0,
+            "rows_above_30000": 0
+          },
+          {
+            "gyro_is_hd": true,
+            "rows": 0,
+            "max_abs_deg_s": null,
+            "p50_abs_deg_s": null,
+            "rows_above_1000": 0,
+            "rows_above_30000": 0
+          }
+        ],
+        "rows_above_30000_deg_s": []
+      },
+      "feature_ranges": {
+        "peak_horizontal_g": {
+          "nonfinite": 0,
+          "min": 0.30028820277277396,
+          "p50": 0.7483872615121984,
+          "p95": 1.3436985294712562,
+          "max": 5.602566380892524
+        },
+        "gps_end_kmh": {
+          "nonfinite": 0,
+          "min": 0.0,
+          "p50": 9.0,
+          "p95": 57.0,
+          "max": 130.0
+        },
+        "gps_samples": {
+          "nonfinite": 0,
+          "min": 15.0,
+          "p50": 16.0,
+          "p95": 16.0,
+          "max": 16.0
+        },
+        "gyro_is_hd": {
+          "nonfinite": 0,
+          "min": 0.0,
+          "p50": 0.0,
+          "p95": 0.0,
+          "max": 0.0
+        },
+        "peak_abs_gyro_deg_s": {
+          "nonfinite": 0,
+          "min": 1.0,
+          "p50": 10.0,
+          "p95": 37.0,
+          "max": 419.0
+        },
+        "imu_samples": {
+          "nonfinite": 0,
+          "min": 1410.0,
+          "p50": 1600.0,
+          "p95": 1600.0,
+          "max": 1600.0
+        }
+      },
+      "label_nulls": 0,
+      "event_id_nulls": 0
+    },
+    {
+      "file_name": "train-00002-of-00011.parquet",
+      "split": "train",
+      "rows": 12542,
+      "matrix_rows": 12542,
+      "rows_removed": 0,
+      "schema_problems": [],
+      "column_types": {
+        "event_id": "int64",
+        "label": "int64",
+        "vehiclesize": "string",
+        "gyro_is_hd": "bool",
+        "gsensor": "list<element: fixed_size_list<element: float>[3]>",
+        "gyro": "list<element: fixed_size_list<element: float>[3]>",
+        "gps_speed": "list<element: float>"
+      },
+      "extra_columns": [],
+      "label_counts": {
+        "0": 365,
+        "1": 3088,
+        "2": 9089
+      },
+      "null_counts": {
+        "event_id": 0,
+        "label": 0,
+        "vehiclesize": 0,
+        "gyro_is_hd": 0,
+        "gsensor": 0,
+        "gyro": 0,
+        "gps_speed": 0
+      },
+      "nonfinite_totals": {
+        "gsensor": 0,
+        "gyro": 0,
+        "gps_speed": 0
+      },
+      "gps": [
+        {
+          "length": 14,
+          "rows": 1,
+          "gyro_is_hd": 0,
+          "crash": 1,
+          "last_equals_previous": 0
+        },
+        {
+          "length": 15,
+          "rows": 6,
+          "gyro_is_hd": 0,
+          "crash": 0,
+          "last_equals_previous": 1
+        },
+        {
+          "length": 16,
+          "rows": 12534,
+          "gyro_is_hd": 0,
+          "crash": 363,
+          "last_equals_previous": 4636
+        },
+        {
+          "length": 17,
+          "rows": 1,
+          "gyro_is_hd": 0,
+          "crash": 1,
+          "last_equals_previous": 1
+        }
+      ],
+      "gps_structure": [
+        {
+          "length": 14,
+          "rows": 1,
+          "last_equals_previous": 0,
+          "first_equals_second": 1,
+          "any_adjacent_duplicate": 1,
+          "no_adjacent_duplicate": 0
+        },
+        {
+          "length": 15,
+          "rows": 6,
+          "last_equals_previous": 1,
+          "first_equals_second": 1,
+          "any_adjacent_duplicate": 5,
+          "no_adjacent_duplicate": 1
+        },
+        {
+          "length": 16,
+          "rows": 12534,
+          "last_equals_previous": 4636,
+          "first_equals_second": 2941,
+          "any_adjacent_duplicate": 10991,
+          "no_adjacent_duplicate": 1543
+        },
+        {
+          "length": 17,
+          "rows": 1,
+          "last_equals_previous": 1,
+          "first_equals_second": 1,
+          "any_adjacent_duplicate": 1,
+          "no_adjacent_duplicate": 0
+        }
+      ],
+      "imu": {
+        "rows": 12542,
+        "unusual_rows": 13,
+        "mismatch_rows": 0,
+        "max_gsensor_length": 1600,
+        "max_gyro_length": 1600,
+        "mismatch_examples": []
+      },
+      "gyro": {
+        "by_resolution": [
+          {
+            "gyro_is_hd": false,
+            "rows": 12542,
+            "max_abs_deg_s": 1438.0,
+            "p50_abs_deg_s": 11.0,
+            "rows_above_1000": 3,
+            "rows_above_30000": 0
+          },
+          {
+            "gyro_is_hd": true,
+            "rows": 0,
+            "max_abs_deg_s": null,
+            "p50_abs_deg_s": null,
+            "rows_above_1000": 0,
+            "rows_above_30000": 0
+          }
+        ],
+        "rows_above_30000_deg_s": []
+      },
+      "feature_ranges": {
+        "peak_horizontal_g": {
+          "nonfinite": 0,
+          "min": 0.28595455211906334,
+          "p50": 0.7642008837794136,
+          "p95": 1.6730887933876954,
+          "max": 6.445419665693484
+        },
+        "gps_end_kmh": {
+          "nonfinite": 0,
+          "min": 0.0,
+          "p50": 8.0,
+          "p95": 60.0,
+          "max": 121.0
+        },
+        "gps_samples": {
+          "nonfinite": 0,
+          "min": 14.0,
+          "p50": 16.0,
+          "p95": 16.0,
+          "max": 17.0
+        },
+        "gyro_is_hd": {
+          "nonfinite": 0,
+          "min": 0.0,
+          "p50": 0.0,
+          "p95": 0.0,
+          "max": 0.0
+        },
+        "peak_abs_gyro_deg_s": {
+          "nonfinite": 0,
+          "min": 2.0,
+          "p50": 11.0,
+          "p95": 42.0,
+          "max": 1438.0
+        },
+        "imu_samples": {
+          "nonfinite": 0,
+          "min": 1380.0,
+          "p50": 1600.0,
+          "p95": 1600.0,
+          "max": 1600.0
+        }
+      },
+      "label_nulls": 0,
+      "event_id_nulls": 0
+    },
+    {
+      "file_name": "train-00003-of-00011.parquet",
+      "split": "train",
+      "rows": 12541,
+      "matrix_rows": 12541,
+      "rows_removed": 0,
+      "schema_problems": [],
+      "column_types": {
+        "event_id": "int64",
+        "label": "int64",
+        "vehiclesize": "string",
+        "gyro_is_hd": "bool",
+        "gsensor": "list<element: fixed_size_list<element: float>[3]>",
+        "gyro": "list<element: fixed_size_list<element: float>[3]>",
+        "gps_speed": "list<element: float>"
+      },
+      "extra_columns": [],
+      "label_counts": {
+        "0": 1475,
+        "1": 2187,
+        "2": 8879
+      },
+      "null_counts": {
+        "event_id": 0,
+        "label": 0,
+        "vehiclesize": 0,
+        "gyro_is_hd": 0,
+        "gsensor": 0,
+        "gyro": 0,
+        "gps_speed": 0
+      },
+      "nonfinite_totals": {
+        "gsensor": 0,
+        "gyro": 0,
+        "gps_speed": 0
+      },
+      "gps": [
+        {
+          "length": 11,
+          "rows": 1,
+          "gyro_is_hd": 0,
+          "crash": 1,
+          "last_equals_previous": 0
+        },
+        {
+          "length": 12,
+          "rows": 1,
+          "gyro_is_hd": 0,
+          "crash": 1,
+          "last_equals_previous": 0
+        },
+        {
+          "length": 13,
+          "rows": 4,
+          "gyro_is_hd": 0,
+          "crash": 4,
+          "last_equals_previous": 0
+        },
+        {
+          "length": 14,
+          "rows": 1,
+          "gyro_is_hd": 0,
+          "crash": 1,
+          "last_equals_previous": 0
+        },
+        {
+          "length": 15,
+          "rows": 8,
+          "gyro_is_hd": 0,
+          "crash": 2,
+          "last_equals_previous": 1
+        },
+        {
+          "length": 16,
+          "rows": 11839,
+          "gyro_is_hd": 0,
+          "crash": 842,
+          "last_equals_previous": 4411
+        },
+        {
+          "length": 17,
+          "rows": 687,
+          "gyro_is_hd": 4,
+          "crash": 624,
+          "last_equals_previous": 394
+        }
+      ],
+      "gps_structure": [
+        {
+          "length": 11,
+          "rows": 1,
+          "last_equals_previous": 0,
+          "first_equals_second": 0,
+          "any_adjacent_duplicate": 1,
+          "no_adjacent_duplicate": 0
+        },
+        {
+          "length": 12,
+          "rows": 1,
+          "last_equals_previous": 0,
+          "first_equals_second": 0,
+          "any_adjacent_duplicate": 1,
+          "no_adjacent_duplicate": 0
+        },
+        {
+          "length": 13,
+          "rows": 4,
+          "last_equals_previous": 0,
+          "first_equals_second": 0,
+          "any_adjacent_duplicate": 3,
+          "no_adjacent_duplicate": 1
+        },
+        {
+          "length": 14,
+          "rows": 1,
+          "last_equals_previous": 0,
+          "first_equals_second": 0,
+          "any_adjacent_duplicate": 1,
+          "no_adjacent_duplicate": 0
+        },
+        {
+          "length": 15,
+          "rows": 8,
+          "last_equals_previous": 1,
+          "first_equals_second": 1,
+          "any_adjacent_duplicate": 6,
+          "no_adjacent_duplicate": 2
+        },
+        {
+          "length": 16,
+          "rows": 11839,
+          "last_equals_previous": 4411,
+          "first_equals_second": 2923,
+          "any_adjacent_duplicate": 10408,
+          "no_adjacent_duplicate": 1431
+        },
+        {
+          "length": 17,
+          "rows": 687,
+          "last_equals_previous": 394,
+          "first_equals_second": 262,
+          "any_adjacent_duplicate": 658,
+          "no_adjacent_duplicate": 29
+        }
+      ],
+      "imu": {
+        "rows": 12541,
+        "unusual_rows": 26,
+        "mismatch_rows": 0,
+        "max_gsensor_length": 1600,
+        "max_gyro_length": 1600,
+        "mismatch_examples": []
+      },
+      "gyro": {
+        "by_resolution": [
+          {
+            "gyro_is_hd": false,
+            "rows": 12537,
+            "max_abs_deg_s": 2000.0,
+            "p50_abs_deg_s": 12.0,
+            "rows_above_1000": 17,
+            "rows_above_30000": 0
+          },
+          {
+            "gyro_is_hd": true,
+            "rows": 4,
+            "max_abs_deg_s": 140.08200073242188,
+            "p50_abs_deg_s": 90.82099914550781,
+            "rows_above_1000": 0,
+            "rows_above_30000": 0
+          }
+        ],
+        "rows_above_30000_deg_s": []
+      },
+      "feature_ranges": {
+        "peak_horizontal_g": {
+          "nonfinite": 0,
+          "min": 0.1840896503644086,
+          "p50": 0.7800262658477399,
+          "p95": 4.000540286012204,
+          "max": 6.3335250686989015
+        },
+        "gps_end_kmh": {
+          "nonfinite": 0,
+          "min": 0.0,
+          "p50": 7.0,
+          "p95": 57.0,
+          "max": 116.0
+        },
+        "gps_samples": {
+          "nonfinite": 0,
+          "min": 11.0,
+          "p50": 16.0,
+          "p95": 17.0,
+          "max": 17.0
+        },
+        "gyro_is_hd": {
+          "nonfinite": 0,
+          "min": 0.0,
+          "p50": 0.0,
+          "p95": 0.0,
+          "max": 1.0
+        },
+        "peak_abs_gyro_deg_s": {
+          "nonfinite": 0,
+          "min": 1.0,
+          "p50": 12.0,
+          "p95": 88.0,
+          "max": 2000.0
+        },
+        "imu_samples": {
+          "nonfinite": 0,
+          "min": 1050.0,
+          "p50": 1600.0,
+          "p95": 1600.0,
+          "max": 1600.0
+        }
+      },
+      "label_nulls": 0,
+      "event_id_nulls": 0
+    },
+    {
+      "file_name": "train-00004-of-00011.parquet",
+      "split": "train",
+      "rows": 12541,
+      "matrix_rows": 12541,
+      "rows_removed": 0,
+      "schema_problems": [],
+      "column_types": {
+        "event_id": "int64",
+        "label": "int64",
+        "vehiclesize": "string",
+        "gyro_is_hd": "bool",
+        "gsensor": "list<element: fixed_size_list<element: float>[3]>",
+        "gyro": "list<element: fixed_size_list<element: float>[3]>",
+        "gps_speed": "list<element: float>"
+      },
+      "extra_columns": [],
+      "label_counts": {
+        "0": 3268,
+        "1": 607,
+        "2": 8666
+      },
+      "null_counts": {
+        "event_id": 0,
+        "label": 0,
+        "vehiclesize": 0,
+        "gyro_is_hd": 0,
+        "gsensor": 0,
+        "gyro": 0,
+        "gps_speed": 0
+      },
+      "nonfinite_totals": {
+        "gsensor": 0,
+        "gyro": 0,
+        "gps_speed": 0
+      },
+      "gps": [
+        {
+          "length": 11,
+          "rows": 2,
+          "gyro_is_hd": 0,
+          "crash": 1,
+          "last_equals_previous": 0
+        },
+        {
+          "length": 12,
+          "rows": 3,
+          "gyro_is_hd": 2,
+          "crash": 3,
+          "last_equals_previous": 0
+        },
+        {
+          "length": 13,
+          "rows": 2,
+          "gyro_is_hd": 1,
+          "crash": 2,
+          "last_equals_previous": 0
+        },
+        {
+          "length": 14,
+          "rows": 1,
+          "gyro_is_hd": 0,
+          "crash": 1,
+          "last_equals_previous": 1
+        },
+        {
+          "length": 15,
+          "rows": 6,
+          "gyro_is_hd": 1,
+          "crash": 3,
+          "last_equals_previous": 2
+        },
+        {
+          "length": 16,
+          "rows": 10041,
+          "gyro_is_hd": 4,
+          "crash": 802,
+          "last_equals_previous": 2971
+        },
+        {
+          "length": 17,
+          "rows": 2486,
+          "gyro_is_hd": 1947,
+          "crash": 2456,
+          "last_equals_previous": 1406
+        }
+      ],
+      "gps_structure": [
+        {
+          "length": 11,
+          "rows": 2,
+          "last_equals_previous": 0,
+          "first_equals_second": 1,
+          "any_adjacent_duplicate": 2,
+          "no_adjacent_duplicate": 0
+        },
+        {
+          "length": 12,
+          "rows": 3,
+          "last_equals_previous": 0,
+          "first_equals_second": 0,
+          "any_adjacent_duplicate": 1,
+          "no_adjacent_duplicate": 2
+        },
+        {
+          "length": 13,
+          "rows": 2,
+          "last_equals_previous": 0,
+          "first_equals_second": 0,
+          "any_adjacent_duplicate": 0,
+          "no_adjacent_duplicate": 2
+        },
+        {
+          "length": 14,
+          "rows": 1,
+          "last_equals_previous": 1,
+          "first_equals_second": 0,
+          "any_adjacent_duplicate": 1,
+          "no_adjacent_duplicate": 0
+        },
+        {
+          "length": 15,
+          "rows": 6,
+          "last_equals_previous": 2,
+          "first_equals_second": 3,
+          "any_adjacent_duplicate": 5,
+          "no_adjacent_duplicate": 1
+        },
+        {
+          "length": 16,
+          "rows": 10041,
+          "last_equals_previous": 2971,
+          "first_equals_second": 2540,
+          "any_adjacent_duplicate": 8364,
+          "no_adjacent_duplicate": 1677
+        },
+        {
+          "length": 17,
+          "rows": 2486,
+          "last_equals_previous": 1406,
+          "first_equals_second": 912,
+          "any_adjacent_duplicate": 2374,
+          "no_adjacent_duplicate": 112
+        }
+      ],
+      "imu": {
+        "rows": 12541,
+        "unusual_rows": 27,
+        "mismatch_rows": 0,
+        "max_gsensor_length": 1600,
+        "max_gyro_length": 1600,
+        "mismatch_examples": []
+      },
+      "gyro": {
+        "by_resolution": [
+          {
+            "gyro_is_hd": false,
+            "rows": 10586,
+            "max_abs_deg_s": 32766.0,
+            "p50_abs_deg_s": 19.0,
+            "rows_above_1000": 30,
+            "rows_above_30000": 10
+          },
+          {
+            "gyro_is_hd": true,
+            "rows": 1955,
+            "max_abs_deg_s": 1038.489990234375,
+            "p50_abs_deg_s": 61.983001708984375,
+            "rows_above_1000": 6,
+            "rows_above_30000": 0
+          }
+        ],
+        "rows_above_30000_deg_s": [
+          {
+            "row_index": 1406,
+            "peak_abs_deg_s": 32278.0,
+            "gyro_is_hd": false,
+            "label": 2
+          },
+          {
+            "row_index": 1599,
+            "peak_abs_deg_s": 32167.0,
+            "gyro_is_hd": false,
+            "label": 2
+          },
+          {
+            "row_index": 3484,
+            "peak_abs_deg_s": 32602.0,
+            "gyro_is_hd": false,
+            "label": 2
+          },
+          {
+            "row_index": 4082,
+            "peak_abs_deg_s": 32766.0,
+            "gyro_is_hd": false,
+            "label": 2
+          },
+          {
+            "row_index": 5161,
+            "peak_abs_deg_s": 32757.0,
+            "gyro_is_hd": false,
+            "label": 2
+          },
+          {
+            "row_index": 6398,
+            "peak_abs_deg_s": 32598.0,
+            "gyro_is_hd": false,
+            "label": 2
+          },
+          {
+            "row_index": 7830,
+            "peak_abs_deg_s": 32719.0,
+            "gyro_is_hd": false,
+            "label": 2
+          },
+          {
+            "row_index": 8659,
+            "peak_abs_deg_s": 32447.0,
+            "gyro_is_hd": false,
+            "label": 2
+          },
+          {
+            "row_index": 9073,
+            "peak_abs_deg_s": 32753.0,
+            "gyro_is_hd": false,
+            "label": 2
+          },
+          {
+            "row_index": 10173,
+            "peak_abs_deg_s": 32579.0,
+            "gyro_is_hd": false,
+            "label": 2
+          }
+        ]
+      },
+      "feature_ranges": {
+        "peak_horizontal_g": {
+          "nonfinite": 0,
+          "min": 0.14904026731238174,
+          "p50": 0.8098444073020277,
+          "p95": 5.056384919456274,
+          "max": 45.52493079303139
+        },
+        "gps_end_kmh": {
+          "nonfinite": 0,
+          "min": 0.0,
+          "p50": 13.0,
+          "p95": 70.0,
+          "max": 141.0
+        },
+        "gps_samples": {
+          "nonfinite": 0,
+          "min": 11.0,
+          "p50": 16.0,
+          "p95": 17.0,
+          "max": 17.0
+        },
+        "gyro_is_hd": {
+          "nonfinite": 0,
+          "min": 0.0,
+          "p50": 0.0,
+          "p95": 1.0,
+          "max": 1.0
+        },
+        "peak_abs_gyro_deg_s": {
+          "nonfinite": 0,
+          "min": 1.0,
+          "p50": 22.0,
+          "p95": 194.0,
+          "max": 32766.0
+        },
+        "imu_samples": {
+          "nonfinite": 0,
+          "min": 1070.0,
+          "p50": 1600.0,
+          "p95": 1600.0,
+          "max": 1600.0
+        }
+      },
+      "label_nulls": 0,
+      "event_id_nulls": 0
+    },
+    {
+      "file_name": "train-00005-of-00011.parquet",
+      "split": "train",
+      "rows": 12541,
+      "matrix_rows": 12541,
+      "rows_removed": 0,
+      "schema_problems": [],
+      "column_types": {
+        "event_id": "int64",
+        "label": "int64",
+        "vehiclesize": "string",
+        "gyro_is_hd": "bool",
+        "gsensor": "list<element: fixed_size_list<element: float>[3]>",
+        "gyro": "list<element: fixed_size_list<element: float>[3]>",
+        "gps_speed": "list<element: float>"
+      },
+      "extra_columns": [],
+      "label_counts": {
+        "0": 12541,
+        "1": 0,
+        "2": 0
+      },
+      "null_counts": {
+        "event_id": 0,
+        "label": 0,
+        "vehiclesize": 0,
+        "gyro_is_hd": 0,
+        "gsensor": 0,
+        "gyro": 0,
+        "gps_speed": 0
+      },
+      "nonfinite_totals": {
+        "gsensor": 0,
+        "gyro": 0,
+        "gps_speed": 0
+      },
+      "gps": [
+        {
+          "length": 11,
+          "rows": 3,
+          "gyro_is_hd": 3,
+          "crash": 3,
+          "last_equals_previous": 1
+        },
+        {
+          "length": 12,
+          "rows": 5,
+          "gyro_is_hd": 5,
+          "crash": 5,
+          "last_equals_previous": 1
+        },
+        {
+          "length": 13,
+          "rows": 4,
+          "gyro_is_hd": 4,
+          "crash": 4,
+          "last_equals_previous": 1
+        },
+        {
+          "length": 14,
+          "rows": 8,
+          "gyro_is_hd": 8,
+          "crash": 8,
+          "last_equals_previous": 3
+        },
+        {
+          "length": 15,
+          "rows": 8,
+          "gyro_is_hd": 8,
+          "crash": 8,
+          "last_equals_previous": 3
+        },
+        {
+          "length": 16,
+          "rows": 21,
+          "gyro_is_hd": 6,
+          "crash": 21,
+          "last_equals_previous": 10
+        },
+        {
+          "length": 17,
+          "rows": 12486,
+          "gyro_is_hd": 12440,
+          "crash": 12486,
+          "last_equals_previous": 7299
+        },
+        {
+          "length": 42,
+          "rows": 6,
+          "gyro_is_hd": 6,
+          "crash": 6,
+          "last_equals_previous": 6
+        }
+      ],
+      "gps_structure": [
+        {
+          "length": 11,
+          "rows": 3,
+          "last_equals_previous": 1,
+          "first_equals_second": 2,
+          "any_adjacent_duplicate": 2,
+          "no_adjacent_duplicate": 1
+        },
+        {
+          "length": 12,
+          "rows": 5,
+          "last_equals_previous": 1,
+          "first_equals_second": 1,
+          "any_adjacent_duplicate": 3,
+          "no_adjacent_duplicate": 2
+        },
+        {
+          "length": 13,
+          "rows": 4,
+          "last_equals_previous": 1,
+          "first_equals_second": 2,
+          "any_adjacent_duplicate": 4,
+          "no_adjacent_duplicate": 0
+        },
+        {
+          "length": 14,
+          "rows": 8,
+          "last_equals_previous": 3,
+          "first_equals_second": 2,
+          "any_adjacent_duplicate": 7,
+          "no_adjacent_duplicate": 1
+        },
+        {
+          "length": 15,
+          "rows": 8,
+          "last_equals_previous": 3,
+          "first_equals_second": 3,
+          "any_adjacent_duplicate": 7,
+          "no_adjacent_duplicate": 1
+        },
+        {
+          "length": 16,
+          "rows": 21,
+          "last_equals_previous": 10,
+          "first_equals_second": 8,
+          "any_adjacent_duplicate": 20,
+          "no_adjacent_duplicate": 1
+        },
+        {
+          "length": 17,
+          "rows": 12486,
+          "last_equals_previous": 7299,
+          "first_equals_second": 4462,
+          "any_adjacent_duplicate": 12073,
+          "no_adjacent_duplicate": 413
+        },
+        {
+          "length": 42,
+          "rows": 6,
+          "last_equals_previous": 6,
+          "first_equals_second": 1,
+          "any_adjacent_duplicate": 6,
+          "no_adjacent_duplicate": 0
+        }
+      ],
+      "imu": {
+        "rows": 12541,
+        "unusual_rows": 41,
+        "mismatch_rows": 1,
+        "max_gsensor_length": 4100,
+        "max_gyro_length": 4100,
+        "mismatch_examples": [
+          {
+            "gsensor_length": 1080,
+            "gyro_length": 1090,
+            "label": 0
+          }
+        ]
+      },
+      "gyro": {
+        "by_resolution": [
+          {
+            "gyro_is_hd": false,
+            "rows": 61,
+            "max_abs_deg_s": 489.0,
+            "p50_abs_deg_s": 56.0,
+            "rows_above_1000": 0,
+            "rows_above_30000": 0
+          },
+          {
+            "gyro_is_hd": true,
+            "rows": 12480,
+            "max_abs_deg_s": 1394.3170166015625,
+            "p50_abs_deg_s": 50.39649963378906,
+            "rows_above_1000": 29,
+            "rows_above_30000": 0
+          }
+        ],
+        "rows_above_30000_deg_s": []
+      },
+      "feature_ranges": {
+        "peak_horizontal_g": {
+          "nonfinite": 0,
+          "min": 0.23828763906999814,
+          "p50": 3.74000856567748,
+          "p95": 5.59336202207505,
+          "max": 7.1195422483243975
+        },
+        "gps_end_kmh": {
+          "nonfinite": 0,
+          "min": 0.0,
+          "p50": 2.0,
+          "p95": 69.0,
+          "max": 150.0
+        },
+        "gps_samples": {
+          "nonfinite": 0,
+          "min": 11.0,
+          "p50": 17.0,
+          "p95": 17.0,
+          "max": 42.0
+        },
+        "gyro_is_hd": {
+          "nonfinite": 0,
+          "min": 0.0,
+          "p50": 1.0,
+          "p95": 1.0,
+          "max": 1.0
+        },
+        "peak_abs_gyro_deg_s": {
+          "nonfinite": 0,
+          "min": 2.38100004196167,
+          "p50": 50.42399978637695,
+          "p95": 255.41200256347656,
+          "max": 1394.3170166015625
+        },
+        "imu_samples": {
+          "nonfinite": 0,
+          "min": 1000.0,
+          "p50": 1600.0,
+          "p95": 1600.0,
+          "max": 4100.0
+        }
+      },
+      "label_nulls": 0,
+      "event_id_nulls": 0
+    },
+    {
+      "file_name": "train-00006-of-00011.parquet",
+      "split": "train",
+      "rows": 12541,
+      "matrix_rows": 12541,
+      "rows_removed": 0,
+      "schema_problems": [],
+      "column_types": {
+        "event_id": "int64",
+        "label": "int64",
+        "vehiclesize": "string",
+        "gyro_is_hd": "bool",
+        "gsensor": "list<element: fixed_size_list<element: float>[3]>",
+        "gyro": "list<element: fixed_size_list<element: float>[3]>",
+        "gps_speed": "list<element: float>"
+      },
+      "extra_columns": [],
+      "label_counts": {
+        "0": 4646,
+        "1": 839,
+        "2": 7056
+      },
+      "null_counts": {
+        "event_id": 0,
+        "label": 0,
+        "vehiclesize": 0,
+        "gyro_is_hd": 0,
+        "gsensor": 0,
+        "gyro": 0,
+        "gps_speed": 0
+      },
+      "nonfinite_totals": {
+        "gsensor": 0,
+        "gyro": 0,
+        "gps_speed": 0
+      },
+      "gps": [
+        {
+          "length": 11,
+          "rows": 3,
+          "gyro_is_hd": 1,
+          "crash": 1,
+          "last_equals_previous": 2
+        },
+        {
+          "length": 12,
+          "rows": 3,
+          "gyro_is_hd": 0,
+          "crash": 1,
+          "last_equals_previous": 2
+        },
+        {
+          "length": 13,
+          "rows": 5,
+          "gyro_is_hd": 2,
+          "crash": 1,
+          "last_equals_previous": 2
+        },
+        {
+          "length": 14,
+          "rows": 3,
+          "gyro_is_hd": 2,
+          "crash": 1,
+          "last_equals_previous": 2
+        },
+        {
+          "length": 15,
+          "rows": 7,
+          "gyro_is_hd": 2,
+          "crash": 2,
+          "last_equals_previous": 3
+        },
+        {
+          "length": 16,
+          "rows": 1309,
+          "gyro_is_hd": 8,
+          "crash": 5,
+          "last_equals_previous": 440
+        },
+        {
+          "length": 17,
+          "rows": 11211,
+          "gyro_is_hd": 8434,
+          "crash": 4635,
+          "last_equals_previous": 5899
+        }
+      ],
+      "gps_structure": [
+        {
+          "length": 11,
+          "rows": 3,
+          "last_equals_previous": 2,
+          "first_equals_second": 0,
+          "any_adjacent_duplicate": 2,
+          "no_adjacent_duplicate": 1
+        },
+        {
+          "length": 12,
+          "rows": 3,
+          "last_equals_previous": 2,
+          "first_equals_second": 0,
+          "any_adjacent_duplicate": 3,
+          "no_adjacent_duplicate": 0
+        },
+        {
+          "length": 13,
+          "rows": 5,
+          "last_equals_previous": 2,
+          "first_equals_second": 1,
+          "any_adjacent_duplicate": 5,
+          "no_adjacent_duplicate": 0
+        },
+        {
+          "length": 14,
+          "rows": 3,
+          "last_equals_previous": 2,
+          "first_equals_second": 3,
+          "any_adjacent_duplicate": 3,
+          "no_adjacent_duplicate": 0
+        },
+        {
+          "length": 15,
+          "rows": 7,
+          "last_equals_previous": 3,
+          "first_equals_second": 4,
+          "any_adjacent_duplicate": 6,
+          "no_adjacent_duplicate": 1
+        },
+        {
+          "length": 16,
+          "rows": 1309,
+          "last_equals_previous": 440,
+          "first_equals_second": 404,
+          "any_adjacent_duplicate": 1144,
+          "no_adjacent_duplicate": 165
+        },
+        {
+          "length": 17,
+          "rows": 11211,
+          "last_equals_previous": 5899,
+          "first_equals_second": 3921,
+          "any_adjacent_duplicate": 10612,
+          "no_adjacent_duplicate": 599
+        }
+      ],
+      "imu": {
+        "rows": 12541,
+        "unusual_rows": 35,
+        "mismatch_rows": 0,
+        "max_gsensor_length": 1600,
+        "max_gyro_length": 1600,
+        "mismatch_examples": []
+      },
+      "gyro": {
+        "by_resolution": [
+          {
+            "gyro_is_hd": false,
+            "rows": 4092,
+            "max_abs_deg_s": 2000.0,
+            "p50_abs_deg_s": 109.0,
+            "rows_above_1000": 11,
+            "rows_above_30000": 0
+          },
+          {
+            "gyro_is_hd": true,
+            "rows": 8449,
+            "max_abs_deg_s": 1358.968017578125,
+            "p50_abs_deg_s": 42.58300018310547,
+            "rows_above_1000": 15,
+            "rows_above_30000": 0
+          }
+        ],
+        "rows_above_30000_deg_s": []
+      },
+      "feature_ranges": {
+        "peak_horizontal_g": {
+          "nonfinite": 0,
+          "min": 0.0850881900946265,
+          "p50": 2.2233797140772267,
+          "p95": 5.184123511550223,
+          "max": 6.968224958259367
+        },
+        "gps_end_kmh": {
+          "nonfinite": 0,
+          "min": 0.0,
+          "p50": 12.0,
+          "p95": 107.0,
+          "max": 160.0
+        },
+        "gps_samples": {
+          "nonfinite": 0,
+          "min": 11.0,
+          "p50": 17.0,
+          "p95": 17.0,
+          "max": 17.0
+        },
+        "gyro_is_hd": {
+          "nonfinite": 0,
+          "min": 0.0,
+          "p50": 1.0,
+          "p95": 1.0,
+          "max": 1.0
+        },
+        "peak_abs_gyro_deg_s": {
+          "nonfinite": 0,
+          "min": 0.039000000804662704,
+          "p50": 61.23500061035156,
+          "p95": 297.0,
+          "max": 2000.0
+        },
+        "imu_samples": {
+          "nonfinite": 0,
+          "min": 1000.0,
+          "p50": 1600.0,
+          "p95": 1600.0,
+          "max": 1600.0
+        }
+      },
+      "label_nulls": 0,
+      "event_id_nulls": 0
+    },
+    {
+      "file_name": "train-00007-of-00011.parquet",
+      "split": "train",
+      "rows": 12541,
+      "matrix_rows": 12541,
+      "rows_removed": 0,
+      "schema_problems": [],
+      "column_types": {
+        "event_id": "int64",
+        "label": "int64",
+        "vehiclesize": "string",
+        "gyro_is_hd": "bool",
+        "gsensor": "list<element: fixed_size_list<element: float>[3]>",
+        "gyro": "list<element: fixed_size_list<element: float>[3]>",
+        "gps_speed": "list<element: float>"
+      },
+      "extra_columns": [],
+      "label_counts": {
+        "0": 0,
+        "1": 9796,
+        "2": 2745
+      },
+      "null_counts": {
+        "event_id": 0,
+        "label": 0,
+        "vehiclesize": 0,
+        "gyro_is_hd": 0,
+        "gsensor": 0,
+        "gyro": 0,
+        "gps_speed": 0
+      },
+      "nonfinite_totals": {
+        "gsensor": 0,
+        "gyro": 0,
+        "gps_speed": 0
+      },
+      "gps": [
+        {
+          "length": 10,
+          "rows": 1,
+          "gyro_is_hd": 0,
+          "crash": 0,
+          "last_equals_previous": 0
+        },
+        {
+          "length": 11,
+          "rows": 7,
+          "gyro_is_hd": 2,
+          "crash": 0,
+          "last_equals_previous": 2
+        },
+        {
+          "length": 12,
+          "rows": 3,
+          "gyro_is_hd": 0,
+          "crash": 0,
+          "last_equals_previous": 0
+        },
+        {
+          "length": 13,
+          "rows": 6,
+          "gyro_is_hd": 2,
+          "crash": 0,
+          "last_equals_previous": 4
+        },
+        {
+          "length": 14,
+          "rows": 4,
+          "gyro_is_hd": 2,
+          "crash": 0,
+          "last_equals_previous": 2
+        },
+        {
+          "length": 15,
+          "rows": 5,
+          "gyro_is_hd": 0,
+          "crash": 0,
+          "last_equals_previous": 0
+        },
+        {
+          "length": 16,
+          "rows": 1493,
+          "gyro_is_hd": 3,
+          "crash": 0,
+          "last_equals_previous": 453
+        },
+        {
+          "length": 17,
+          "rows": 11022,
+          "gyro_is_hd": 7663,
+          "crash": 0,
+          "last_equals_previous": 5141
+        }
+      ],
+      "gps_structure": [
+        {
+          "length": 10,
+          "rows": 1,
+          "last_equals_previous": 0,
+          "first_equals_second": 0,
+          "any_adjacent_duplicate": 1,
+          "no_adjacent_duplicate": 0
+        },
+        {
+          "length": 11,
+          "rows": 7,
+          "last_equals_previous": 2,
+          "first_equals_second": 2,
+          "any_adjacent_duplicate": 4,
+          "no_adjacent_duplicate": 3
+        },
+        {
+          "length": 12,
+          "rows": 3,
+          "last_equals_previous": 0,
+          "first_equals_second": 0,
+          "any_adjacent_duplicate": 3,
+          "no_adjacent_duplicate": 0
+        },
+        {
+          "length": 13,
+          "rows": 6,
+          "last_equals_previous": 4,
+          "first_equals_second": 2,
+          "any_adjacent_duplicate": 5,
+          "no_adjacent_duplicate": 1
+        },
+        {
+          "length": 14,
+          "rows": 4,
+          "last_equals_previous": 2,
+          "first_equals_second": 3,
+          "any_adjacent_duplicate": 4,
+          "no_adjacent_duplicate": 0
+        },
+        {
+          "length": 15,
+          "rows": 5,
+          "last_equals_previous": 0,
+          "first_equals_second": 1,
+          "any_adjacent_duplicate": 3,
+          "no_adjacent_duplicate": 2
+        },
+        {
+          "length": 16,
+          "rows": 1493,
+          "last_equals_previous": 453,
+          "first_equals_second": 352,
+          "any_adjacent_duplicate": 1324,
+          "no_adjacent_duplicate": 169
+        },
+        {
+          "length": 17,
+          "rows": 11022,
+          "last_equals_previous": 5141,
+          "first_equals_second": 2860,
+          "any_adjacent_duplicate": 10132,
+          "no_adjacent_duplicate": 890
+        }
+      ],
+      "imu": {
+        "rows": 12541,
+        "unusual_rows": 31,
+        "mismatch_rows": 0,
+        "max_gsensor_length": 1600,
+        "max_gyro_length": 1600,
+        "mismatch_examples": []
+      },
+      "gyro": {
+        "by_resolution": [
+          {
+            "gyro_is_hd": false,
+            "rows": 4869,
+            "max_abs_deg_s": 603.0,
+            "p50_abs_deg_s": 8.0,
+            "rows_above_1000": 0,
+            "rows_above_30000": 0
+          },
+          {
+            "gyro_is_hd": true,
+            "rows": 7672,
+            "max_abs_deg_s": 1008.2039794921875,
+            "p50_abs_deg_s": 8.75,
+            "rows_above_1000": 2,
+            "rows_above_30000": 0
+          }
+        ],
+        "rows_above_30000_deg_s": []
+      },
+      "feature_ranges": {
+        "peak_horizontal_g": {
+          "nonfinite": 0,
+          "min": 0.09847842103353595,
+          "p50": 0.739233401303667,
+          "p95": 2.1015713874188378,
+          "max": 5.889105553397323
+        },
+        "gps_end_kmh": {
+          "nonfinite": 0,
+          "min": 0.0,
+          "p50": 14.0,
+          "p95": 83.0,
+          "max": 500.0
+        },
+        "gps_samples": {
+          "nonfinite": 0,
+          "min": 10.0,
+          "p50": 17.0,
+          "p95": 17.0,
+          "max": 17.0
+        },
+        "gyro_is_hd": {
+          "nonfinite": 0,
+          "min": 0.0,
+          "p50": 1.0,
+          "p95": 1.0,
+          "max": 1.0
+        },
+        "peak_abs_gyro_deg_s": {
+          "nonfinite": 0,
+          "min": 0.550000011920929,
+          "p50": 8.406000137329102,
+          "p95": 157.0,
+          "max": 1008.2039794921875
+        },
+        "imu_samples": {
+          "nonfinite": 0,
+          "min": 1000.0,
+          "p50": 1600.0,
+          "p95": 1600.0,
+          "max": 1600.0
+        }
+      },
+      "label_nulls": 0,
+      "event_id_nulls": 0
+    },
+    {
+      "file_name": "train-00008-of-00011.parquet",
+      "split": "train",
+      "rows": 12541,
+      "matrix_rows": 12541,
+      "rows_removed": 0,
+      "schema_problems": [],
+      "column_types": {
+        "event_id": "int64",
+        "label": "int64",
+        "vehiclesize": "string",
+        "gyro_is_hd": "bool",
+        "gsensor": "list<element: fixed_size_list<element: float>[3]>",
+        "gyro": "list<element: fixed_size_list<element: float>[3]>",
+        "gps_speed": "list<element: float>"
+      },
+      "extra_columns": [],
+      "label_counts": {
+        "0": 0,
+        "1": 0,
+        "2": 12541
+      },
+      "null_counts": {
+        "event_id": 0,
+        "label": 0,
+        "vehiclesize": 0,
+        "gyro_is_hd": 0,
+        "gsensor": 0,
+        "gyro": 0,
+        "gps_speed": 0
+      },
+      "nonfinite_totals": {
+        "gsensor": 0,
+        "gyro": 0,
+        "gps_speed": 0
+      },
+      "gps": [
+        {
+          "length": 11,
+          "rows": 3,
+          "gyro_is_hd": 1,
+          "crash": 0,
+          "last_equals_previous": 0
+        },
+        {
+          "length": 12,
+          "rows": 6,
+          "gyro_is_hd": 2,
+          "crash": 0,
+          "last_equals_previous": 2
+        },
+        {
+          "length": 13,
+          "rows": 5,
+          "gyro_is_hd": 0,
+          "crash": 0,
+          "last_equals_previous": 2
+        },
+        {
+          "length": 14,
+          "rows": 4,
+          "gyro_is_hd": 2,
+          "crash": 0,
+          "last_equals_previous": 1
+        },
+        {
+          "length": 15,
+          "rows": 9,
+          "gyro_is_hd": 2,
+          "crash": 0,
+          "last_equals_previous": 6
+        },
+        {
+          "length": 16,
+          "rows": 920,
+          "gyro_is_hd": 4,
+          "crash": 0,
+          "last_equals_previous": 277
+        },
+        {
+          "length": 17,
+          "rows": 11594,
+          "gyro_is_hd": 9841,
+          "crash": 0,
+          "last_equals_previous": 5764
+        }
+      ],
+      "gps_structure": [
+        {
+          "length": 11,
+          "rows": 3,
+          "last_equals_previous": 0,
+          "first_equals_second": 1,
+          "any_adjacent_duplicate": 2,
+          "no_adjacent_duplicate": 1
+        },
+        {
+          "length": 12,
+          "rows": 6,
+          "last_equals_previous": 2,
+          "first_equals_second": 2,
+          "any_adjacent_duplicate": 5,
+          "no_adjacent_duplicate": 1
+        },
+        {
+          "length": 13,
+          "rows": 5,
+          "last_equals_previous": 2,
+          "first_equals_second": 0,
+          "any_adjacent_duplicate": 4,
+          "no_adjacent_duplicate": 1
+        },
+        {
+          "length": 14,
+          "rows": 4,
+          "last_equals_previous": 1,
+          "first_equals_second": 1,
+          "any_adjacent_duplicate": 4,
+          "no_adjacent_duplicate": 0
+        },
+        {
+          "length": 15,
+          "rows": 9,
+          "last_equals_previous": 6,
+          "first_equals_second": 4,
+          "any_adjacent_duplicate": 9,
+          "no_adjacent_duplicate": 0
+        },
+        {
+          "length": 16,
+          "rows": 920,
+          "last_equals_previous": 277,
+          "first_equals_second": 254,
+          "any_adjacent_duplicate": 735,
+          "no_adjacent_duplicate": 185
+        },
+        {
+          "length": 17,
+          "rows": 11594,
+          "last_equals_previous": 5764,
+          "first_equals_second": 3966,
+          "any_adjacent_duplicate": 10769,
+          "no_adjacent_duplicate": 825
+        }
+      ],
+      "imu": {
+        "rows": 12541,
+        "unusual_rows": 39,
+        "mismatch_rows": 2,
+        "max_gsensor_length": 1600,
+        "max_gyro_length": 1600,
+        "mismatch_examples": [
+          {
+            "gsensor_length": 1360,
+            "gyro_length": 1350,
+            "label": 2
+          },
+          {
+            "gsensor_length": 1570,
+            "gyro_length": 1560,
+            "label": 2
+          }
+        ]
+      },
+      "gyro": {
+        "by_resolution": [
+          {
+            "gyro_is_hd": false,
+            "rows": 2689,
+            "max_abs_deg_s": 2000.0,
+            "p50_abs_deg_s": 11.0,
+            "rows_above_1000": 3,
+            "rows_above_30000": 0
+          },
+          {
+            "gyro_is_hd": true,
+            "rows": 9852,
+            "max_abs_deg_s": 989.177001953125,
+            "p50_abs_deg_s": 6.519500017166138,
+            "rows_above_1000": 0,
+            "rows_above_30000": 0
+          }
+        ],
+        "rows_above_30000_deg_s": []
+      },
+      "feature_ranges": {
+        "peak_horizontal_g": {
+          "nonfinite": 0,
+          "min": 0.006403124268849653,
+          "p50": 0.5580224291153081,
+          "p95": 1.1565993837683854,
+          "max": 6.577421421506404
+        },
+        "gps_end_kmh": {
+          "nonfinite": 0,
+          "min": 0.0,
+          "p50": 40.0,
+          "p95": 113.0,
+          "max": 147.0
+        },
+        "gps_samples": {
+          "nonfinite": 0,
+          "min": 11.0,
+          "p50": 17.0,
+          "p95": 17.0,
+          "max": 17.0
+        },
+        "gyro_is_hd": {
+          "nonfinite": 0,
+          "min": 0.0,
+          "p50": 1.0,
+          "p95": 1.0,
+          "max": 1.0
+        },
+        "peak_abs_gyro_deg_s": {
+          "nonfinite": 0,
+          "min": 0.3970000147819519,
+          "p50": 7.0,
+          "p95": 33.0,
+          "max": 2000.0
+        },
+        "imu_samples": {
+          "nonfinite": 0,
+          "min": 1010.0,
+          "p50": 1600.0,
+          "p95": 1600.0,
+          "max": 1600.0
+        }
+      },
+      "label_nulls": 0,
+      "event_id_nulls": 0
+    },
+    {
+      "file_name": "train-00009-of-00011.parquet",
+      "split": "train",
+      "rows": 12541,
+      "matrix_rows": 12541,
+      "rows_removed": 0,
+      "schema_problems": [],
+      "column_types": {
+        "event_id": "int64",
+        "label": "int64",
+        "vehiclesize": "string",
+        "gyro_is_hd": "bool",
+        "gsensor": "list<element: fixed_size_list<element: float>[3]>",
+        "gyro": "list<element: fixed_size_list<element: float>[3]>",
+        "gps_speed": "list<element: float>"
+      },
+      "extra_columns": [],
+      "label_counts": {
+        "0": 0,
+        "1": 0,
+        "2": 12541
+      },
+      "null_counts": {
+        "event_id": 0,
+        "label": 0,
+        "vehiclesize": 0,
+        "gyro_is_hd": 0,
+        "gsensor": 0,
+        "gyro": 0,
+        "gps_speed": 0
+      },
+      "nonfinite_totals": {
+        "gsensor": 0,
+        "gyro": 0,
+        "gps_speed": 0
+      },
+      "gps": [
+        {
+          "length": 11,
+          "rows": 1,
+          "gyro_is_hd": 0,
+          "crash": 0,
+          "last_equals_previous": 1
+        },
+        {
+          "length": 12,
+          "rows": 4,
+          "gyro_is_hd": 1,
+          "crash": 0,
+          "last_equals_previous": 0
+        },
+        {
+          "length": 13,
+          "rows": 2,
+          "gyro_is_hd": 0,
+          "crash": 0,
+          "last_equals_previous": 1
+        },
+        {
+          "length": 14,
+          "rows": 9,
+          "gyro_is_hd": 2,
+          "crash": 0,
+          "last_equals_previous": 3
+        },
+        {
+          "length": 15,
+          "rows": 8,
+          "gyro_is_hd": 3,
+          "crash": 0,
+          "last_equals_previous": 1
+        },
+        {
+          "length": 16,
+          "rows": 979,
+          "gyro_is_hd": 3,
+          "crash": 0,
+          "last_equals_previous": 269
+        },
+        {
+          "length": 17,
+          "rows": 11538,
+          "gyro_is_hd": 9809,
+          "crash": 0,
+          "last_equals_previous": 5760
+        }
+      ],
+      "gps_structure": [
+        {
+          "length": 11,
+          "rows": 1,
+          "last_equals_previous": 1,
+          "first_equals_second": 0,
+          "any_adjacent_duplicate": 1,
+          "no_adjacent_duplicate": 0
+        },
+        {
+          "length": 12,
+          "rows": 4,
+          "last_equals_previous": 0,
+          "first_equals_second": 1,
+          "any_adjacent_duplicate": 2,
+          "no_adjacent_duplicate": 2
+        },
+        {
+          "length": 13,
+          "rows": 2,
+          "last_equals_previous": 1,
+          "first_equals_second": 0,
+          "any_adjacent_duplicate": 2,
+          "no_adjacent_duplicate": 0
+        },
+        {
+          "length": 14,
+          "rows": 9,
+          "last_equals_previous": 3,
+          "first_equals_second": 1,
+          "any_adjacent_duplicate": 7,
+          "no_adjacent_duplicate": 2
+        },
+        {
+          "length": 15,
+          "rows": 8,
+          "last_equals_previous": 1,
+          "first_equals_second": 4,
+          "any_adjacent_duplicate": 6,
+          "no_adjacent_duplicate": 2
+        },
+        {
+          "length": 16,
+          "rows": 979,
+          "last_equals_previous": 269,
+          "first_equals_second": 274,
+          "any_adjacent_duplicate": 794,
+          "no_adjacent_duplicate": 185
+        },
+        {
+          "length": 17,
+          "rows": 11538,
+          "last_equals_previous": 5760,
+          "first_equals_second": 3861,
+          "any_adjacent_duplicate": 10754,
+          "no_adjacent_duplicate": 784
+        }
+      ],
+      "imu": {
+        "rows": 12541,
+        "unusual_rows": 34,
+        "mismatch_rows": 1,
+        "max_gsensor_length": 1600,
+        "max_gyro_length": 1600,
+        "mismatch_examples": [
+          {
+            "gsensor_length": 1560,
+            "gyro_length": 1550,
+            "label": 2
+          }
+        ]
+      },
+      "gyro": {
+        "by_resolution": [
+          {
+            "gyro_is_hd": false,
+            "rows": 2723,
+            "max_abs_deg_s": 2000.0,
+            "p50_abs_deg_s": 10.0,
+            "rows_above_1000": 3,
+            "rows_above_30000": 0
+          },
+          {
+            "gyro_is_hd": true,
+            "rows": 9818,
+            "max_abs_deg_s": 225.01100158691406,
+            "p50_abs_deg_s": 6.314000129699707,
+            "rows_above_1000": 0,
+            "rows_above_30000": 0
+          }
+        ],
+        "rows_above_30000_deg_s": []
+      },
+      "feature_ranges": {
+        "peak_horizontal_g": {
+          "nonfinite": 0,
+          "min": 0.009433981395046677,
+          "p50": 0.555986501661517,
+          "p95": 1.1389314865872955,
+          "max": 4.49720026987805
+        },
+        "gps_end_kmh": {
+          "nonfinite": 0,
+          "min": 0.0,
+          "p50": 38.0,
+          "p95": 113.0,
+          "max": 141.0
+        },
+        "gps_samples": {
+          "nonfinite": 0,
+          "min": 11.0,
+          "p50": 17.0,
+          "p95": 17.0,
+          "max": 17.0
+        },
+        "gyro_is_hd": {
+          "nonfinite": 0,
+          "min": 0.0,
+          "p50": 1.0,
+          "p95": 1.0,
+          "max": 1.0
+        },
+        "peak_abs_gyro_deg_s": {
+          "nonfinite": 0,
+          "min": 0.3970000147819519,
+          "p50": 7.0,
+          "p95": 32.0,
+          "max": 2000.0
+        },
+        "imu_samples": {
+          "nonfinite": 0,
+          "min": 1050.0,
+          "p50": 1600.0,
+          "p95": 1600.0,
+          "max": 1600.0
+        }
+      },
+      "label_nulls": 0,
+      "event_id_nulls": 0
+    },
+    {
+      "file_name": "train-00010-of-00011.parquet",
+      "split": "train",
+      "rows": 12541,
+      "matrix_rows": 12541,
+      "rows_removed": 0,
+      "schema_problems": [],
+      "column_types": {
+        "event_id": "int64",
+        "label": "int64",
+        "vehiclesize": "string",
+        "gyro_is_hd": "bool",
+        "gsensor": "list<element: fixed_size_list<element: float>[3]>",
+        "gyro": "list<element: fixed_size_list<element: float>[3]>",
+        "gps_speed": "list<element: float>"
+      },
+      "extra_columns": [],
+      "label_counts": {
+        "0": 0,
+        "1": 0,
+        "2": 12541
+      },
+      "null_counts": {
+        "event_id": 0,
+        "label": 0,
+        "vehiclesize": 0,
+        "gyro_is_hd": 0,
+        "gsensor": 0,
+        "gyro": 0,
+        "gps_speed": 0
+      },
+      "nonfinite_totals": {
+        "gsensor": 0,
+        "gyro": 0,
+        "gps_speed": 0
+      },
+      "gps": [
+        {
+          "length": 11,
+          "rows": 4,
+          "gyro_is_hd": 1,
+          "crash": 0,
+          "last_equals_previous": 1
+        },
+        {
+          "length": 12,
+          "rows": 4,
+          "gyro_is_hd": 0,
+          "crash": 0,
+          "last_equals_previous": 1
+        },
+        {
+          "length": 13,
+          "rows": 1,
+          "gyro_is_hd": 0,
+          "crash": 0,
+          "last_equals_previous": 0
+        },
+        {
+          "length": 14,
+          "rows": 9,
+          "gyro_is_hd": 2,
+          "crash": 0,
+          "last_equals_previous": 3
+        },
+        {
+          "length": 15,
+          "rows": 5,
+          "gyro_is_hd": 1,
+          "crash": 0,
+          "last_equals_previous": 1
+        },
+        {
+          "length": 16,
+          "rows": 982,
+          "gyro_is_hd": 1,
+          "crash": 0,
+          "last_equals_previous": 285
+        },
+        {
+          "length": 17,
+          "rows": 11536,
+          "gyro_is_hd": 9794,
+          "crash": 0,
+          "last_equals_previous": 5695
+        }
+      ],
+      "gps_structure": [
+        {
+          "length": 11,
+          "rows": 4,
+          "last_equals_previous": 1,
+          "first_equals_second": 0,
+          "any_adjacent_duplicate": 2,
+          "no_adjacent_duplicate": 2
+        },
+        {
+          "length": 12,
+          "rows": 4,
+          "last_equals_previous": 1,
+          "first_equals_second": 2,
+          "any_adjacent_duplicate": 3,
+          "no_adjacent_duplicate": 1
+        },
+        {
+          "length": 13,
+          "rows": 1,
+          "last_equals_previous": 0,
+          "first_equals_second": 0,
+          "any_adjacent_duplicate": 1,
+          "no_adjacent_duplicate": 0
+        },
+        {
+          "length": 14,
+          "rows": 9,
+          "last_equals_previous": 3,
+          "first_equals_second": 4,
+          "any_adjacent_duplicate": 7,
+          "no_adjacent_duplicate": 2
+        },
+        {
+          "length": 15,
+          "rows": 5,
+          "last_equals_previous": 1,
+          "first_equals_second": 2,
+          "any_adjacent_duplicate": 4,
+          "no_adjacent_duplicate": 1
+        },
+        {
+          "length": 16,
+          "rows": 982,
+          "last_equals_previous": 285,
+          "first_equals_second": 263,
+          "any_adjacent_duplicate": 803,
+          "no_adjacent_duplicate": 179
+        },
+        {
+          "length": 17,
+          "rows": 11536,
+          "last_equals_previous": 5695,
+          "first_equals_second": 3842,
+          "any_adjacent_duplicate": 10777,
+          "no_adjacent_duplicate": 759
+        }
+      ],
+      "imu": {
+        "rows": 12541,
+        "unusual_rows": 32,
+        "mismatch_rows": 1,
+        "max_gsensor_length": 1600,
+        "max_gyro_length": 1600,
+        "mismatch_examples": [
+          {
+            "gsensor_length": 1050,
+            "gyro_length": 1040,
+            "label": 2
+          }
+        ]
+      },
+      "gyro": {
+        "by_resolution": [
+          {
+            "gyro_is_hd": false,
+            "rows": 2742,
+            "max_abs_deg_s": 32766.0,
+            "p50_abs_deg_s": 10.0,
+            "rows_above_1000": 2,
+            "rows_above_30000": 1
+          },
+          {
+            "gyro_is_hd": true,
+            "rows": 9799,
+            "max_abs_deg_s": 172.3070068359375,
+            "p50_abs_deg_s": 6.3379998207092285,
+            "rows_above_1000": 0,
+            "rows_above_30000": 0
+          }
+        ],
+        "rows_above_30000_deg_s": [
+          {
+            "row_index": 2284,
+            "peak_abs_deg_s": 32766.0,
+            "gyro_is_hd": false,
+            "label": 2
+          }
+        ]
+      },
+      "feature_ranges": {
+        "peak_horizontal_g": {
+          "nonfinite": 0,
+          "min": 0.00538516473864937,
+          "p50": 0.5553602370275392,
+          "p95": 1.1299778243688277,
+          "max": 45.91766629550475
+        },
+        "gps_end_kmh": {
+          "nonfinite": 0,
+          "min": 0.0,
+          "p50": 39.0,
+          "p95": 114.0,
+          "max": 157.0
+        },
+        "gps_samples": {
+          "nonfinite": 0,
+          "min": 11.0,
+          "p50": 17.0,
+          "p95": 17.0,
+          "max": 17.0
+        },
+        "gyro_is_hd": {
+          "nonfinite": 0,
+          "min": 0.0,
+          "p50": 1.0,
+          "p95": 1.0,
+          "max": 1.0
+        },
+        "peak_abs_gyro_deg_s": {
+          "nonfinite": 0,
+          "min": 0.039000000804662704,
+          "p50": 7.0,
+          "p95": 32.0,
+          "max": 32766.0
+        },
+        "imu_samples": {
+          "nonfinite": 0,
+          "min": 1010.0,
+          "p50": 1600.0,
+          "p95": 1600.0,
+          "max": 1600.0
+        }
+      },
+      "label_nulls": 0,
+      "event_id_nulls": 0
+    },
+    {
+      "file_name": "validation-00000-of-00003.parquet",
+      "split": "validation",
+      "rows": 9059,
+      "matrix_rows": 9059,
+      "rows_removed": 0,
+      "schema_problems": [],
+      "column_types": {
+        "event_id": "int64",
+        "label": "int64",
+        "vehiclesize": "string",
+        "gyro_is_hd": "bool",
+        "gsensor": "list<element: fixed_size_list<element: float>[3]>",
+        "gyro": "list<element: fixed_size_list<element: float>[3]>",
+        "gps_speed": "list<element: float>"
+      },
+      "extra_columns": [],
+      "label_counts": {
+        "0": 54,
+        "1": 1892,
+        "2": 7113
+      },
+      "null_counts": {
+        "event_id": 0,
+        "label": 0,
+        "vehiclesize": 0,
+        "gyro_is_hd": 0,
+        "gsensor": 0,
+        "gyro": 0,
+        "gps_speed": 0
+      },
+      "nonfinite_totals": {
+        "gsensor": 0,
+        "gyro": 0,
+        "gps_speed": 0
+      },
+      "gps": [
+        {
+          "length": 15,
+          "rows": 9,
+          "gyro_is_hd": 0,
+          "crash": 0,
+          "last_equals_previous": 2
+        },
+        {
+          "length": 16,
+          "rows": 9050,
+          "gyro_is_hd": 0,
+          "crash": 54,
+          "last_equals_previous": 3177
+        }
+      ],
+      "gps_structure": [
+        {
+          "length": 15,
+          "rows": 9,
+          "last_equals_previous": 2,
+          "first_equals_second": 3,
+          "any_adjacent_duplicate": 7,
+          "no_adjacent_duplicate": 2
+        },
+        {
+          "length": 16,
+          "rows": 9050,
+          "last_equals_previous": 3177,
+          "first_equals_second": 2204,
+          "any_adjacent_duplicate": 7866,
+          "no_adjacent_duplicate": 1184
+        }
+      ],
+      "imu": {
+        "rows": 9059,
+        "unusual_rows": 13,
+        "mismatch_rows": 0,
+        "max_gsensor_length": 1600,
+        "max_gyro_length": 1600,
+        "mismatch_examples": []
+      },
+      "gyro": {
+        "by_resolution": [
+          {
+            "gyro_is_hd": false,
+            "rows": 9059,
+            "max_abs_deg_s": 716.0,
+            "p50_abs_deg_s": 10.0,
+            "rows_above_1000": 0,
+            "rows_above_30000": 0
+          },
+          {
+            "gyro_is_hd": true,
+            "rows": 0,
+            "max_abs_deg_s": null,
+            "p50_abs_deg_s": null,
+            "rows_above_1000": 0,
+            "rows_above_30000": 0
+          }
+        ],
+        "rows_above_30000_deg_s": []
+      },
+      "feature_ranges": {
+        "peak_horizontal_g": {
+          "nonfinite": 0,
+          "min": 0.23975403321716515,
+          "p50": 0.745268417478252,
+          "p95": 1.3424182144827268,
+          "max": 5.995863982488873
+        },
+        "gps_end_kmh": {
+          "nonfinite": 0,
+          "min": 0.0,
+          "p50": 9.0,
+          "p95": 57.0,
+          "max": 127.0
+        },
+        "gps_samples": {
+          "nonfinite": 0,
+          "min": 15.0,
+          "p50": 16.0,
+          "p95": 16.0,
+          "max": 16.0
+        },
+        "gyro_is_hd": {
+          "nonfinite": 0,
+          "min": 0.0,
+          "p50": 0.0,
+          "p95": 0.0,
+          "max": 0.0
+        },
+        "peak_abs_gyro_deg_s": {
+          "nonfinite": 0,
+          "min": 1.0,
+          "p50": 10.0,
+          "p95": 38.0,
+          "max": 716.0
+        },
+        "imu_samples": {
+          "nonfinite": 0,
+          "min": 1410.0,
+          "p50": 1600.0,
+          "p95": 1600.0,
+          "max": 1600.0
+        }
+      },
+      "label_nulls": 0,
+      "event_id_nulls": 0
+    },
+    {
+      "file_name": "validation-00001-of-00003.parquet",
+      "split": "validation",
+      "rows": 9058,
+      "matrix_rows": 9058,
+      "rows_removed": 0,
+      "schema_problems": [],
+      "column_types": {
+        "event_id": "int64",
+        "label": "int64",
+        "vehiclesize": "string",
+        "gyro_is_hd": "bool",
+        "gsensor": "list<element: fixed_size_list<element: float>[3]>",
+        "gyro": "list<element: fixed_size_list<element: float>[3]>",
+        "gps_speed": "list<element: float>"
+      },
+      "extra_columns": [],
+      "label_counts": {
+        "0": 4201,
+        "1": 1515,
+        "2": 3342
+      },
+      "null_counts": {
+        "event_id": 0,
+        "label": 0,
+        "vehiclesize": 0,
+        "gyro_is_hd": 0,
+        "gsensor": 0,
+        "gyro": 0,
+        "gps_speed": 0
+      },
+      "nonfinite_totals": {
+        "gsensor": 0,
+        "gyro": 0,
+        "gps_speed": 0
+      },
+      "gps": [
+        {
+          "length": 11,
+          "rows": 1,
+          "gyro_is_hd": 0,
+          "crash": 0,
+          "last_equals_previous": 0
+        },
+        {
+          "length": 12,
+          "rows": 2,
+          "gyro_is_hd": 1,
+          "crash": 1,
+          "last_equals_previous": 0
+        },
+        {
+          "length": 13,
+          "rows": 1,
+          "gyro_is_hd": 0,
+          "crash": 0,
+          "last_equals_previous": 0
+        },
+        {
+          "length": 14,
+          "rows": 2,
+          "gyro_is_hd": 0,
+          "crash": 0,
+          "last_equals_previous": 1
+        },
+        {
+          "length": 15,
+          "rows": 6,
+          "gyro_is_hd": 5,
+          "crash": 5,
+          "last_equals_previous": 2
+        },
+        {
+          "length": 16,
+          "rows": 2052,
+          "gyro_is_hd": 1,
+          "crash": 99,
+          "last_equals_previous": 633
+        },
+        {
+          "length": 17,
+          "rows": 6994,
+          "gyro_is_hd": 5900,
+          "crash": 4096,
+          "last_equals_previous": 3846
+        }
+      ],
+      "gps_structure": [
+        {
+          "length": 11,
+          "rows": 1,
+          "last_equals_previous": 0,
+          "first_equals_second": 0,
+          "any_adjacent_duplicate": 1,
+          "no_adjacent_duplicate": 0
+        },
+        {
+          "length": 12,
+          "rows": 2,
+          "last_equals_previous": 0,
+          "first_equals_second": 1,
+          "any_adjacent_duplicate": 2,
+          "no_adjacent_duplicate": 0
+        },
+        {
+          "length": 13,
+          "rows": 1,
+          "last_equals_previous": 0,
+          "first_equals_second": 0,
+          "any_adjacent_duplicate": 1,
+          "no_adjacent_duplicate": 0
+        },
+        {
+          "length": 14,
+          "rows": 2,
+          "last_equals_previous": 1,
+          "first_equals_second": 1,
+          "any_adjacent_duplicate": 2,
+          "no_adjacent_duplicate": 0
+        },
+        {
+          "length": 15,
+          "rows": 6,
+          "last_equals_previous": 2,
+          "first_equals_second": 4,
+          "any_adjacent_duplicate": 5,
+          "no_adjacent_duplicate": 1
+        },
+        {
+          "length": 16,
+          "rows": 2052,
+          "last_equals_previous": 633,
+          "first_equals_second": 559,
+          "any_adjacent_duplicate": 1741,
+          "no_adjacent_duplicate": 311
+        },
+        {
+          "length": 17,
+          "rows": 6994,
+          "last_equals_previous": 3846,
+          "first_equals_second": 2326,
+          "any_adjacent_duplicate": 6666,
+          "no_adjacent_duplicate": 328
+        }
+      ],
+      "imu": {
+        "rows": 9058,
+        "unusual_rows": 15,
+        "mismatch_rows": 0,
+        "max_gsensor_length": 1600,
+        "max_gyro_length": 1600,
+        "mismatch_examples": []
+      },
+      "gyro": {
+        "by_resolution": [
+          {
+            "gyro_is_hd": false,
+            "rows": 3151,
+            "max_abs_deg_s": 2000.0,
+            "p50_abs_deg_s": 23.0,
+            "rows_above_1000": 6,
+            "rows_above_30000": 0
+          },
+          {
+            "gyro_is_hd": true,
+            "rows": 5907,
+            "max_abs_deg_s": 1394.3170166015625,
+            "p50_abs_deg_s": 40.63199996948242,
+            "rows_above_1000": 8,
+            "rows_above_30000": 0
+          }
+        ],
+        "rows_above_30000_deg_s": []
+      },
+      "feature_ranges": {
+        "peak_horizontal_g": {
+          "nonfinite": 0,
+          "min": 0.06440496889771674,
+          "p50": 2.08029703643109,
+          "p95": 5.219660355713693,
+          "max": 7.096045771673217
+        },
+        "gps_end_kmh": {
+          "nonfinite": 0,
+          "min": 0.0,
+          "p50": 8.0,
+          "p95": 86.0,
+          "max": 500.0
+        },
+        "gps_samples": {
+          "nonfinite": 0,
+          "min": 11.0,
+          "p50": 17.0,
+          "p95": 17.0,
+          "max": 17.0
+        },
+        "gyro_is_hd": {
+          "nonfinite": 0,
+          "min": 0.0,
+          "p50": 1.0,
+          "p95": 1.0,
+          "max": 1.0
+        },
+        "peak_abs_gyro_deg_s": {
+          "nonfinite": 0,
+          "min": 1.0,
+          "p50": 34.38250160217285,
+          "p95": 241.0984466552734,
+          "max": 2000.0
+        },
+        "imu_samples": {
+          "nonfinite": 0,
+          "min": 1060.0,
+          "p50": 1600.0,
+          "p95": 1600.0,
+          "max": 1600.0
+        }
+      },
+      "label_nulls": 0,
+      "event_id_nulls": 0
+    },
+    {
+      "file_name": "validation-00002-of-00003.parquet",
+      "split": "validation",
+      "rows": 9058,
+      "matrix_rows": 9058,
+      "rows_removed": 0,
+      "schema_problems": [],
+      "column_types": {
+        "event_id": "int64",
+        "label": "int64",
+        "vehiclesize": "string",
+        "gyro_is_hd": "bool",
+        "gsensor": "list<element: fixed_size_list<element: float>[3]>",
+        "gyro": "list<element: fixed_size_list<element: float>[3]>",
+        "gps_speed": "list<element: float>"
+      },
+      "extra_columns": [],
+      "label_counts": {
+        "0": 0,
+        "1": 839,
+        "2": 8219
+      },
+      "null_counts": {
+        "event_id": 0,
+        "label": 0,
+        "vehiclesize": 0,
+        "gyro_is_hd": 0,
+        "gsensor": 0,
+        "gyro": 0,
+        "gps_speed": 0
+      },
+      "nonfinite_totals": {
+        "gsensor": 0,
+        "gyro": 0,
+        "gps_speed": 0
+      },
+      "gps": [
+        {
+          "length": 11,
+          "rows": 3,
+          "gyro_is_hd": 1,
+          "crash": 0,
+          "last_equals_previous": 0
+        },
+        {
+          "length": 12,
+          "rows": 2,
+          "gyro_is_hd": 0,
+          "crash": 0,
+          "last_equals_previous": 0
+        },
+        {
+          "length": 13,
+          "rows": 6,
+          "gyro_is_hd": 1,
+          "crash": 0,
+          "last_equals_previous": 1
+        },
+        {
+          "length": 14,
+          "rows": 2,
+          "gyro_is_hd": 1,
+          "crash": 0,
+          "last_equals_previous": 2
+        },
+        {
+          "length": 15,
+          "rows": 4,
+          "gyro_is_hd": 1,
+          "crash": 0,
+          "last_equals_previous": 3
+        },
+        {
+          "length": 16,
+          "rows": 700,
+          "gyro_is_hd": 1,
+          "crash": 0,
+          "last_equals_previous": 206
+        },
+        {
+          "length": 17,
+          "rows": 8341,
+          "gyro_is_hd": 6979,
+          "crash": 0,
+          "last_equals_previous": 4169
+        }
+      ],
+      "gps_structure": [
+        {
+          "length": 11,
+          "rows": 3,
+          "last_equals_previous": 0,
+          "first_equals_second": 1,
+          "any_adjacent_duplicate": 2,
+          "no_adjacent_duplicate": 1
+        },
+        {
+          "length": 12,
+          "rows": 2,
+          "last_equals_previous": 0,
+          "first_equals_second": 1,
+          "any_adjacent_duplicate": 2,
+          "no_adjacent_duplicate": 0
+        },
+        {
+          "length": 13,
+          "rows": 6,
+          "last_equals_previous": 1,
+          "first_equals_second": 1,
+          "any_adjacent_duplicate": 6,
+          "no_adjacent_duplicate": 0
+        },
+        {
+          "length": 14,
+          "rows": 2,
+          "last_equals_previous": 2,
+          "first_equals_second": 2,
+          "any_adjacent_duplicate": 2,
+          "no_adjacent_duplicate": 0
+        },
+        {
+          "length": 15,
+          "rows": 4,
+          "last_equals_previous": 3,
+          "first_equals_second": 2,
+          "any_adjacent_duplicate": 4,
+          "no_adjacent_duplicate": 0
+        },
+        {
+          "length": 16,
+          "rows": 700,
+          "last_equals_previous": 206,
+          "first_equals_second": 181,
+          "any_adjacent_duplicate": 584,
+          "no_adjacent_duplicate": 116
+        },
+        {
+          "length": 17,
+          "rows": 8341,
+          "last_equals_previous": 4169,
+          "first_equals_second": 2742,
+          "any_adjacent_duplicate": 7750,
+          "no_adjacent_duplicate": 591
+        }
+      ],
+      "imu": {
+        "rows": 9058,
+        "unusual_rows": 21,
+        "mismatch_rows": 0,
+        "max_gsensor_length": 1600,
+        "max_gyro_length": 1600,
+        "mismatch_examples": []
+      },
+      "gyro": {
+        "by_resolution": [
+          {
+            "gyro_is_hd": false,
+            "rows": 2074,
+            "max_abs_deg_s": 2147483.75,
+            "p50_abs_deg_s": 9.0,
+            "rows_above_1000": 3,
+            "rows_above_30000": 2
+          },
+          {
+            "gyro_is_hd": true,
+            "rows": 6984,
+            "max_abs_deg_s": 157.56300354003906,
+            "p50_abs_deg_s": 6.299499988555908,
+            "rows_above_1000": 0,
+            "rows_above_30000": 0
+          }
+        ],
+        "rows_above_30000_deg_s": [
+          {
+            "row_index": 314,
+            "peak_abs_deg_s": 2147483.75,
+            "gyro_is_hd": false,
+            "label": 1
+          },
+          {
+            "row_index": 8417,
+            "peak_abs_deg_s": 32713.0,
+            "gyro_is_hd": false,
+            "label": 2
+          }
+        ]
+      },
+      "feature_ranges": {
+        "peak_horizontal_g": {
+          "nonfinite": 0,
+          "min": 0.007071068032477886,
+          "p50": 0.566700078789685,
+          "p95": 1.1722939372409045,
+          "max": 2420975.6413557865
+        },
+        "gps_end_kmh": {
+          "nonfinite": 0,
+          "min": 0.0,
+          "p50": 36.0,
+          "p95": 113.0,
+          "max": 142.0
+        },
+        "gps_samples": {
+          "nonfinite": 0,
+          "min": 11.0,
+          "p50": 17.0,
+          "p95": 17.0,
+          "max": 17.0
+        },
+        "gyro_is_hd": {
+          "nonfinite": 0,
+          "min": 0.0,
+          "p50": 1.0,
+          "p95": 1.0,
+          "max": 1.0
+        },
+        "peak_abs_gyro_deg_s": {
+          "nonfinite": 0,
+          "min": 0.3970000147819519,
+          "p50": 6.934999942779541,
+          "p95": 32.1485990524292,
+          "max": 2147483.75
+        },
+        "imu_samples": {
+          "nonfinite": 0,
+          "min": 1030.0,
+          "p50": 1600.0,
+          "p95": 1600.0,
+          "max": 1600.0
+        }
+      },
+      "label_nulls": 0,
+      "event_id_nulls": 0
+    },
+    {
+      "file_name": "test-00000-of-00002.parquet",
+      "split": "test",
+      "rows": 12087,
+      "matrix_rows": 12087,
+      "rows_removed": 0,
+      "schema_problems": [],
+      "column_types": {
+        "event_id": "int64",
+        "label": "int64",
+        "vehiclesize": "string",
+        "gyro_is_hd": "bool",
+        "gsensor": "list<element: fixed_size_list<element: float>[3]>",
+        "gyro": "list<element: fixed_size_list<element: float>[3]>",
+        "gps_speed": "list<element: float>"
+      },
+      "extra_columns": [],
+      "label_counts": {
+        "0": 4221,
+        "1": 1366,
+        "2": 6500
+      },
+      "null_counts": {
+        "event_id": 0,
+        "label": 0,
+        "vehiclesize": 0,
+        "gyro_is_hd": 0,
+        "gsensor": 0,
+        "gyro": 0,
+        "gps_speed": 0
+      },
+      "nonfinite_totals": {
+        "gsensor": 0,
+        "gyro": 0,
+        "gps_speed": 0
+      },
+      "gps": [
+        {
+          "length": 11,
+          "rows": 1,
+          "gyro_is_hd": 1,
+          "crash": 1,
+          "last_equals_previous": 0
+        },
+        {
+          "length": 12,
+          "rows": 1,
+          "gyro_is_hd": 1,
+          "crash": 1,
+          "last_equals_previous": 0
+        },
+        {
+          "length": 13,
+          "rows": 1,
+          "gyro_is_hd": 1,
+          "crash": 1,
+          "last_equals_previous": 0
+        },
+        {
+          "length": 14,
+          "rows": 3,
+          "gyro_is_hd": 3,
+          "crash": 3,
+          "last_equals_previous": 0
+        },
+        {
+          "length": 15,
+          "rows": 9,
+          "gyro_is_hd": 2,
+          "crash": 2,
+          "last_equals_previous": 4
+        },
+        {
+          "length": 16,
+          "rows": 7733,
+          "gyro_is_hd": 0,
+          "crash": 110,
+          "last_equals_previous": 2628
+        },
+        {
+          "length": 17,
+          "rows": 4337,
+          "gyro_is_hd": 4117,
+          "crash": 4101,
+          "last_equals_previous": 2486
+        },
+        {
+          "length": 42,
+          "rows": 2,
+          "gyro_is_hd": 2,
+          "crash": 2,
+          "last_equals_previous": 2
+        }
+      ],
+      "gps_structure": [
+        {
+          "length": 11,
+          "rows": 1,
+          "last_equals_previous": 0,
+          "first_equals_second": 1,
+          "any_adjacent_duplicate": 1,
+          "no_adjacent_duplicate": 0
+        },
+        {
+          "length": 12,
+          "rows": 1,
+          "last_equals_previous": 0,
+          "first_equals_second": 0,
+          "any_adjacent_duplicate": 1,
+          "no_adjacent_duplicate": 0
+        },
+        {
+          "length": 13,
+          "rows": 1,
+          "last_equals_previous": 0,
+          "first_equals_second": 0,
+          "any_adjacent_duplicate": 1,
+          "no_adjacent_duplicate": 0
+        },
+        {
+          "length": 14,
+          "rows": 3,
+          "last_equals_previous": 0,
+          "first_equals_second": 2,
+          "any_adjacent_duplicate": 3,
+          "no_adjacent_duplicate": 0
+        },
+        {
+          "length": 15,
+          "rows": 9,
+          "last_equals_previous": 4,
+          "first_equals_second": 3,
+          "any_adjacent_duplicate": 8,
+          "no_adjacent_duplicate": 1
+        },
+        {
+          "length": 16,
+          "rows": 7733,
+          "last_equals_previous": 2628,
+          "first_equals_second": 1892,
+          "any_adjacent_duplicate": 6739,
+          "no_adjacent_duplicate": 994
+        },
+        {
+          "length": 17,
+          "rows": 4337,
+          "last_equals_previous": 2486,
+          "first_equals_second": 1472,
+          "any_adjacent_duplicate": 4169,
+          "no_adjacent_duplicate": 168
+        },
+        {
+          "length": 42,
+          "rows": 2,
+          "last_equals_previous": 2,
+          "first_equals_second": 0,
+          "any_adjacent_duplicate": 2,
+          "no_adjacent_duplicate": 0
+        }
+      ],
+      "imu": {
+        "rows": 12087,
+        "unusual_rows": 19,
+        "mismatch_rows": 0,
+        "max_gsensor_length": 4100,
+        "max_gyro_length": 4100,
+        "mismatch_examples": []
+      },
+      "gyro": {
+        "by_resolution": [
+          {
+            "gyro_is_hd": false,
+            "rows": 7960,
+            "max_abs_deg_s": 32762.0,
+            "p50_abs_deg_s": 11.0,
+            "rows_above_1000": 7,
+            "rows_above_30000": 2
+          },
+          {
+            "gyro_is_hd": true,
+            "rows": 4127,
+            "max_abs_deg_s": 1360.303955078125,
+            "p50_abs_deg_s": 50.165000915527344,
+            "rows_above_1000": 7,
+            "rows_above_30000": 0
+          }
+        ],
+        "rows_above_30000_deg_s": [
+          {
+            "row_index": 7115,
+            "peak_abs_deg_s": 32762.0,
+            "gyro_is_hd": false,
+            "label": 2
+          },
+          {
+            "row_index": 7212,
+            "peak_abs_deg_s": 32654.0,
+            "gyro_is_hd": false,
+            "label": 2
+          }
+        ]
+      },
+      "feature_ranges": {
+        "peak_horizontal_g": {
+          "nonfinite": 0,
+          "min": 0.19221341995957586,
+          "p50": 0.9601510211349032,
+          "p95": 5.085927644684647,
+          "max": 43.8080427228059
+        },
+        "gps_end_kmh": {
+          "nonfinite": 0,
+          "min": 0.0,
+          "p50": 6.0,
+          "p95": 65.0,
+          "max": 142.0
+        },
+        "gps_samples": {
+          "nonfinite": 0,
+          "min": 11.0,
+          "p50": 16.0,
+          "p95": 17.0,
+          "max": 42.0
+        },
+        "gyro_is_hd": {
+          "nonfinite": 0,
+          "min": 0.0,
+          "p50": 0.0,
+          "p95": 1.0,
+          "max": 1.0
+        },
+        "peak_abs_gyro_deg_s": {
+          "nonfinite": 0,
+          "min": 2.0,
+          "p50": 19.0,
+          "p95": 162.4211044311521,
+          "max": 32762.0
+        },
+        "imu_samples": {
+          "nonfinite": 0,
+          "min": 1020.0,
+          "p50": 1600.0,
+          "p95": 1600.0,
+          "max": 4100.0
+        }
+      },
+      "label_nulls": 0,
+      "event_id_nulls": 0
+    },
+    {
+      "file_name": "test-00001-of-00002.parquet",
+      "split": "test",
+      "rows": 12087,
+      "matrix_rows": 12087,
+      "rows_removed": 0,
+      "schema_problems": [],
+      "column_types": {
+        "event_id": "int64",
+        "label": "int64",
+        "vehiclesize": "string",
+        "gyro_is_hd": "bool",
+        "gsensor": "list<element: fixed_size_list<element: float>[3]>",
+        "gyro": "list<element: fixed_size_list<element: float>[3]>",
+        "gps_speed": "list<element: float>"
+      },
+      "extra_columns": [],
+      "label_counts": {
+        "0": 0,
+        "1": 2267,
+        "2": 9820
+      },
+      "null_counts": {
+        "event_id": 0,
+        "label": 0,
+        "vehiclesize": 0,
+        "gyro_is_hd": 0,
+        "gsensor": 0,
+        "gyro": 0,
+        "gps_speed": 0
+      },
+      "nonfinite_totals": {
+        "gsensor": 0,
+        "gyro": 0,
+        "gps_speed": 0
+      },
+      "gps": [
+        {
+          "length": 11,
+          "rows": 2,
+          "gyro_is_hd": 0,
+          "crash": 0,
+          "last_equals_previous": 0
+        },
+        {
+          "length": 12,
+          "rows": 3,
+          "gyro_is_hd": 0,
+          "crash": 0,
+          "last_equals_previous": 0
+        },
+        {
+          "length": 13,
+          "rows": 7,
+          "gyro_is_hd": 2,
+          "crash": 0,
+          "last_equals_previous": 2
+        },
+        {
+          "length": 14,
+          "rows": 2,
+          "gyro_is_hd": 1,
+          "crash": 0,
+          "last_equals_previous": 1
+        },
+        {
+          "length": 15,
+          "rows": 5,
+          "gyro_is_hd": 1,
+          "crash": 0,
+          "last_equals_previous": 3
+        },
+        {
+          "length": 16,
+          "rows": 1120,
+          "gyro_is_hd": 2,
+          "crash": 0,
+          "last_equals_previous": 330
+        },
+        {
+          "length": 17,
+          "rows": 10948,
+          "gyro_is_hd": 8702,
+          "crash": 0,
+          "last_equals_previous": 5281
+        }
+      ],
+      "gps_structure": [
+        {
+          "length": 11,
+          "rows": 2,
+          "last_equals_previous": 0,
+          "first_equals_second": 1,
+          "any_adjacent_duplicate": 1,
+          "no_adjacent_duplicate": 1
+        },
+        {
+          "length": 12,
+          "rows": 3,
+          "last_equals_previous": 0,
+          "first_equals_second": 1,
+          "any_adjacent_duplicate": 2,
+          "no_adjacent_duplicate": 1
+        },
+        {
+          "length": 13,
+          "rows": 7,
+          "last_equals_previous": 2,
+          "first_equals_second": 4,
+          "any_adjacent_duplicate": 6,
+          "no_adjacent_duplicate": 1
+        },
+        {
+          "length": 14,
+          "rows": 2,
+          "last_equals_previous": 1,
+          "first_equals_second": 2,
+          "any_adjacent_duplicate": 2,
+          "no_adjacent_duplicate": 0
+        },
+        {
+          "length": 15,
+          "rows": 5,
+          "last_equals_previous": 3,
+          "first_equals_second": 2,
+          "any_adjacent_duplicate": 5,
+          "no_adjacent_duplicate": 0
+        },
+        {
+          "length": 16,
+          "rows": 1120,
+          "last_equals_previous": 330,
+          "first_equals_second": 294,
+          "any_adjacent_duplicate": 971,
+          "no_adjacent_duplicate": 149
+        },
+        {
+          "length": 17,
+          "rows": 10948,
+          "last_equals_previous": 5281,
+          "first_equals_second": 3550,
+          "any_adjacent_duplicate": 10152,
+          "no_adjacent_duplicate": 796
+        }
+      ],
+      "imu": {
+        "rows": 12087,
+        "unusual_rows": 31,
+        "mismatch_rows": 1,
+        "max_gsensor_length": 1600,
+        "max_gyro_length": 1600,
+        "mismatch_examples": [
+          {
+            "gsensor_length": 1280,
+            "gyro_length": 1270,
+            "label": 2
+          }
+        ]
+      },
+      "gyro": {
+        "by_resolution": [
+          {
+            "gyro_is_hd": false,
+            "rows": 3379,
+            "max_abs_deg_s": 880.0,
+            "p50_abs_deg_s": 12.0,
+            "rows_above_1000": 0,
+            "rows_above_30000": 0
+          },
+          {
+            "gyro_is_hd": true,
+            "rows": 8708,
+            "max_abs_deg_s": 1253.470947265625,
+            "p50_abs_deg_s": 7.5325000286102295,
+            "rows_above_1000": 2,
+            "rows_above_30000": 0
+          }
+        ],
+        "rows_above_30000_deg_s": []
+      },
+      "feature_ranges": {
+        "peak_horizontal_g": {
+          "nonfinite": 0,
+          "min": 0.033136082875843104,
+          "p50": 0.6380415122823068,
+          "p95": 2.157602865830667,
+          "max": 5.963427133206645
+        },
+        "gps_end_kmh": {
+          "nonfinite": 0,
+          "min": 0.0,
+          "p50": 31.0,
+          "p95": 112.0,
+          "max": 138.0
+        },
+        "gps_samples": {
+          "nonfinite": 0,
+          "min": 11.0,
+          "p50": 17.0,
+          "p95": 17.0,
+          "max": 17.0
+        },
+        "gyro_is_hd": {
+          "nonfinite": 0,
+          "min": 0.0,
+          "p50": 1.0,
+          "p95": 1.0,
+          "max": 1.0
+        },
+        "peak_abs_gyro_deg_s": {
+          "nonfinite": 0,
+          "min": 0.039000000804662704,
+          "p50": 8.487000465393066,
+          "p95": 119.0,
+          "max": 1253.470947265625
+        },
+        "imu_samples": {
+          "nonfinite": 0,
+          "min": 1080.0,
+          "p50": 1600.0,
+          "p95": 1600.0,
+          "max": 1600.0
+        }
+      },
+      "label_nulls": 0,
+      "event_id_nulls": 0
+    }
+  ],
+  "gps_conclusion": {
+    "length_16": {
+      "rows": 85825,
+      "last_equals_previous": 29506,
+      "first_equals_second": 21096,
+      "no_adjacent_duplicate": 11437
+    },
+    "length_17": {
+      "rows": 103187,
+      "last_equals_previous": 53144,
+      "first_equals_second": 34181,
+      "no_adjacent_duplicate": 6294
+    },
+    "interpretation": "103187 rows store 17 GPS samples. 53144 repeat the final sample and 34181 repeat the first sample. Those counts can overlap. 6294 rows have no adjacent duplicate, so length 17 is not one parse error. Rows stay at their stored length."
+  },
+  "excluded_features": {
+    "gps_samples": "GPS list length is a storage count, not a speed. Standardizing it turns a one-sample format gap into a large score when one length dominates training.",
+    "imu_samples": "Accelerometer list length is a storage count, not an acceleration.",
+    "gyro_samples": "Gyroscope list length is a storage count, not a rotation.",
+    "gyro_is_hd": "This is a sensor-resolution flag. Standardization does not put high-definition and standard gyroscope samples on one scale.",
+    "peak_abs_gyro_deg_s": "Standard gyroscope rows can saturate near the int16 full scale, while high-definition rows use a finer resolution. One standardized column does not correct that encoding.",
+    "std_gyro_magnitude_deg_s": "Same gyroscope encoding mismatch as the peak gyroscope feature."
+  },
+  "candidates": {
+    "peak_baseline": {
+      "kind": "peak",
+      "features": [
+        "peak_horizontal_g"
+      ],
+      "score": "max over time of hypot(accel_x, accel_y)"
+    },
+    "accel_logistic": {
+      "kind": "logistic",
+      "features": [
+        "peak_horizontal_g",
+        "peak_magnitude_g",
+        "min_ax_g",
+        "max_ax_g",
+        "std_horizontal_g"
+      ],
+      "imputer": "median fit on training rows",
+      "scaler": "standard scaler fit on training rows",
+      "scaler_mean": [
+        1.3194589921917115,
+        1.9686928980279212,
+        -1.039260478254789,
+        0.6898215203184668,
+        0.16972126715891397
+      ],
+      "scaler_scale": [
+        1.3325597627412968,
+        1.294484813028426,
+        1.0911391498469494,
+        0.9575270604120752,
+        0.14436425176232984
+      ],
+      "logistic_C": 1.0,
+      "class_weight": "balanced",
+      "solver": "lbfgs",
+      "random_state": 0,
+      "max_iter": 1000,
+      "intercept": -1.479930093266309,
+      "coefficients": {
+        "peak_horizontal_g": 2.6564977123282962,
+        "peak_magnitude_g": 0.3538248530829053,
+        "min_ax_g": -0.8236415308786735,
+        "max_ax_g": -0.7576964789839428,
+        "std_horizontal_g": 0.8599312944069697
+      }
+    },
+    "defensible_logistic": {
+      "kind": "logistic",
+      "features": [
+        "peak_horizontal_g",
+        "peak_magnitude_g",
+        "min_ax_g",
+        "max_ax_g",
+        "std_horizontal_g",
+        "gps_start_kmh",
+        "gps_end_kmh",
+        "gps_min_kmh",
+        "gps_drop_kmh",
+        "size_light",
+        "size_medium",
+        "size_heavy"
+      ],
+      "imputer": "median fit on training rows",
+      "scaler": "standard scaler fit on training rows",
+      "scaler_mean": [
+        1.3194589921917115,
+        1.9686928980279212,
+        -1.039260478254789,
+        0.6898215203184668,
+        0.16972126715891397,
+        62.001565739304404,
+        26.930984241123852,
+        19.733759079113327,
+        42.26780666019108,
+        0.1426489989416762,
+        0.3539803122780057,
+        0.1617133247314322
+      ],
+      "scaler_scale": [
+        1.3325597627412968,
+        1.294484813028426,
+        1.0911391498469494,
+        0.9575270604120752,
+        0.14436425176232984,
+        31.041474829926752,
+        31.631375329279294,
+        29.909293338517006,
+        29.295368251726114,
+        0.3497145436532686,
+        0.4782031480423057,
+        0.36818762246406195
+      ],
+      "logistic_C": 1.0,
+      "class_weight": "balanced",
+      "solver": "lbfgs",
+      "random_state": 0,
+      "max_iter": 1000,
+      "intercept": -1.9189504041075385,
+      "coefficients": {
+        "peak_horizontal_g": 2.5497373845640143,
+        "peak_magnitude_g": 0.3382274688955427,
+        "min_ax_g": -0.809039220403663,
+        "max_ax_g": -0.7320628624763436,
+        "std_horizontal_g": 0.7266595625730423,
+        "gps_start_kmh": 0.7126853140357942,
+        "gps_end_kmh": -1.856823953961768,
+        "gps_min_kmh": 1.134261145958396,
+        "gps_drop_kmh": -0.40286730647110036,
+        "size_light": 0.534291181016059,
+        "size_medium": 0.8446131178120592,
+        "size_heavy": 0.5072468040579278
+      }
+    }
+  },
+  "validation_comparison": {
+    "peak_baseline": {
+      "max_f1_threshold": {
+        "role": "validation_operating_point",
+        "threshold": 1.9936800270274158,
+        "false_positives": 1060,
+        "false_negatives": 463,
+        "rows": 27175,
+        "precision_crash": 0.7815333882934872,
+        "recall_crash": 0.891186839012926,
+        "f1_crash": 0.8327660041726145,
+        "balanced_accuracy": 0.9224695102568993,
+        "balanced_accuracy_note": "",
+        "confusion_matrix": {
+          "labels": [
+            "non_crash",
+            "crash"
+          ],
+          "matrix": [
+            [
+              21860,
+              1060
+            ],
+            [
+              463,
+              3792
+            ]
+          ]
+        },
+        "support_non_crash": 22920,
+        "support_crash": 4255,
+        "average_precision_crash": 0.884837641607,
+        "average_precision_note": "",
+        "average_precision_excluded_nonfinite": 0
+      }
+    },
+    "accel_logistic": {
+      "max_f1_threshold": {
+        "role": "validation_operating_point",
+        "threshold": 0.5810991558413173,
+        "false_positives": 986,
+        "false_negatives": 398,
+        "rows": 27175,
+        "precision_crash": 0.7964071856287425,
+        "recall_crash": 0.9064629847238543,
+        "f1_crash": 0.8478786546493735,
+        "balanced_accuracy": 0.9317218937580878,
+        "balanced_accuracy_note": "",
+        "confusion_matrix": {
+          "labels": [
+            "non_crash",
+            "crash"
+          ],
+          "matrix": [
+            [
+              21934,
+              986
+            ],
+            [
+              398,
+              3857
+            ]
+          ]
+        },
+        "support_non_crash": 22920,
+        "support_crash": 4255,
+        "average_precision_crash": 0.9079283442938089,
+        "average_precision_note": "",
+        "average_precision_excluded_nonfinite": 0
+      },
+      "probability_0_5": {
+        "role": "validation_reference_not_selected",
+        "threshold": 0.5,
+        "false_positives": 1107,
+        "false_negatives": 321,
+        "rows": 27175,
+        "precision_crash": 0.780400714144019,
+        "recall_crash": 0.9245593419506463,
+        "f1_crash": 0.8463855421686747,
+        "balanced_accuracy": 0.9381304563156372,
+        "balanced_accuracy_note": "",
+        "confusion_matrix": {
+          "labels": [
+            "non_crash",
+            "crash"
+          ],
+          "matrix": [
+            [
+              21813,
+              1107
+            ],
+            [
+              321,
+              3934
+            ]
+          ]
+        },
+        "support_non_crash": 22920,
+        "support_crash": 4255,
+        "average_precision_crash": 0.9079283442938089,
+        "average_precision_note": "",
+        "average_precision_excluded_nonfinite": 0
+      }
+    },
+    "defensible_logistic": {
+      "max_f1_threshold": {
+        "role": "validation_operating_point",
+        "threshold": 0.6152401422448208,
+        "false_positives": 873,
+        "false_negatives": 359,
+        "rows": 27175,
+        "precision_crash": 0.816942755294611,
+        "recall_crash": 0.9156286721504113,
+        "f1_crash": 0.8634751773049646,
+        "balanced_accuracy": 0.9387698334574046,
+        "balanced_accuracy_note": "",
+        "confusion_matrix": {
+          "labels": [
+            "non_crash",
+            "crash"
+          ],
+          "matrix": [
+            [
+              22047,
+              873
+            ],
+            [
+              359,
+              3896
+            ]
+          ]
+        },
+        "support_non_crash": 22920,
+        "support_crash": 4255,
+        "average_precision_crash": 0.922651495325537,
+        "average_precision_note": "",
+        "average_precision_excluded_nonfinite": 0
+      },
+      "probability_0_5": {
+        "role": "validation_reference_not_selected",
+        "threshold": 0.5,
+        "false_positives": 1060,
+        "false_negatives": 262,
+        "rows": 27175,
+        "precision_crash": 0.7902236295270136,
+        "recall_crash": 0.9384253819036428,
+        "f1_crash": 0.8579716373012463,
+        "balanced_accuracy": 0.9460887817022576,
+        "balanced_accuracy_note": "",
+        "confusion_matrix": {
+          "labels": [
+            "non_crash",
+            "crash"
+          ],
+          "matrix": [
+            [
+              21860,
+              1060
+            ],
+            [
+              262,
+              3993
+            ]
+          ]
+        },
+        "support_non_crash": 22920,
+        "support_crash": 4255,
+        "average_precision_crash": 0.922651495325537,
+        "average_precision_note": "",
+        "average_precision_excluded_nonfinite": 0
+      }
+    }
+  },
+  "decision": {
+    "selected_model": "defensible_logistic",
+    "status": "frozen",
+    "reason": "highest validation average precision; name breaks ties",
+    "validation_average_precision": {
+      "peak_baseline": 0.884837641607,
+      "accel_logistic": 0.9079283442938089,
+      "defensible_logistic": 0.922651495325537
+    },
+    "threshold": 0.6152401422448208,
+    "model_criterion": "highest validation average precision; model name breaks ties",
+    "threshold_criterion": "maximum crash F1 on the selected model's validation scores; the lowest score wins ties",
+    "use_case_note": "No missed-crash versus false-alarm cost ratio was specified. Average precision ranks crash scores without an operating point. Crash F1 is the documented balanced threshold. Precision, recall, false positives, and false negatives are reported beside that choice.",
+    "experiment_version": "phase4-v1"
+  },
+  "test_evaluation": {
+    "status": "scored_once",
+    "model": "defensible_logistic",
+    "threshold": 0.6152401422448208,
+    "pooled": {
+      "role": "frozen_test_scored_once",
+      "threshold": 0.6152401422448208,
+      "false_positives": 825,
+      "false_negatives": 349,
+      "rows": 24174,
+      "precision_crash": 0.8243559718969555,
+      "recall_crash": 0.9173181710495143,
+      "f1_crash": 0.8683561336622561,
+      "balanced_accuracy": 0.9379855026048955,
+      "balanced_accuracy_note": "",
+      "confusion_matrix": {
+        "labels": [
+          "non_crash",
+          "crash"
+        ],
+        "matrix": [
+          [
+            19128,
+            825
+          ],
+          [
+            349,
+            3872
+          ]
+        ]
+      },
+      "support_non_crash": 19953,
+      "support_crash": 4221,
+      "average_precision_crash": 0.9272891281023602,
+      "average_precision_note": "",
+      "average_precision_excluded_nonfinite": 0
+    },
+    "by_file": [
+      {
+        "role": "frozen_test_shard_diagnostic",
+        "threshold": 0.6152401422448208,
+        "false_positives": 219,
+        "false_negatives": 349,
+        "rows": 12087,
+        "precision_crash": 0.9464678562698606,
+        "recall_crash": 0.9173181710495143,
+        "f1_crash": 0.931665062560154,
+        "balanced_accuracy": 0.9447384142814315,
+        "balanced_accuracy_note": "",
+        "confusion_matrix": {
+          "labels": [
+            "non_crash",
+            "crash"
+          ],
+          "matrix": [
+            [
+              7647,
+              219
+            ],
+            [
+              349,
+              3872
+            ]
+          ]
+        },
+        "support_non_crash": 7866,
+        "support_crash": 4221,
+        "average_precision_crash": 0.9744468226686215,
+        "average_precision_note": "",
+        "average_precision_excluded_nonfinite": 0,
+        "file_name": "test-00000-of-00002.parquet"
+      },
+      {
+        "role": "frozen_test_shard_diagnostic",
+        "threshold": 0.6152401422448208,
+        "false_positives": 606,
+        "false_negatives": 0,
+        "rows": 12087,
+        "precision_crash": null,
+        "recall_crash": null,
+        "f1_crash": null,
+        "balanced_accuracy": null,
+        "balanced_accuracy_note": "undefined because this slice contains only one class",
+        "confusion_matrix": {
+          "labels": [
+            "non_crash",
+            "crash"
+          ],
+          "matrix": [
+            [
+              11481,
+              606
+            ],
+            [
+              0,
+              0
+            ]
+          ]
+        },
+        "support_non_crash": 12087,
+        "support_crash": 0,
+        "average_precision_crash": null,
+        "average_precision_note": "undefined because this slice does not contain both classes",
+        "average_precision_excluded_nonfinite": 0,
+        "positive_class_metrics": "undefined",
+        "positive_class_note": "This slice has zero crash labels, so precision, recall, F1, and average precision are undefined.",
+        "file_name": "test-00001-of-00002.parquet"
+      }
+    ],
+    "figures": "reports\\phase4\\figures"
+  },
+  "report_path": "reports\\phase4\\phase4_report.md",
+  "json_path": "reports\\phase4\\phase4_results.json"
+}

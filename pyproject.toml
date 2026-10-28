@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "accident-detection"
+version = "0.1.0"
+description = "VZCrash audit and crash-detection baselines."
+requires-python = ">=3.11"
+dependencies = [
+    "numpy==2.4.6",
+    "pyarrow==26.0.0",
+    "matplotlib==3.11.2",
+    "scikit-learn==1.9.1",
+]
+
+[project.optional-dependencies]
+dev = ["pytest==8.4.2"]
+
+[project.scripts]
+vzcrash-audit = "accident_detection.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]

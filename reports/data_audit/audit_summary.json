@@ -1,0 +1,541 @@
+{
+  "data_dir": "data\\VZCrash\\data",
+  "generated_at": "2026-10-28T11:30:00.630872+00:00",
+  "command": "python -m accident_detection.cli --data-dir data/VZCrash/data --report-dir reports/data_audit --figure-dir reports/figures",
+  "rows_removed": 0,
+  "nominal_imu_samples": 1600,
+  "nominal_gps_samples": 16,
+  "imu_hz": 100,
+  "gps_hz": 1,
+  "coverage_notes": [
+    "train: found 1 of 11 official parquet shards in this directory",
+    "validation: found 0 of 3 official parquet shards in this directory"
+  ],
+  "files": [
+    {
+      "file_name": "test-00000-of-00002.parquet",
+      "split": "test",
+      "num_rows": 12087,
+      "num_row_groups": 5,
+      "file_size_bytes": 494437326,
+      "schema_problems": [],
+      "read_error": null,
+      "signals_scanned": true,
+      "label_counts": {
+        "0": 4221,
+        "1": 1366,
+        "2": 6500
+      },
+      "label_percentages": {
+        "crash": 34.9218,
+        "near_miss": 11.3014,
+        "normal_driving": 53.7768
+      },
+      "null_counts": {
+        "event_id": 0,
+        "label": 0,
+        "vehiclesize": 0,
+        "gyro_is_hd": 0,
+        "gsensor": 0,
+        "gyro": 0,
+        "gps_speed": 0
+      },
+      "null_element_totals": {
+        "gsensor": 0,
+        "gyro": 0,
+        "gps_speed": 0
+      },
+      "nonfinite_totals": {
+        "gsensor": 0,
+        "gyro": 0,
+        "gps_speed": 0
+      },
+      "length_counts": {
+        "gsensor": {
+          "1020": 1,
+          "1130": 1,
+          "1250": 1,
+          "1300": 1,
+          "1350": 2,
+          "1400": 1,
+          "1420": 1,
+          "1430": 2,
+          "1440": 1,
+          "1460": 1,
+          "1470": 1,
+          "1500": 2,
+          "1550": 1,
+          "1580": 1,
+          "1600": 12068,
+          "4100": 2
+        },
+        "gyro": {
+          "1020": 1,
+          "1130": 1,
+          "1250": 1,
+          "1300": 1,
+          "1350": 2,
+          "1400": 1,
+          "1420": 1,
+          "1430": 2,
+          "1440": 1,
+          "1460": 1,
+          "1470": 1,
+          "1500": 2,
+          "1550": 1,
+          "1580": 1,
+          "1600": 12068,
+          "4100": 2
+        },
+        "gps_speed": {
+          "11": 1,
+          "12": 1,
+          "13": 1,
+          "14": 3,
+          "15": 9,
+          "16": 7733,
+          "17": 4337,
+          "42": 2
+        }
+      },
+      "extrema": {
+        "gsensor": {
+          "finite_count": 58021740,
+          "min": -32.7239990234375,
+          "max": 32.60200119018555
+        },
+        "gyro": {
+          "finite_count": 58021740,
+          "min": -32762.0,
+          "max": 32730.0
+        },
+        "gps_speed": {
+          "finite_count": 197754,
+          "min": 0.0,
+          "max": 163.0
+        }
+      },
+      "vehiclesize_counts": {
+        "Unknown": 4992,
+        "Light": 1526,
+        "Heavy": 1542,
+        "Medium": 4027
+      },
+      "gyro_is_hd_counts": {
+        "true": 4127,
+        "false": 7960,
+        "null": 0
+      },
+      "anomaly_counts": {
+        "length_not_nominal:gsensor": 19,
+        "length_not_nominal:gyro": 19,
+        "length_not_nominal:gps_speed": 4354
+      }
+    },
+    {
+      "file_name": "test-00001-of-00002.parquet",
+      "split": "test",
+      "num_rows": 12087,
+      "num_row_groups": 5,
+      "file_size_bytes": 494255434,
+      "schema_problems": [],
+      "read_error": null,
+      "signals_scanned": true,
+      "label_counts": {
+        "0": 0,
+        "1": 2267,
+        "2": 9820
+      },
+      "label_percentages": {
+        "crash": 0.0,
+        "near_miss": 18.7557,
+        "normal_driving": 81.2443
+      },
+      "null_counts": {
+        "event_id": 0,
+        "label": 0,
+        "vehiclesize": 0,
+        "gyro_is_hd": 0,
+        "gsensor": 0,
+        "gyro": 0,
+        "gps_speed": 0
+      },
+      "null_element_totals": {
+        "gsensor": 0,
+        "gyro": 0,
+        "gps_speed": 0
+      },
+      "nonfinite_totals": {
+        "gsensor": 0,
+        "gyro": 0,
+        "gps_speed": 0
+      },
+      "length_counts": {
+        "gsensor": {
+          "1080": 1,
+          "1100": 1,
+          "1140": 1,
+          "1150": 1,
+          "1160": 1,
+          "1170": 1,
+          "1200": 1,
+          "1250": 1,
+          "1280": 1,
+          "1300": 4,
+          "1310": 1,
+          "1400": 1,
+          "1410": 2,
+          "1440": 1,
+          "1450": 1,
+          "1480": 1,
+          "1490": 1,
+          "1510": 2,
+          "1530": 3,
+          "1540": 2,
+          "1550": 1,
+          "1570": 1,
+          "1590": 1,
+          "1600": 12056
+        },
+        "gyro": {
+          "1080": 1,
+          "1100": 1,
+          "1140": 1,
+          "1150": 1,
+          "1160": 1,
+          "1170": 1,
+          "1200": 1,
+          "1250": 1,
+          "1270": 1,
+          "1300": 4,
+          "1310": 1,
+          "1400": 1,
+          "1410": 2,
+          "1440": 1,
+          "1450": 1,
+          "1480": 1,
+          "1490": 1,
+          "1510": 2,
+          "1530": 3,
+          "1540": 2,
+          "1550": 1,
+          "1570": 1,
+          "1590": 1,
+          "1600": 12056
+        },
+        "gps_speed": {
+          "11": 2,
+          "12": 3,
+          "13": 7,
+          "14": 2,
+          "15": 5,
+          "16": 1120,
+          "17": 10948
+        }
+      },
+      "extrema": {
+        "gsensor": {
+          "finite_count": 57996360,
+          "min": -5.065000057220459,
+          "max": 5.8379998207092285
+        },
+        "gyro": {
+          "finite_count": 57996330,
+          "min": -1006.7249755859375,
+          "max": 1253.470947265625
+        },
+        "gps_speed": {
+          "finite_count": 204288,
+          "min": 0.0,
+          "max": 216.0
+        }
+      },
+      "vehiclesize_counts": {
+        "Light": 2363,
+        "Heavy": 2676,
+        "Medium": 5153,
+        "Unknown": 1895
+      },
+      "gyro_is_hd_counts": {
+        "true": 8708,
+        "false": 3379,
+        "null": 0
+      },
+      "anomaly_counts": {
+        "length_not_nominal:gps_speed": 10967,
+        "length_not_nominal:gsensor": 31,
+        "length_not_nominal:gyro": 31,
+        "imu_length_mismatch": 1
+      }
+    },
+    {
+      "file_name": "train-00000-of-00011.parquet",
+      "split": "train",
+      "num_rows": 12542,
+      "num_row_groups": 5,
+      "file_size_bytes": 512916857,
+      "schema_problems": [],
+      "read_error": null,
+      "signals_scanned": true,
+      "label_counts": {
+        "0": 245,
+        "1": 1496,
+        "2": 10801
+      },
+      "label_percentages": {
+        "crash": 1.9534,
+        "near_miss": 11.9279,
+        "normal_driving": 86.1186
+      },
+      "null_counts": {
+        "event_id": 0,
+        "label": 0,
+        "vehiclesize": 0,
+        "gyro_is_hd": 0,
+        "gsensor": 0,
+        "gyro": 0,
+        "gps_speed": 0
+      },
+      "null_element_totals": {
+        "gsensor": 0,
+        "gyro": 0,
+        "gps_speed": 0
+      },
+      "nonfinite_totals": {
+        "gsensor": 0,
+        "gyro": 0,
+        "gps_speed": 0
+      },
+      "length_counts": {
+        "gsensor": {
+          "1410": 1,
+          "1420": 4,
+          "1430": 1,
+          "1450": 2,
+          "1460": 1,
+          "1480": 1,
+          "1500": 7,
+          "1510": 1,
+          "1520": 2,
+          "1540": 2,
+          "1550": 1,
+          "1560": 1,
+          "1590": 1,
+          "1600": 12517
+        },
+        "gyro": {
+          "1410": 1,
+          "1420": 4,
+          "1430": 1,
+          "1450": 2,
+          "1460": 1,
+          "1480": 1,
+          "1500": 7,
+          "1510": 1,
+          "1520": 2,
+          "1540": 2,
+          "1550": 1,
+          "1560": 1,
+          "1590": 1,
+          "1600": 12517
+        },
+        "gps_speed": {
+          "15": 17,
+          "16": 12519,
+          "17": 6
+        }
+      },
+      "extrema": {
+        "gsensor": {
+          "finite_count": 60193170,
+          "min": -5.248000144958496,
+          "max": 5.247000217437744
+        },
+        "gyro": {
+          "finite_count": 60193170,
+          "min": -1885.0,
+          "max": 1674.0
+        },
+        "gps_speed": {
+          "finite_count": 200661,
+          "min": 0.0,
+          "max": 183.0
+        }
+      },
+      "vehiclesize_counts": {
+        "Unknown": 8838,
+        "Medium": 2081,
+        "Heavy": 819,
+        "Light": 804
+      },
+      "gyro_is_hd_counts": {
+        "true": 0,
+        "false": 12542,
+        "null": 0
+      },
+      "anomaly_counts": {
+        "length_not_nominal:gps_speed": 23,
+        "length_not_nominal:gsensor": 25,
+        "length_not_nominal:gyro": 25
+      }
+    }
+  ],
+  "split_totals": {
+    "test": {
+      "rows": 24174,
+      "labels": {
+        "0": 4221,
+        "1": 3633,
+        "2": 16320
+      }
+    },
+    "train": {
+      "rows": 12542,
+      "labels": {
+        "0": 245,
+        "1": 1496,
+        "2": 10801
+      }
+    }
+  },
+  "duplicate_event_ids": [],
+  "descriptive_stats": {
+    "role": "descriptive_not_applied",
+    "split": "train",
+    "note": "Computed only on scanned training files. Not a scaler and not a threshold.",
+    "peak_acceleration_magnitude_g": {
+      "all": {
+        "count": 12542,
+        "nonfinite_count": 0,
+        "mean": 1.4996072546446524,
+        "p0": 1.0652990762597092,
+        "p5": 1.1890226940883155,
+        "p25": 1.279651157357727,
+        "p50": 1.382047025059114,
+        "p75": 1.544838321138673,
+        "p95": 2.0640695419789914,
+        "p100": 6.785230043887543
+      },
+      "crash": {
+        "count": 245,
+        "nonfinite_count": 0,
+        "mean": 3.939221861544857,
+        "p0": 1.2678620376355405,
+        "p5": 1.8499453661469105,
+        "p25": 2.835404178591595,
+        "p50": 3.868144202960364,
+        "p75": 5.167630330219064,
+        "p95": 6.288437003235266,
+        "p100": 6.785230043887543
+      },
+      "near_miss": {
+        "count": 1496,
+        "nonfinite_count": 0,
+        "mean": 1.4880827340158684,
+        "p0": 1.1183849439570095,
+        "p5": 1.207641268594156,
+        "p25": 1.3024803908828728,
+        "p50": 1.4167529736098037,
+        "p75": 1.587808454783354,
+        "p95": 1.9986836322581838,
+        "p100": 4.461788652632176
+      },
+      "normal_driving": {
+        "count": 10801,
+        "nonfinite_count": 0,
+        "mean": 1.4458654811209146,
+        "p0": 1.0652990762597092,
+        "p5": 1.1868117285145086,
+        "p25": 1.274531273921535,
+        "p50": 1.3711327759042933,
+        "p75": 1.5243470850433163,
+        "p95": 1.9195262110919826,
+        "p100": 6.1681695420410545
+      }
+    },
+    "peak_horizontal_acceleration_g": {
+      "all": {
+        "count": 12542,
+        "nonfinite_count": 0,
+        "mean": 0.8396890315716732,
+        "p0": 0.24149741629241217,
+        "p5": 0.485027590398994,
+        "p25": 0.612515513047246,
+        "p50": 0.7300619805456416,
+        "p75": 0.89825233233034,
+        "p95": 1.42257967822938,
+        "p100": 6.313503297960359
+      },
+      "crash": {
+        "count": 245,
+        "nonfinite_count": 0,
+        "mean": 3.413058271904395,
+        "p0": 0.7691664289590532,
+        "p5": 1.4154169978354096,
+        "p25": 2.309692963876252,
+        "p50": 3.4716912676934153,
+        "p75": 4.280571182226799,
+        "p95": 5.5403348293489305,
+        "p100": 6.313503297960359
+      },
+      "near_miss": {
+        "count": 1496,
+        "nonfinite_count": 0,
+        "mean": 0.8807451548963424,
+        "p0": 0.35611795631293736,
+        "p5": 0.5220542194454371,
+        "p25": 0.669132447463705,
+        "p50": 0.8174004644800161,
+        "p75": 1.0223668443942988,
+        "p95": 1.4327305131090935,
+        "p100": 3.1359198091110785
+      },
+      "normal_driving": {
+        "count": 10801,
+        "nonfinite_count": 0,
+        "mean": 0.7756305717646903,
+        "p0": 0.24149741629241217,
+        "p5": 0.4786742087358205,
+        "p25": 0.6044369277320277,
+        "p50": 0.7144403407567906,
+        "p75": 0.8655553390286043,
+        "p95": 1.2470352365804551,
+        "p100": 5.491432819732849
+      }
+    }
+  },
+  "examples": [
+    {
+      "label": 0,
+      "label_name": "crash",
+      "event_id": 9366,
+      "source_file": "train-00000-of-00011.parquet",
+      "row_index": 1,
+      "nominal_timing": true
+    },
+    {
+      "label": 1,
+      "label_name": "near_miss",
+      "event_id": 19241,
+      "source_file": "train-00000-of-00011.parquet",
+      "row_index": 132,
+      "nominal_timing": true
+    },
+    {
+      "label": 2,
+      "label_name": "normal_driving",
+      "event_id": 9322,
+      "source_file": "train-00000-of-00011.parquet",
+      "row_index": 0,
+      "nominal_timing": true
+    }
+  ],
+  "anomaly_policy": [
+    "Every audited row is kept. `rows_removed` is 0.",
+    "IMU lists that are not 1600 samples are flagged `length_not_nominal`.",
+    "GPS lists that are not 16 samples are flagged `length_not_nominal` and kept at their original length.",
+    "Accelerometer and gyroscope length disagreements are flagged `imu_length_mismatch`.",
+    "Nulls, empty lists, non-finite values, unknown labels, and duplicate event IDs are flagged.",
+    "Flags are listed in `anomalies.csv`. They are not a filter."
+  ]
+}
