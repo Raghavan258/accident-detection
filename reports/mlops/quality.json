@@ -1,0 +1,30 @@
+{
+  "passed": true,
+  "problems": [],
+  "missing_counts": {},
+  "outlier_share_by_feature": {
+    "peak_horizontal_g": 0.09124525232035414,
+    "peak_magnitude_g": 0.12214280809073284,
+    "min_ax_g": 0.05970322710152507,
+    "max_ax_g": 0.06529215067907006,
+    "std_horizontal_g": 0.016624142248141866,
+    "gps_start_kmh": 5.282536462707934e-06,
+    "gps_end_kmh": 1.0565072925415868e-05,
+    "gps_min_kmh": 0.11351642604713079,
+    "gps_drop_kmh": 5.282536462707934e-06,
+    "size_light": 0.1458772444176796,
+    "size_medium": 0.3588796796669889,
+    "size_heavy": 0.16358430664067658
+  },
+  "deepchecks": {
+    "available": true,
+    "passed": false,
+    "integrity_passed": false,
+    "train_test_passed": true,
+    "integrity_not_passed": [
+      "Feature Feature Correlation"
+    ],
+    "train_test_not_passed": []
+  },
+  "rows": 189303
+}

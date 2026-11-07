@@ -1,0 +1,15 @@
+{
+  "drift_detected": true,
+  "drifted_features": [
+    "peak_horizontal_g",
+    "peak_magnitude_g",
+    "min_ax_g",
+    "max_ax_g",
+    "std_horizontal_g"
+  ],
+  "share_threshold": 0.3,
+  "evidently": {
+    "available": true,
+    "wrote_html": true
+  }
+}

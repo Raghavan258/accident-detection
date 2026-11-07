@@ -1,0 +1,26 @@
+{
+  "rows": 189303,
+  "columns": [
+    "peak_horizontal_g",
+    "peak_magnitude_g",
+    "min_ax_g",
+    "max_ax_g",
+    "std_horizontal_g",
+    "peak_abs_gyro_deg_s",
+    "std_gyro_magnitude_deg_s",
+    "imu_samples",
+    "gyro_samples",
+    "gps_start_kmh",
+    "gps_end_kmh",
+    "gps_min_kmh",
+    "gps_drop_kmh",
+    "gps_samples",
+    "gyro_is_hd",
+    "size_light",
+    "size_medium",
+    "size_heavy",
+    "split",
+    "label",
+    "event_id"
+  ]
+}

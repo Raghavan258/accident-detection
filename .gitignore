@@ -5,3 +5,15 @@ __pycache__/
 *.egg-info/
 .mypy_cache/
 data/
+*.db
+*.sqlite
+*.sqlite3
+.env
+.env.*
+mlruns/
+mlops/*.db
+mlops/artifacts/
+.dvc/cache/
+.dvc/tmp/
+datasets/processed/*.parquet
+models/

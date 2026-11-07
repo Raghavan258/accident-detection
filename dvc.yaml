@@ -1,0 +1,14 @@
+stages:
+  train:
+    cmd: python -m accident_detection.mlops --features datasets/processed/features.parquet --tracking-uri sqlite:///mlops/mlflow.db --reports reports/mlops
+    deps:
+      - datasets/processed/features.parquet
+      - src/accident_detection
+      - params.yaml
+    params:
+      - params.yaml:
+          - min_validation_average_precision
+          - min_validation_recall
+          - drift_share_threshold
+    outs:
+      - reports/mlops/deployment.json

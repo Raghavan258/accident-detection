@@ -1,0 +1,4 @@
+model_name: iveras-crash-detector
+min_validation_average_precision: 0.85
+min_validation_recall: 0.85
+drift_share_threshold: 0.3

@@ -1,0 +1,660 @@
+{
+  "run_id": "c311845a-a34f-4297-96b0-3c935969a7bb",
+  "started_at": "2026-10-29T11:19:26.168851+00:00",
+  "finished_at": "2026-10-29T11:24:38.087650+00:00",
+  "status": "loaded",
+  "input_dir": "data\\VZCrash\\data",
+  "duration_seconds": 311.918,
+  "files_discovered": 16,
+  "files_processed": 16,
+  "files_failed": 0,
+  "input_rows": 189303,
+  "accepted_rows": 189303,
+  "rejected_rows": 0,
+  "shards": [
+    {
+      "file_name": "test-00000-of-00002.parquet",
+      "split_name": "test",
+      "byte_size": 494437326,
+      "input_rows": 12087,
+      "accepted_rows": 12087,
+      "rejected_rows": 0,
+      "status": "processed",
+      "error_message": null
+    },
+    {
+      "file_name": "test-00001-of-00002.parquet",
+      "split_name": "test",
+      "byte_size": 494255434,
+      "input_rows": 12087,
+      "accepted_rows": 12087,
+      "rejected_rows": 0,
+      "status": "processed",
+      "error_message": null
+    },
+    {
+      "file_name": "train-00000-of-00011.parquet",
+      "split_name": "train",
+      "byte_size": 512916857,
+      "input_rows": 12542,
+      "accepted_rows": 12542,
+      "rejected_rows": 0,
+      "status": "processed",
+      "error_message": null
+    },
+    {
+      "file_name": "train-00001-of-00011.parquet",
+      "split_name": "train",
+      "byte_size": 512949454,
+      "input_rows": 12542,
+      "accepted_rows": 12542,
+      "rejected_rows": 0,
+      "status": "processed",
+      "error_message": null
+    },
+    {
+      "file_name": "train-00002-of-00011.parquet",
+      "split_name": "train",
+      "byte_size": 512949841,
+      "input_rows": 12542,
+      "accepted_rows": 12542,
+      "rejected_rows": 0,
+      "status": "processed",
+      "error_message": null
+    },
+    {
+      "file_name": "train-00003-of-00011.parquet",
+      "split_name": "train",
+      "byte_size": 512838950,
+      "input_rows": 12541,
+      "accepted_rows": 12541,
+      "rejected_rows": 0,
+      "status": "processed",
+      "error_message": null
+    },
+    {
+      "file_name": "train-00004-of-00011.parquet",
+      "split_name": "train",
+      "byte_size": 512835365,
+      "input_rows": 12541,
+      "accepted_rows": 12541,
+      "rejected_rows": 0,
+      "status": "processed",
+      "error_message": null
+    },
+    {
+      "file_name": "train-00005-of-00011.parquet",
+      "split_name": "train",
+      "byte_size": 513139543,
+      "input_rows": 12541,
+      "accepted_rows": 12541,
+      "rejected_rows": 0,
+      "status": "processed",
+      "error_message": null
+    },
+    {
+      "file_name": "train-00006-of-00011.parquet",
+      "split_name": "train",
+      "byte_size": 512796422,
+      "input_rows": 12541,
+      "accepted_rows": 12541,
+      "rejected_rows": 0,
+      "status": "processed",
+      "error_message": null
+    },
+    {
+      "file_name": "train-00007-of-00011.parquet",
+      "split_name": "train",
+      "byte_size": 512746735,
+      "input_rows": 12541,
+      "accepted_rows": 12541,
+      "rejected_rows": 0,
+      "status": "processed",
+      "error_message": null
+    },
+    {
+      "file_name": "train-00008-of-00011.parquet",
+      "split_name": "train",
+      "byte_size": 512753396,
+      "input_rows": 12541,
+      "accepted_rows": 12541,
+      "rejected_rows": 0,
+      "status": "processed",
+      "error_message": null
+    },
+    {
+      "file_name": "train-00009-of-00011.parquet",
+      "split_name": "train",
+      "byte_size": 512819118,
+      "input_rows": 12541,
+      "accepted_rows": 12541,
+      "rejected_rows": 0,
+      "status": "processed",
+      "error_message": null
+    },
+    {
+      "file_name": "train-00010-of-00011.parquet",
+      "split_name": "train",
+      "byte_size": 512796165,
+      "input_rows": 12541,
+      "accepted_rows": 12541,
+      "rejected_rows": 0,
+      "status": "processed",
+      "error_message": null
+    },
+    {
+      "file_name": "validation-00000-of-00003.parquet",
+      "split_name": "validation",
+      "byte_size": 370491448,
+      "input_rows": 9059,
+      "accepted_rows": 9059,
+      "rejected_rows": 0,
+      "status": "processed",
+      "error_message": null
+    },
+    {
+      "file_name": "validation-00001-of-00003.parquet",
+      "split_name": "validation",
+      "byte_size": 370432581,
+      "input_rows": 9058,
+      "accepted_rows": 9058,
+      "rejected_rows": 0,
+      "status": "processed",
+      "error_message": null
+    },
+    {
+      "file_name": "validation-00002-of-00003.parquet",
+      "split_name": "validation",
+      "byte_size": 370368262,
+      "input_rows": 9058,
+      "accepted_rows": 9058,
+      "rejected_rows": 0,
+      "status": "processed",
+      "error_message": null
+    }
+  ],
+  "metrics": [
+    {
+      "scope": "all",
+      "metric": "input_rows",
+      "value": 189303,
+      "detail": null
+    },
+    {
+      "scope": "all",
+      "metric": "accepted_rows",
+      "value": 189303,
+      "detail": null
+    },
+    {
+      "scope": "all",
+      "metric": "rejected_rows",
+      "value": 0,
+      "detail": null
+    },
+    {
+      "scope": "all",
+      "metric": "label_crash",
+      "value": 31079,
+      "detail": null
+    },
+    {
+      "scope": "test-00000-of-00002.parquet",
+      "metric": "label_crash",
+      "value": 4221,
+      "detail": "test"
+    },
+    {
+      "scope": "test-00001-of-00002.parquet",
+      "metric": "label_crash",
+      "value": 0,
+      "detail": "test"
+    },
+    {
+      "scope": "train-00000-of-00011.parquet",
+      "metric": "label_crash",
+      "value": 245,
+      "detail": "train"
+    },
+    {
+      "scope": "train-00001-of-00011.parquet",
+      "metric": "label_crash",
+      "value": 63,
+      "detail": "train"
+    },
+    {
+      "scope": "train-00002-of-00011.parquet",
+      "metric": "label_crash",
+      "value": 365,
+      "detail": "train"
+    },
+    {
+      "scope": "train-00003-of-00011.parquet",
+      "metric": "label_crash",
+      "value": 1475,
+      "detail": "train"
+    },
+    {
+      "scope": "train-00004-of-00011.parquet",
+      "metric": "label_crash",
+      "value": 3268,
+      "detail": "train"
+    },
+    {
+      "scope": "train-00005-of-00011.parquet",
+      "metric": "label_crash",
+      "value": 12541,
+      "detail": "train"
+    },
+    {
+      "scope": "train-00006-of-00011.parquet",
+      "metric": "label_crash",
+      "value": 4646,
+      "detail": "train"
+    },
+    {
+      "scope": "train-00007-of-00011.parquet",
+      "metric": "label_crash",
+      "value": 0,
+      "detail": "train"
+    },
+    {
+      "scope": "train-00008-of-00011.parquet",
+      "metric": "label_crash",
+      "value": 0,
+      "detail": "train"
+    },
+    {
+      "scope": "train-00009-of-00011.parquet",
+      "metric": "label_crash",
+      "value": 0,
+      "detail": "train"
+    },
+    {
+      "scope": "train-00010-of-00011.parquet",
+      "metric": "label_crash",
+      "value": 0,
+      "detail": "train"
+    },
+    {
+      "scope": "validation-00000-of-00003.parquet",
+      "metric": "label_crash",
+      "value": 54,
+      "detail": "validation"
+    },
+    {
+      "scope": "validation-00001-of-00003.parquet",
+      "metric": "label_crash",
+      "value": 4201,
+      "detail": "validation"
+    },
+    {
+      "scope": "validation-00002-of-00003.parquet",
+      "metric": "label_crash",
+      "value": 0,
+      "detail": "validation"
+    },
+    {
+      "scope": "all",
+      "metric": "label_near_miss",
+      "value": 28681,
+      "detail": null
+    },
+    {
+      "scope": "test-00000-of-00002.parquet",
+      "metric": "label_near_miss",
+      "value": 1366,
+      "detail": "test"
+    },
+    {
+      "scope": "test-00001-of-00002.parquet",
+      "metric": "label_near_miss",
+      "value": 2267,
+      "detail": "test"
+    },
+    {
+      "scope": "train-00000-of-00011.parquet",
+      "metric": "label_near_miss",
+      "value": 1496,
+      "detail": "train"
+    },
+    {
+      "scope": "train-00001-of-00011.parquet",
+      "metric": "label_near_miss",
+      "value": 2789,
+      "detail": "train"
+    },
+    {
+      "scope": "train-00002-of-00011.parquet",
+      "metric": "label_near_miss",
+      "value": 3088,
+      "detail": "train"
+    },
+    {
+      "scope": "train-00003-of-00011.parquet",
+      "metric": "label_near_miss",
+      "value": 2187,
+      "detail": "train"
+    },
+    {
+      "scope": "train-00004-of-00011.parquet",
+      "metric": "label_near_miss",
+      "value": 607,
+      "detail": "train"
+    },
+    {
+      "scope": "train-00005-of-00011.parquet",
+      "metric": "label_near_miss",
+      "value": 0,
+      "detail": "train"
+    },
+    {
+      "scope": "train-00006-of-00011.parquet",
+      "metric": "label_near_miss",
+      "value": 839,
+      "detail": "train"
+    },
+    {
+      "scope": "train-00007-of-00011.parquet",
+      "metric": "label_near_miss",
+      "value": 9796,
+      "detail": "train"
+    },
+    {
+      "scope": "train-00008-of-00011.parquet",
+      "metric": "label_near_miss",
+      "value": 0,
+      "detail": "train"
+    },
+    {
+      "scope": "train-00009-of-00011.parquet",
+      "metric": "label_near_miss",
+      "value": 0,
+      "detail": "train"
+    },
+    {
+      "scope": "train-00010-of-00011.parquet",
+      "metric": "label_near_miss",
+      "value": 0,
+      "detail": "train"
+    },
+    {
+      "scope": "validation-00000-of-00003.parquet",
+      "metric": "label_near_miss",
+      "value": 1892,
+      "detail": "validation"
+    },
+    {
+      "scope": "validation-00001-of-00003.parquet",
+      "metric": "label_near_miss",
+      "value": 1515,
+      "detail": "validation"
+    },
+    {
+      "scope": "validation-00002-of-00003.parquet",
+      "metric": "label_near_miss",
+      "value": 839,
+      "detail": "validation"
+    },
+    {
+      "scope": "all",
+      "metric": "label_normal_driving",
+      "value": 129543,
+      "detail": null
+    },
+    {
+      "scope": "test-00000-of-00002.parquet",
+      "metric": "label_normal_driving",
+      "value": 6500,
+      "detail": "test"
+    },
+    {
+      "scope": "test-00001-of-00002.parquet",
+      "metric": "label_normal_driving",
+      "value": 9820,
+      "detail": "test"
+    },
+    {
+      "scope": "train-00000-of-00011.parquet",
+      "metric": "label_normal_driving",
+      "value": 10801,
+      "detail": "train"
+    },
+    {
+      "scope": "train-00001-of-00011.parquet",
+      "metric": "label_normal_driving",
+      "value": 9690,
+      "detail": "train"
+    },
+    {
+      "scope": "train-00002-of-00011.parquet",
+      "metric": "label_normal_driving",
+      "value": 9089,
+      "detail": "train"
+    },
+    {
+      "scope": "train-00003-of-00011.parquet",
+      "metric": "label_normal_driving",
+      "value": 8879,
+      "detail": "train"
+    },
+    {
+      "scope": "train-00004-of-00011.parquet",
+      "metric": "label_normal_driving",
+      "value": 8666,
+      "detail": "train"
+    },
+    {
+      "scope": "train-00005-of-00011.parquet",
+      "metric": "label_normal_driving",
+      "value": 0,
+      "detail": "train"
+    },
+    {
+      "scope": "train-00006-of-00011.parquet",
+      "metric": "label_normal_driving",
+      "value": 7056,
+      "detail": "train"
+    },
+    {
+      "scope": "train-00007-of-00011.parquet",
+      "metric": "label_normal_driving",
+      "value": 2745,
+      "detail": "train"
+    },
+    {
+      "scope": "train-00008-of-00011.parquet",
+      "metric": "label_normal_driving",
+      "value": 12541,
+      "detail": "train"
+    },
+    {
+      "scope": "train-00009-of-00011.parquet",
+      "metric": "label_normal_driving",
+      "value": 12541,
+      "detail": "train"
+    },
+    {
+      "scope": "train-00010-of-00011.parquet",
+      "metric": "label_normal_driving",
+      "value": 12541,
+      "detail": "train"
+    },
+    {
+      "scope": "validation-00000-of-00003.parquet",
+      "metric": "label_normal_driving",
+      "value": 7113,
+      "detail": "validation"
+    },
+    {
+      "scope": "validation-00001-of-00003.parquet",
+      "metric": "label_normal_driving",
+      "value": 3342,
+      "detail": "validation"
+    },
+    {
+      "scope": "validation-00002-of-00003.parquet",
+      "metric": "label_normal_driving",
+      "value": 8219,
+      "detail": "validation"
+    },
+    {
+      "scope": "all",
+      "metric": "missing_vehiclesize",
+      "value": 0,
+      "detail": "0.000000"
+    },
+    {
+      "scope": "all",
+      "metric": "missing_peak_horizontal_g",
+      "value": 0,
+      "detail": "0.000000"
+    },
+    {
+      "scope": "all",
+      "metric": "missing_peak_magnitude_g",
+      "value": 0,
+      "detail": "0.000000"
+    },
+    {
+      "scope": "all",
+      "metric": "missing_min_ax_g",
+      "value": 0,
+      "detail": "0.000000"
+    },
+    {
+      "scope": "all",
+      "metric": "missing_max_ax_g",
+      "value": 0,
+      "detail": "0.000000"
+    },
+    {
+      "scope": "all",
+      "metric": "missing_std_horizontal_g",
+      "value": 0,
+      "detail": "0.000000"
+    },
+    {
+      "scope": "all",
+      "metric": "missing_peak_abs_gyro_deg_s",
+      "value": 0,
+      "detail": "0.000000"
+    },
+    {
+      "scope": "all",
+      "metric": "missing_std_gyro_magnitude_deg_s",
+      "value": 0,
+      "detail": "0.000000"
+    },
+    {
+      "scope": "all",
+      "metric": "missing_imu_samples",
+      "value": 0,
+      "detail": "0.000000"
+    },
+    {
+      "scope": "all",
+      "metric": "missing_gyro_samples",
+      "value": 0,
+      "detail": "0.000000"
+    },
+    {
+      "scope": "all",
+      "metric": "missing_gps_start_kmh",
+      "value": 0,
+      "detail": "0.000000"
+    },
+    {
+      "scope": "all",
+      "metric": "missing_gps_end_kmh",
+      "value": 0,
+      "detail": "0.000000"
+    },
+    {
+      "scope": "all",
+      "metric": "missing_gps_min_kmh",
+      "value": 0,
+      "detail": "0.000000"
+    },
+    {
+      "scope": "all",
+      "metric": "missing_gps_drop_kmh",
+      "value": 0,
+      "detail": "0.000000"
+    },
+    {
+      "scope": "all",
+      "metric": "missing_gps_samples",
+      "value": 0,
+      "detail": "0.000000"
+    },
+    {
+      "scope": "all",
+      "metric": "missing_gyro_is_hd",
+      "value": 0,
+      "detail": "0.000000"
+    },
+    {
+      "scope": "all",
+      "metric": "missing_size_light",
+      "value": 0,
+      "detail": "0.000000"
+    },
+    {
+      "scope": "all",
+      "metric": "missing_size_medium",
+      "value": 0,
+      "detail": "0.000000"
+    },
+    {
+      "scope": "all",
+      "metric": "missing_size_heavy",
+      "value": 0,
+      "detail": "0.000000"
+    },
+    {
+      "scope": "all",
+      "metric": "within_file_duplicate_event_ids",
+      "value": 0,
+      "detail": "A duplicate is a repeated event_id. Within-file and cross-file repeats are counted and kept. Equal sensor summaries with different event_ids are not treated as duplicates."
+    },
+    {
+      "scope": "all",
+      "metric": "cross_file_duplicate_event_ids",
+      "value": 0,
+      "detail": "A duplicate is a repeated event_id. Within-file and cross-file repeats are counted and kept. Equal sensor summaries with different event_ids are not treated as duplicates."
+    },
+    {
+      "scope": "all",
+      "metric": "rejection_reason_none",
+      "value": 0,
+      "detail": null
+    },
+    {
+      "scope": "all",
+      "metric": "nonfinite_feature_values",
+      "value": 0,
+      "detail": null
+    },
+    {
+      "scope": "all",
+      "metric": "unexpected_vehiclesize",
+      "value": 0,
+      "detail": null
+    }
+  ],
+  "warnings": [
+    "test-00001-of-00002.parquet accepted rows contain no crashes",
+    "train-00005-of-00011.parquet accepted rows are all crashes",
+    "train-00007-of-00011.parquet accepted rows contain no crashes",
+    "train-00008-of-00011.parquet accepted rows contain no crashes",
+    "train-00009-of-00011.parquet accepted rows contain no crashes",
+    "train-00010-of-00011.parquet accepted rows contain no crashes",
+    "validation-00002-of-00003.parquet accepted rows contain no crashes"
+  ],
+  "duplicate_policy": "A duplicate is a repeated event_id. Within-file and cross-file repeats are counted and kept. Equal sensor summaries with different event_ids are not treated as duplicates.",
+  "missing_value_policy": "Null labels and null event ids are rejected. Other missing values stay null. The training imputer is not applied in this pipeline.",
+  "rejection_policy": "Rejected rows are stored with a reason and are excluded from sensor_events. Valid rows, including extreme gyroscope values and unusual lengths, are kept.",
+  "rows_removed_without_reason": 0,
+  "database_status": "committed"
+}

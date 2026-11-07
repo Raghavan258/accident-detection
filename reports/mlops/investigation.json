@@ -1,0 +1,16 @@
+{
+  "source": "datasets/processed/features.parquet",
+  "measured_on": "2026-11-07",
+  "recomputed_on_request": false,
+  "peak_horizontal_g_median_train": 0.7688910935646752,
+  "peak_horizontal_g_median_validation": 0.7610630757437044,
+  "extreme_event": {
+    "event_id": 385560,
+    "split": "validation",
+    "label": 1,
+    "label_name": "near_miss",
+    "peak_horizontal_g": 2420975.6413557865,
+    "note": "One validation row is above 100 g. It was kept. It moves the validation mean. Treat it as a data-quality investigation, not a confirmed physical acceleration."
+  },
+  "correlation_note": "The Deepchecks feature-feature correlation condition failed. The acceleration summaries are related by construction."
+}

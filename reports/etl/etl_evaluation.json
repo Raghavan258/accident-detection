@@ -1,0 +1,162 @@
+{
+  "run_id": "c311845a-a34f-4297-96b0-3c935969a7bb",
+  "rows": {
+    "train": 137954,
+    "validation": 27175,
+    "test": 24174
+  },
+  "historical_phase4_used": false,
+  "decision": {
+    "selected_model": "defensible_logistic",
+    "status": "frozen",
+    "reason": "highest validation average precision; name breaks ties",
+    "validation_average_precision": {
+      "peak_baseline": 0.884837641607,
+      "accel_logistic": 0.9079283442938089,
+      "defensible_logistic": 0.922651495325537
+    },
+    "threshold": 0.6152401422448208,
+    "model_criterion": "highest validation average precision; model name breaks ties",
+    "threshold_criterion": "maximum crash F1 on the selected model's validation scores; the lowest score wins ties",
+    "use_case_note": "No missed-crash versus false-alarm cost ratio was specified. Average precision ranks crash scores without an operating point. Crash F1 is the documented balanced threshold. Precision, recall, false positives, and false negatives are reported beside that choice.",
+    "experiment_version": "phase4-v1"
+  },
+  "validation": {
+    "peak_baseline": {
+      "role": "validation_operating_point",
+      "threshold": 1.9936800270274158,
+      "false_positives": 1060,
+      "false_negatives": 463,
+      "rows": 27175,
+      "precision_crash": 0.7815333882934872,
+      "recall_crash": 0.891186839012926,
+      "f1_crash": 0.8327660041726145,
+      "balanced_accuracy": 0.9224695102568993,
+      "balanced_accuracy_note": "",
+      "confusion_matrix": {
+        "labels": [
+          "non_crash",
+          "crash"
+        ],
+        "matrix": [
+          [
+            21860,
+            1060
+          ],
+          [
+            463,
+            3792
+          ]
+        ]
+      },
+      "support_non_crash": 22920,
+      "support_crash": 4255,
+      "average_precision_crash": 0.884837641607,
+      "average_precision_note": "",
+      "average_precision_excluded_nonfinite": 0
+    },
+    "accel_logistic": {
+      "role": "validation_operating_point",
+      "threshold": 0.5810991558413173,
+      "false_positives": 986,
+      "false_negatives": 398,
+      "rows": 27175,
+      "precision_crash": 0.7964071856287425,
+      "recall_crash": 0.9064629847238543,
+      "f1_crash": 0.8478786546493735,
+      "balanced_accuracy": 0.9317218937580878,
+      "balanced_accuracy_note": "",
+      "confusion_matrix": {
+        "labels": [
+          "non_crash",
+          "crash"
+        ],
+        "matrix": [
+          [
+            21934,
+            986
+          ],
+          [
+            398,
+            3857
+          ]
+        ]
+      },
+      "support_non_crash": 22920,
+      "support_crash": 4255,
+      "average_precision_crash": 0.9079283442938089,
+      "average_precision_note": "",
+      "average_precision_excluded_nonfinite": 0
+    },
+    "defensible_logistic": {
+      "role": "validation_operating_point",
+      "threshold": 0.6152401422448208,
+      "false_positives": 873,
+      "false_negatives": 359,
+      "rows": 27175,
+      "precision_crash": 0.816942755294611,
+      "recall_crash": 0.9156286721504113,
+      "f1_crash": 0.8634751773049646,
+      "balanced_accuracy": 0.9387698334574046,
+      "balanced_accuracy_note": "",
+      "confusion_matrix": {
+        "labels": [
+          "non_crash",
+          "crash"
+        ],
+        "matrix": [
+          [
+            22047,
+            873
+          ],
+          [
+            359,
+            3896
+          ]
+        ]
+      },
+      "support_non_crash": 22920,
+      "support_crash": 4255,
+      "average_precision_crash": 0.922651495325537,
+      "average_precision_note": "",
+      "average_precision_excluded_nonfinite": 0
+    }
+  },
+  "test": {
+    "status": "scored_once",
+    "metrics": {
+      "role": "etl_test_scored_once",
+      "threshold": 0.6152401422448208,
+      "false_positives": 825,
+      "false_negatives": 349,
+      "rows": 24174,
+      "precision_crash": 0.8243559718969555,
+      "recall_crash": 0.9173181710495143,
+      "f1_crash": 0.8683561336622561,
+      "balanced_accuracy": 0.9379855026048955,
+      "balanced_accuracy_note": "",
+      "confusion_matrix": {
+        "labels": [
+          "non_crash",
+          "crash"
+        ],
+        "matrix": [
+          [
+            19128,
+            825
+          ],
+          [
+            349,
+            3872
+          ]
+        ]
+      },
+      "support_non_crash": 19953,
+      "support_crash": 4221,
+      "average_precision_crash": 0.9272891281023602,
+      "average_precision_note": "",
+      "average_precision_excluded_nonfinite": 0
+    }
+  },
+  "status": "frozen"
+}

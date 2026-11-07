@@ -1,0 +1,12 @@
+{
+  "run_id": "aafc0af6e90c43ff90564ef4b782d420",
+  "gate": {
+    "passed": true,
+    "min_validation_average_precision": 0.85,
+    "min_validation_recall": 0.85,
+    "validation_average_precision": 0.922651495325537,
+    "validation_recall": 0.9156286721504113,
+    "used_test_labels": false
+  },
+  "run_name": "official-splits"
+}
