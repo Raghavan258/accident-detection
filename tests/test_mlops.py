@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import shutil
 import subprocess
+import sys
 from pathlib import Path
 
 import numpy as np
@@ -122,8 +123,8 @@ def test_dvc_versions_a_processed_table(tmp_path: Path):
     table = tmp_path / "features.parquet"
     _separable().to_parquet(table, index=False)
     subprocess.run(["git", "init"], cwd=tmp_path, check=True, capture_output=True)
-    subprocess.run([_dvc(), "init", "--no-scm"], cwd=tmp_path, check=True, capture_output=True)
-    subprocess.run([_dvc(), "add", table.name], cwd=tmp_path, check=True, capture_output=True)
+    subprocess.run([*_dvc(), "init", "--no-scm"], cwd=tmp_path, check=True, capture_output=True)
+    subprocess.run([*_dvc(), "add", table.name], cwd=tmp_path, check=True, capture_output=True)
     assert (tmp_path / "features.parquet.dvc").exists()
 
 
@@ -164,5 +165,5 @@ def _frame(labels: np.ndarray) -> pd.DataFrame:
     return frame
 
 
-def _dvc() -> str:
-    return str(ROOT / ".venv" / "Scripts" / "dvc.exe")
+def _dvc() -> list[str]:
+    return [sys.executable, "-m", "dvc"]

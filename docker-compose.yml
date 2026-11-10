@@ -6,6 +6,19 @@ services:
     environment:
       MLFLOW_TRACKING_URI: sqlite:///mlops/mlflow.db
       IVERAS_REPORT_DIR: /app/reports/mlops
+      IVERAS_CORS: http://localhost:5173,http://127.0.0.1:5173
     volumes:
       - ./mlops:/app/mlops
       - ./reports/mlops:/app/reports/mlops
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      args:
+        VITE_API_BASE: http://127.0.0.1:8000
+    ports:
+      - "5173:80"
+    depends_on:
+      iveras:
+        condition: service_healthy
