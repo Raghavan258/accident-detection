@@ -15,6 +15,8 @@ from accident_detection.mlops.dashboard import render_dashboard
 from accident_detection.mlops.registry import load_production, rollback_production
 from accident_detection.mlops.service import predict_from_features, predict_from_window
 from accident_detection.mlops.status import build_status
+from accident_detection.synthetic_v2.routes import mount_synthetic
+from accident_detection.synthetic_v2.v2_routes import build_v2_router
 
 DEFAULT_URI = "sqlite:///mlops/mlflow.db"
 
@@ -45,6 +47,8 @@ def create_app(tracking_uri: str, report_dir: Path | None = None) -> FastAPI:
     app.state.features_path = Path(os.environ.get("IVERAS_FEATURES", "datasets/processed/features.parquet"))
     _cors(app)
     _mount(app)
+    mount_synthetic(app)
+    app.include_router(build_v2_router(tracking_uri))
     return app
 
 
@@ -103,13 +107,17 @@ def _promote(app: FastAPI, version: str) -> dict[str, object]:
 
 
 def _cors(app: FastAPI) -> None:
-    origins = os.environ.get("IVERAS_CORS", "http://localhost:5173,http://127.0.0.1:5173").split(",")
     app.add_middleware(
         CORSMiddleware,
-        allow_origins=[origin.strip() for origin in origins if origin.strip()],
+        allow_origins=_origins(),
         allow_methods=["*"],
         allow_headers=["*"],
     )
+
+
+def _origins() -> list[str]:
+    raw = os.environ.get("ALLOWED_ORIGINS") or os.environ.get("IVERAS_CORS") or "http://localhost:5173,http://127.0.0.1:5173"
+    return [origin.strip() for origin in raw.split(",") if origin.strip()]
 
 
 def _drift_file(report_dir: Path | None) -> FileResponse:
@@ -130,8 +138,27 @@ def _predict(app: FastAPI, score) -> dict[str, object]:
 
 
 def _default_app() -> FastAPI:
+    _link_default_store()
     report = os.environ.get("IVERAS_REPORT_DIR")
     return create_app(os.environ.get("MLFLOW_TRACKING_URI", DEFAULT_URI), Path(report) if report else None)
+
+
+def _link_default_store() -> None:
+    from accident_detection.mlops.store_link import link_recorded_store
+
+    database = _sqlite_path(os.environ.get("MLFLOW_TRACKING_URI", DEFAULT_URI))
+    if database is not None and database.is_file():
+        link_recorded_store(database, database.parent)
+
+
+def _sqlite_path(uri: str) -> Path | None:
+    prefix = "sqlite:///"
+    if not uri.startswith(prefix):
+        return None
+    path = Path(uri.removeprefix(prefix))
+    if not path.is_absolute():
+        path = Path.cwd() / path
+    return path
 
 
 app = _default_app()

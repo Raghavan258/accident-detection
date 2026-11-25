@@ -1,5 +1,5 @@
 import { renderAt } from "@/test/render"
-import { health, status } from "@/test/fixtures"
+import { status } from "@/test/fixtures"
 import { screen, waitFor } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
 import { beforeEach, describe, expect, it, vi } from "vitest"
@@ -10,7 +10,6 @@ beforeEach(() => {
     vi.fn(async (input: RequestInfo, init?: RequestInit) => {
       const url = String(input)
       if (url.endsWith("/mlops/status")) return json(status)
-      if (url.endsWith("/mlops/health")) return json(health)
       if (url.endsWith("/mlops/schema")) {
         return json({ features: [{ name: "peak_horizontal_g", label: "Peak horizontal acceleration", unit: "g", group: "acceleration" }] })
       }
@@ -28,6 +27,8 @@ describe("mlops frontend", () => {
     expect(screen.getByText("0.8169").closest("section")?.textContent).toContain("Validation precision")
     expect(screen.getByText("Total predictions").closest("section")?.textContent).toContain("N/A")
     expect(screen.getByText(/not a deployment input/i)).toBeInTheDocument()
+    expect(screen.getByText("Schema passed")).toBeInTheDocument()
+    expect(screen.getByText("Prediction latency").closest("section")?.textContent).toContain("N/A")
   })
 
   it("shows the registry gate and blocks an unvalidated alias in the form", async () => {
@@ -53,7 +54,6 @@ describe("mlops frontend", () => {
     vi.stubGlobal("fetch", vi.fn(async (input: RequestInfo) => {
       const url = String(input)
       if (url.endsWith("/mlops/status")) return json(status)
-      if (url.endsWith("/mlops/health")) return json(health)
       if (url.endsWith("/mlops/schema")) return json({ features: [{ name: "peak_horizontal_g", label: "Peak", unit: "g", group: "acceleration" }] })
       if (url.endsWith("/mlops/examples")) return json({ rows: [] })
       return json({ detail: "no production model is registered" }, 409)

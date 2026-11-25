@@ -16,3 +16,12 @@ body {
 * {
   box-sizing: border-box;
 }
+
+.pulse-ring {
+  animation: pulse-ring 1.2s ease-out infinite;
+}
+
+@keyframes pulse-ring {
+  0% { stroke-opacity: 1; }
+  100% { stroke-opacity: 0.15; }
+}

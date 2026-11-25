@@ -4,19 +4,25 @@ services:
     ports:
       - "8000:8000"
     environment:
-      MLFLOW_TRACKING_URI: sqlite:///mlops/mlflow.db
+      MLFLOW_TRACKING_URI: sqlite:////app/mlops/mlflow.db
       IVERAS_REPORT_DIR: /app/reports/mlops
+      IVERAS_DB: /app/data/processed/accident_detection.db
+      IVERAS_FEATURES: /app/datasets/processed/features.parquet
+      IVERAS_SYNTHETIC: /app/datasets/synthetic_v2/events.parquet
       IVERAS_CORS: http://localhost:5173,http://127.0.0.1:5173
     volumes:
       - ./mlops:/app/mlops
       - ./reports/mlops:/app/reports/mlops
+      - ./data/processed:/app/data/processed
+      - ./datasets/processed:/app/datasets/processed
+      - ./datasets/synthetic_v2:/app/datasets/synthetic_v2
 
   frontend:
     build:
       context: ./frontend
       dockerfile: Dockerfile
       args:
-        VITE_API_BASE: http://127.0.0.1:8000
+        VITE_API_URL: http://127.0.0.1:8000
     ports:
       - "5173:80"
     depends_on:

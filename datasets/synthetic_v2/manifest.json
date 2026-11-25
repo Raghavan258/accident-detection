@@ -1,0 +1,76 @@
+{
+  "name": "iveras-synthetic-v2",
+  "seed": 20261125,
+  "rows": 1000,
+  "requested_counts": {
+    "crash": 200,
+    "near_miss": 150,
+    "normal_driving": 650
+  },
+  "actual_counts": {
+    "normal_driving": 650,
+    "crash": 200,
+    "near_miss": 150
+  },
+  "crs": "EPSG:4326",
+  "sha256": "968884a35c5643cb1c6111bd4113a962006a128ef46c11092264bdbe59186863",
+  "localities": [
+    {
+      "name": "Koramangala",
+      "lat_min": 12.925,
+      "lat_max": 12.945,
+      "lon_min": 77.61,
+      "lon_max": 77.64
+    },
+    {
+      "name": "Indiranagar",
+      "lat_min": 12.97,
+      "lat_max": 12.985,
+      "lon_min": 77.635,
+      "lon_max": 77.655
+    },
+    {
+      "name": "Whitefield",
+      "lat_min": 12.96,
+      "lat_max": 12.99,
+      "lon_min": 77.72,
+      "lon_max": 77.76
+    },
+    {
+      "name": "Jayanagar",
+      "lat_min": 12.92,
+      "lat_max": 12.94,
+      "lon_min": 77.58,
+      "lon_max": 77.6
+    },
+    {
+      "name": "Malleswaram",
+      "lat_min": 13.0,
+      "lat_max": 13.02,
+      "lon_min": 77.56,
+      "lon_max": 77.58
+    },
+    {
+      "name": "Hebbal",
+      "lat_min": 13.03,
+      "lat_max": 13.05,
+      "lon_min": 77.59,
+      "lon_max": 77.61
+    },
+    {
+      "name": "Electronic City",
+      "lat_min": 12.83,
+      "lat_max": 12.855,
+      "lon_min": 77.66,
+      "lon_max": 77.69
+    },
+    {
+      "name": "Yelahanka",
+      "lat_min": 13.09,
+      "lat_max": 13.115,
+      "lon_min": 77.58,
+      "lon_max": 77.61
+    }
+  ],
+  "not_vzcrash": true
+}

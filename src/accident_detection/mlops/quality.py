@@ -68,14 +68,21 @@ def _schema_problems(frame: pd.DataFrame) -> list[str]:
 
 
 def _missing(frame: pd.DataFrame) -> dict[str, int]:
-    counts = frame.loc[:, list(DEFENSIBLE_FEATURE_NAMES)].isna().sum()
+    present = [name for name in DEFENSIBLE_FEATURE_NAMES if name in frame.columns]
+    if not present:
+        return {}
+    counts = frame.loc[:, present].isna().sum()
     return {name: int(counts[name]) for name in counts.index if int(counts[name]) > 0}
 
 
 def _outlier_share(frame: pd.DataFrame) -> dict[str, float]:
+    if SPLIT_COLUMN not in frame.columns:
+        return {}
     train = frame.loc[frame[SPLIT_COLUMN] == "train"]
     shares = {}
     for name in DEFENSIBLE_FEATURE_NAMES:
+        if name not in frame.columns:
+            continue
         shares[name] = _share(train[name].to_numpy(dtype=float), frame[name].to_numpy(dtype=float))
     return shares
 

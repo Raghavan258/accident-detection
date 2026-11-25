@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import shutil
+import sqlite3
 import subprocess
 import sys
 from pathlib import Path
@@ -19,6 +20,7 @@ from accident_detection.mlops.cloud import cloud_status
 from accident_detection.mlops.drift import monitor_drift
 from accident_detection.mlops.lifecycle import run_lifecycle
 from accident_detection.mlops.quality import validate_frame
+from accident_detection.mlops.store_link import link_recorded_store
 from accident_detection.mlops.registry import registry_history, rollback_production
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -50,6 +52,43 @@ def test_invalid_labels_fail_validation():
     frame.loc[0, "label"] = 9
     report = validate_frame(frame)
     assert report["passed"] is False
+
+
+def test_defensible_schema_passes_until_a_feature_is_removed():
+    frame = _separable()
+    passed = validate_frame(frame)
+    assert passed["passed"] is True
+    assert passed["problems"] == []
+    broken = frame.drop(columns=["gps_drop_kmh"])
+    failed = validate_frame(broken)
+    assert failed["passed"] is False
+    assert any("gps_drop_kmh" in item for item in failed["problems"])
+
+
+def test_recorded_store_links_a_missing_directory_without_editing_the_database(tmp_path: Path):
+    mount = tmp_path / "mount"
+    mount.mkdir()
+    database = mount / "mlflow.db"
+    recorded = tmp_path / "host" / "mlops" / "artifacts" / "run"
+    _tracking_db(database, recorded.as_uri())
+    before = database.read_bytes()
+    linked = link_recorded_store(database, mount)
+    assert linked == [tmp_path / "host" / "mlops"]
+    assert database.read_bytes() == before
+    assert (tmp_path / "host" / "mlops" / "mlflow.db").is_file()
+
+
+def test_existing_recorded_store_is_not_replaced(tmp_path: Path):
+    mount = tmp_path / "mount"
+    mount.mkdir()
+    root = tmp_path / "host" / "mlops"
+    root.mkdir(parents=True)
+    marker = root / "keep.txt"
+    marker.write_text("keep", encoding="utf-8")
+    database = mount / "mlflow.db"
+    _tracking_db(database, (root / "artifacts" / "run").as_uri())
+    assert link_recorded_store(database, mount) == []
+    assert marker.read_text(encoding="utf-8") == "keep"
 
 
 def test_lifecycle_promotes_only_a_validated_model(tmp_path: Path):
@@ -167,3 +206,13 @@ def _frame(labels: np.ndarray) -> pd.DataFrame:
 
 def _dvc() -> list[str]:
     return [sys.executable, "-m", "dvc"]
+
+
+def _tracking_db(path: Path, artifact_uri: str) -> None:
+    connection = sqlite3.connect(path)
+    connection.execute("CREATE TABLE experiments (artifact_location TEXT)")
+    connection.execute("CREATE TABLE runs (artifact_uri TEXT)")
+    connection.execute("INSERT INTO experiments (artifact_location) VALUES (?)", (artifact_uri,))
+    connection.execute("INSERT INTO runs (artifact_uri) VALUES (?)", (artifact_uri,))
+    connection.commit()
+    connection.close()
