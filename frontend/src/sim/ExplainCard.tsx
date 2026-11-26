@@ -7,7 +7,7 @@ export function ExplainCard({ result, status }: { result: SimEvent | null; statu
   const width = Math.min(100, (result.probability ?? 0) * 100)
   const mark = Math.min(100, (result.threshold ?? 0.6152) * 100)
   return (
-    <section className="space-y-3 rounded-lg bg-[#111827] p-4">
+    <section className="space-y-3 rounded-lg border border-[rgba(148,163,184,0.12)] bg-[#060911] p-4">
       <p className="text-2xl font-semibold" style={{ color: crash ? "#ef4444" : "#14b8a6" }}>{result.prediction}</p>
       <p className="text-sm">{result.event_id} · probability {(result.probability ?? 0).toFixed(4)} · {result.severity_tier}</p>
       <div className="relative h-3 rounded bg-[#0b1120]">
@@ -27,12 +27,22 @@ function ContributionTable({ result }: { result: SimEvent }) {
   return (
     <div className="space-y-2">
       {rows.map((row) => (
-        <div key={row.name} className="grid grid-cols-[1.4fr_0.6fr_auto] items-center gap-2 text-xs">
-          <span>{row.label}{row.tier ? ` · ${row.tier}` : ""}</span>
-          <span className="text-[#9aa8bd]">{row.value}</span>
-          <span style={{ color: row.sign === "+" ? "#ef4444" : "#14b8a6" }}>{row.sign === "+" ? "Toward Crash (+)" : "Toward Normal (-)"}</span>
-        </div>
+        <ImpactRow key={row.name} label={`${row.label}${row.tier ? ` · ${row.tier}` : ""}`} value={row.value} delta={row.delta} sign={row.sign} />
       ))}
+    </div>
+  )
+}
+
+function ImpactRow({ label, value, delta, sign }: { label: string; value: number; delta: number; sign: string }) {
+  const width = Math.min(100, Math.abs(delta) * 40)
+  const crash = sign === "+"
+  return (
+    <div className="text-xs">
+      <div className="flex justify-between gap-2">
+        <span>{label}</span>
+        <span className="font-mono tabular-nums" style={{ color: crash ? "#ef4444" : "#14b8a6" }}>{value} {crash ? "Toward Crash (+)" : "Toward Normal (-)"}</span>
+      </div>
+      <div className="mt-1 h-1 rounded bg-[#060911]"><div className="h-full rounded" style={{ width: `${width}%`, marginLeft: crash ? 0 : `${100 - width}%`, background: crash ? "#ef4444" : "#14b8a6" }} /></div>
     </div>
   )
 }

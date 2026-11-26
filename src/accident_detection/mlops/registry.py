@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from pathlib import Path
+
 import mlflow
 from mlflow.tracking import MlflowClient
 
@@ -72,8 +74,17 @@ def registry_history(tracking_uri: str) -> dict[str, object]:
 
 
 def load_production(tracking_uri: str):
-    """Load the production pipeline and its decision sidecar."""
+    """Load the MLflow production alias, or the frozen file bundle when that store is absent."""
 
+    if not _store_present(tracking_uri):
+        return _frozen()
+    try:
+        return _from_store(tracking_uri)
+    except LookupError:
+        return _frozen()
+
+
+def _from_store(tracking_uri: str):
     client = _client(tracking_uri)
     version = _alias(client, PRODUCTION)
     if version is None:
@@ -82,6 +93,31 @@ def load_production(tracking_uri: str):
     model = mlflow.sklearn.load_model(f"models:/{MODEL_NAME}@production")
     decision = {"threshold": float(info.tags["threshold"]), "feature_names": info.tags["feature_names"].split(",")}
     return {"model": model, "version": version, "decision": decision}
+
+
+def _frozen():
+    from accident_detection.mlops.frozen import load_frozen
+
+    return load_frozen()
+
+
+def _store_present(tracking_uri: str) -> bool:
+    text = (tracking_uri or "").strip()
+    path = _sqlite_file(text)
+    if path is None:
+        return bool(text)
+    return path.is_file() and path.stat().st_size > 0
+
+
+def _sqlite_file(tracking_uri: str) -> Path | None:
+    prefix = "sqlite:///"
+    if not tracking_uri.startswith(prefix):
+        return None
+    raw = tracking_uri.removeprefix(prefix)
+    path = Path(raw) if raw else Path()
+    if raw and not path.is_absolute():
+        path = Path.cwd() / path
+    return path
 
 
 def _tag(client: MlflowClient, version: str, gate_passed: bool, threshold: float, names: list[str]) -> None:

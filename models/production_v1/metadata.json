@@ -1,0 +1,19 @@
+{
+  "model_name": "iveras-crash-detector",
+  "version": "1",
+  "threshold": 0.6152401422448208,
+  "feature_names": [
+    "peak_horizontal_g",
+    "peak_magnitude_g",
+    "min_ax_g",
+    "max_ax_g",
+    "std_horizontal_g",
+    "gps_start_kmh",
+    "gps_end_kmh",
+    "gps_min_kmh",
+    "gps_drop_kmh",
+    "size_light",
+    "size_medium",
+    "size_heavy"
+  ]
+}

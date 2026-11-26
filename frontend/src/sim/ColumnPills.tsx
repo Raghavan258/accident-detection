@@ -17,7 +17,7 @@ export function ColumnPills({ column, value, onPick }: { column: RangeColumn; va
           </Button>
         ))}
       </div>
-      <input className="w-full" type="range" min={column.tiers[0].min} max={column.tiers[column.tiers.length - 1].max} step={column.unit === "g" ? 0.1 : 1} value={clamp(value, column)} onChange={(event) => onPick({ ...current, value: Number(event.target.value) })} />
+      <input className="w-full accent-[#14b8a6]" type="range" min={column.tiers[0].min} max={column.tiers[column.tiers.length - 1].max} step={column.unit === "g" ? 0.1 : 1} value={clamp(value, column)} onChange={(event) => onPick({ ...current, value: Number(event.target.value) })} />
     </div>
   )
 }

@@ -7,7 +7,7 @@ export function Button({ className, ...props }: ButtonHTMLAttributes<HTMLButtonE
   return (
     <button
       className={cn(
-        "inline-flex items-center justify-center rounded-md border border-[#2a3958] bg-[#162033] px-3 py-1.5 text-sm text-[#e7ecf3] hover:bg-[#1c2942] disabled:cursor-not-allowed disabled:opacity-40",
+        "inline-flex items-center justify-center gap-1.5 rounded-md border border-[rgba(148,163,184,0.12)] bg-[#0f1623] px-3 py-1.5 text-sm text-[#e7ecf3] shadow-[inset_0_1px_0_rgba(255,255,255,0.04)] hover:border-[#14b8a6] disabled:cursor-not-allowed disabled:opacity-40",
         className,
       )}
       {...props}
@@ -17,7 +17,7 @@ export function Button({ className, ...props }: ButtonHTMLAttributes<HTMLButtonE
 
 export function Card({ title, children, action }: { title?: string; children: ReactNode; action?: ReactNode }) {
   return (
-    <section className="rounded-lg border border-[#243049] bg-[#121a2b] p-4">
+    <section className="rounded-lg border border-[rgba(148,163,184,0.12)] bg-[#0f1623] p-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.05)]">
       {title ? (
         <div className="mb-3 flex items-center justify-between gap-3">
           <h2 className="text-sm font-medium text-[#d5deea]">{title}</h2>
@@ -45,7 +45,7 @@ export function TextInput(props: InputHTMLAttributes<HTMLInputElement>) {
     <input
       {...props}
       className={cn(
-        "w-full rounded-md border border-[#2a3958] bg-[#0d1524] px-2 py-1.5 text-sm text-[#e7ecf3] outline-none focus:border-sky-700",
+        "w-full rounded-md border border-[rgba(148,163,184,0.12)] bg-[#060911] px-2 py-1.5 font-mono text-sm tabular-nums text-[#e7ecf3] outline-none focus:border-[#14b8a6]",
         props.className,
       )}
     />

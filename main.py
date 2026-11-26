@@ -1,4 +1,8 @@
-"""Render start target. `uvicorn main:app` loads the existing FastAPI app."""
+"""Render start target. `uvicorn main:app` loads the FastAPI app.
+
+Scoring checks the MLflow store first. When that database is missing, prediction
+and the simulator load models/production_v1/ instead.
+"""
 
 from __future__ import annotations
 

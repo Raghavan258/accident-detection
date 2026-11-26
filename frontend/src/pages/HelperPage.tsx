@@ -6,12 +6,11 @@ import { askHelper, dispatchAck, fetchDrivingRoute, getSimEvents, type DispatchH
 import { useEffect, useState } from "react"
 
 const CHIPS = [
-  "Show latest live user alert",
-  "Show severe crashes in Koramangala",
-  "Filter small accidents (1-2g)",
-  "Which locality has the highest crash density?",
-  "Navigate to latest accident",
-]
+  ["All Live Alerts", "Show latest live user alert"],
+  ["Crashes in Koramangala", "Show crashes in Koramangala"],
+  ["Severe >3.5g", "Show severe crashes"],
+  ["Highest Density Zone", "Which locality has the highest crash density?"],
+] as const
 
 type RouteView = { line: [number, number][]; etaMin: number; distanceKm: number; mapsUrl: string; googleUrl: string; hub: DispatchHub }
 
@@ -25,14 +24,16 @@ export function HelperPage() {
   const [chat, setChat] = useState<HelperReply | null>(null)
   const [route, setRoute] = useState<RouteView | null>(null)
   const [draft, setDraft] = useState("")
+  const [tiles, setTiles] = useState<"dark" | "osm">("dark")
   const banner = live.alerts.find((event) => event.alert_triggered || event.sos_requested)
   const pins = merge(chat?.matched_events?.length ? chat.matched_events : events, live.alerts)
+  const selected = pins.find((event) => event.event_id === focusId) ?? null
 
   useEffect(() => {
     const incoming = live.alerts.find((event) => event.alert_triggered || event.sos_requested)
     if (!incoming) return
     setFocusId(incoming.event_id)
-    setFlyTo({ lat: incoming.latitude, lng: incoming.longitude, zoom: 15 })
+    setFlyTo({ lat: incoming.latitude, lng: incoming.longitude, zoom: 16 })
   }, [live.alerts])
 
   useEffect(() => {
@@ -40,22 +41,29 @@ export function HelperPage() {
   }, [label, locality, live.alerts.length])
 
   return (
-    <div className="space-y-3 rounded-xl bg-[#0b1120] p-4 text-[#e7ecf3]">
-      <ProvenanceBanner />
-      <div className="flex items-center justify-between text-xs">
-        <span className={live.connected ? "text-[#14b8a6]" : "text-[#f59e0b]"}>{live.connected ? "LIVE STREAM CONNECTED" : "LIVE STREAM CONNECTING"}</span>
-        <Filters label={label} locality={locality} onLabel={(value) => { setChat(null); setLabel(value) }} onLocality={(value) => { setChat(null); setLocality(value) }} />
-      </div>
-      {banner ? <CrashBanner event={banner} onFocus={() => reveal(banner, setFocusId, setFlyTo)} onNavigate={() => void navigate(banner, setFocusId, setFlyTo, setRoute)} /> : null}
-      <div className="grid h-[70vh] min-h-[32rem] gap-3 min-[880px]:grid-cols-[60%_40%]">
-        <div className="min-h-0">
-          <CityMap events={pins} focusId={focusId} flyTo={flyTo} route={route?.line} hub={route?.hub} onSelect={(id) => setFocusId(id)} />
+    <div className="grid min-h-[70vh] gap-3 md:grid-cols-[420px_1fr]">
+      <aside className="flex max-h-[78vh] flex-col overflow-hidden rounded-lg border border-[rgba(148,163,184,0.12)] bg-[#0f1623] shadow-[inset_0_1px_0_rgba(255,255,255,0.05)]">
+        <div className="sticky top-0 z-10 flex items-center justify-between gap-2 border-b border-[rgba(148,163,184,0.12)] bg-[#0f1623]/90 px-3 py-2 backdrop-blur-md">
+          <div>
+            <p className="text-xs tracking-[0.16em]">DISPATCH COPILOT</p>
+            <p className={live.connected ? "text-[10px] text-[#10b981]" : "text-[10px] text-[#f59e0b]"}>{live.connected ? "SSE LIVE" : "SSE CONNECTING"}</p>
+          </div>
+          <ProvenanceBanner />
+          <Button onClick={() => resetMap(setFocusId, setFlyTo, setRoute)}>Reset Map</Button>
         </div>
-        <aside className="space-y-3 overflow-auto rounded-lg bg-[#111827] p-3">
-          <ChatPanel draft={draft} chat={chat} onDraft={setDraft} onAsk={(message) => void ask(message, setChat, setDraft, setFocusId, setFlyTo, setRoute, route?.etaMin)} onOpen={(event) => void navigate(event, setFocusId, setFlyTo, setRoute)} />
-          {route ? <p className="text-sm">ETA {route.etaMin.toFixed(0)} min · {route.distanceKm.toFixed(1)} km · <a className="text-[#14b8a6] underline" href={route.mapsUrl} target="_blank" rel="noreferrer">OpenStreetMap</a> · <a className="text-[#14b8a6] underline" href={route.googleUrl} target="_blank" rel="noreferrer">Google Maps</a></p> : null}
-          <AlertQueue alerts={live.alerts} onOpen={(event) => void navigate(event, setFocusId, setFlyTo, setRoute)} />
-        </aside>
+        <div className="space-y-3 overflow-auto p-3">
+          <ChatPanel draft={draft} chat={chat} focusId={focusId} alerts={live.alerts} onDraft={setDraft} onAsk={(message) => void ask(message, setChat, setDraft, setFocusId, setFlyTo, setRoute, route?.etaMin)} onOpen={(event) => void navigate(event, setFocusId, setFlyTo, setRoute)} />
+          <Filters label={label} locality={locality} onLabel={(value) => { setChat(null); setLabel(value) }} onLocality={(value) => { setChat(null); setLocality(value) }} />
+          {banner ? <CrashBanner event={banner} onFocus={() => reveal(banner, setFocusId, setFlyTo)} onNavigate={() => void navigate(banner, setFocusId, setFlyTo, setRoute)} /> : null}
+        </div>
+      </aside>
+      <div className="relative min-h-[32rem] overflow-hidden rounded-lg border border-[rgba(148,163,184,0.12)]">
+        <CityMap events={pins} focusId={focusId} flyTo={flyTo} tiles={tiles} zones route={route?.line} hub={route?.hub} onSelect={(id) => { const event = pins.find((item) => item.event_id === id); if (event) reveal(event, setFocusId, setFlyTo) }} />
+        <div className="absolute right-3 top-3 z-[500] flex gap-1">
+          <Button className={tiles === "dark" ? "border-[#14b8a6] text-[#14b8a6]" : ""} onClick={() => setTiles("dark")}>Dark Tactical</Button>
+          <Button className={tiles === "osm" ? "border-[#14b8a6] text-[#14b8a6]" : ""} onClick={() => setTiles("osm")}>Standard OSM</Button>
+        </div>
+        {selected ? <Inspector event={selected} route={route} onAck={() => void acknowledge(selected, route?.etaMin)} /> : null}
       </div>
     </div>
   )
@@ -64,13 +72,13 @@ export function HelperPage() {
 function Filters({ label, locality, onLabel, onLocality }: { label: string; locality: string; onLabel: (value: string) => void; onLocality: (value: string) => void }) {
   return (
     <div className="flex gap-2">
-      <select className="rounded bg-[#111827] p-1" value={label} onChange={(event) => onLabel(event.target.value)}>
+      <select className="rounded border border-[rgba(148,163,184,0.12)] bg-[#060911] p-1 text-xs" value={label} onChange={(event) => onLabel(event.target.value)}>
         <option value="all">all</option>
         <option value="crash">crash</option>
         <option value="near_miss">near_miss</option>
         <option value="normal_driving">normal_driving</option>
       </select>
-      <select className="rounded bg-[#111827] p-1" value={locality} onChange={(event) => onLocality(event.target.value)}>
+      <select className="rounded border border-[rgba(148,163,184,0.12)] bg-[#060911] p-1 text-xs" value={locality} onChange={(event) => onLocality(event.target.value)}>
         {["all", "Koramangala", "Indiranagar", "Whitefield", "Jayanagar", "Malleswaram", "Hebbal", "Electronic City", "Yelahanka"].map((name) => <option key={name}>{name}</option>)}
       </select>
     </div>
@@ -93,40 +101,45 @@ function CrashBanner({ event, onFocus, onNavigate }: { event: SimEvent; onFocus:
   )
 }
 
-function ChatPanel({ draft, chat, onDraft, onAsk, onOpen }: { draft: string; chat: HelperReply | null; onDraft: (value: string) => void; onAsk: (message: string) => void; onOpen: (event: SimEvent) => void }) {
+function ChatPanel({ draft, chat, focusId, alerts, onDraft, onAsk, onOpen }: { draft: string; chat: HelperReply | null; focusId: string | null; alerts: SimEvent[]; onDraft: (value: string) => void; onAsk: (message: string) => void; onOpen: (event: SimEvent) => void }) {
+  const cards = [...alerts, ...(chat?.matched_events ?? [])].slice(0, 8)
   return (
     <div className="space-y-2">
-      <h2 className="text-sm font-medium">Requirement filter</h2>
-      <div className="flex flex-wrap gap-2">
-        {CHIPS.map((chip) => <Button key={chip} onClick={() => onAsk(chip)}>{chip}</Button>)}
-        <Button onClick={() => onAsk("Dispatch Ambulance (108) & Notify User")}>Dispatch Ambulance (108) & Notify User</Button>
-        <Button onClick={() => onAsk("Send ETA update to driver")}>Send ETA update to driver</Button>
-        <Button onClick={() => onAsk("Mark Scene Secured")}>Mark Scene Secured</Button>
+      <div className="flex gap-1 overflow-x-auto">
+        {CHIPS.map(([label, query]) => <Button key={label} onClick={() => onAsk(query)}>{label}</Button>)}
       </div>
       <form className="flex gap-2" onSubmit={(event) => { event.preventDefault(); onAsk(draft) }}>
-        <input className="min-w-0 flex-1 rounded bg-[#0b1120] p-2 text-sm" value={draft} onChange={(event) => onDraft(event.target.value)} placeholder="Filter by zone, severity, or event id" />
+        <input className="min-w-0 flex-1 rounded border border-[rgba(148,163,184,0.12)] bg-[#060911] p-2 text-sm" value={draft} onChange={(event) => onDraft(event.target.value)} placeholder="Filter by zone, severity, or event id" />
         <Button type="submit">Ask</Button>
       </form>
-      {chat ? <p className="text-sm">{chat.reply}</p> : null}
-      {chat?.matched_events.slice(0, 6).map((event) => (
-        <button key={event.event_id} className="block w-full rounded bg-[#0b1120] p-2 text-left text-xs" onClick={() => onOpen(event)}>
-          {event.event_id} · {event.locality} · {event.label_name} · {event.peak_horizontal_g.toFixed(1)} g
-        </button>
-      ))}
+      {chat ? <p className="rounded border border-[rgba(148,163,184,0.12)] p-2 text-sm">{chat.reply}</p> : null}
+      {cards.map((event) => <IncidentCard key={`${event.event_id}-${event.observed_at ?? ""}`} event={event} active={event.event_id === focusId} onOpen={() => onOpen(event)} />)}
+      <div className="flex flex-wrap gap-2">
+        <Button onClick={() => onAsk("Dispatch Ambulance (108) & Notify User")}>Dispatch Ambulance (108)</Button>
+        <Button onClick={() => onAsk("Send ETA update to driver")}>Send ETA</Button>
+        <Button onClick={() => onAsk("Mark Scene Secured")}>Mark Scene Secured</Button>
+      </div>
     </div>
   )
 }
 
-function AlertQueue({ alerts, onOpen }: { alerts: SimEvent[]; onOpen: (event: SimEvent) => void }) {
+function IncidentCard({ event, active, onOpen }: { event: SimEvent; active: boolean; onOpen: () => void }) {
   return (
-    <div className="space-y-2">
-      <h2 className="text-sm font-medium">Alert queue</h2>
-      {alerts.length === 0 ? <p className="text-xs text-[#9aa8bd]">Waiting for a user transmission.</p> : null}
-      {alerts.map((event) => (
-        <button key={event.event_id} className="block w-full rounded p-2 text-left text-xs" style={{ background: event.label_name === "crash" ? "#450a0a" : "#451a03" }} onClick={() => onOpen(event)}>
-          {event.event_id} · {event.label_name} · {event.locality}
-        </button>
-      ))}
+    <button className={`block w-full rounded-lg border bg-[#060911] p-2 text-left text-xs ${active ? "border-[#14b8a6]" : "border-[rgba(148,163,184,0.12)]"}`} onClick={onOpen}>
+      <span className="font-mono">{event.event_id}</span> · {event.locality}
+      <span className="mt-1 block font-mono tabular-nums text-[#9aa8bd]">Peak {event.peak_horizontal_g.toFixed(2)} g · Drop {event.gps_drop_kmh.toFixed(0)} km/h · Prob {(event.probability ?? 0).toFixed(4)} · {event.observed_at ?? "live"}</span>
+    </button>
+  )
+}
+
+function Inspector({ event, route, onAck }: { event: SimEvent; route: RouteView | null; onAck: () => void }) {
+  return (
+    <div className="absolute bottom-3 left-3 z-[500] w-72 rounded-lg border border-[rgba(148,163,184,0.12)] bg-[#0f1623]/90 p-3 text-xs shadow-[inset_0_1px_0_rgba(255,255,255,0.05)] backdrop-blur-md">
+      <p className="font-mono">{event.event_id} · {event.locality}</p>
+      <p className="mt-1 font-mono tabular-nums">{event.latitude.toFixed(5)}, {event.longitude.toFixed(5)}</p>
+      <p className="mt-1 font-mono tabular-nums">Prob {(event.probability ?? 0).toFixed(4)} · {route ? `ETA ${route.etaMin.toFixed(0)} min · ${route.distanceKm.toFixed(1)} km` : "Route pending"}</p>
+      {route ? <a className="mt-1 block text-[#14b8a6] underline" href={route.googleUrl} target="_blank" rel="noreferrer">Open in External Maps</a> : null}
+      <Button className="mt-2 border-[#ef4444] text-[#ef4444]" onClick={onAck}>Acknowledge & Dispatch Unit</Button>
     </div>
   )
 }
@@ -187,7 +200,21 @@ async function navigate(
 
 function reveal(event: SimEvent, setFocusId: (value: string) => void, setFlyTo: (value: { lat: number; lng: number; zoom: number }) => void) {
   setFocusId(event.event_id)
-  setFlyTo({ lat: event.latitude, lng: event.longitude, zoom: 15 })
+  setFlyTo({ lat: event.latitude, lng: event.longitude, zoom: 16 })
+}
+
+function resetMap(setFocusId: (value: string | null) => void, setFlyTo: (value: { lat: number; lng: number; zoom: number }) => void, setRoute: (value: RouteView | null) => void) {
+  setFocusId(null)
+  setRoute(null)
+  setFlyTo({ lat: 12.97, lng: 77.59, zoom: 11 })
+}
+
+async function acknowledge(event: SimEvent, etaMin?: number) {
+  try {
+    await dispatchAck(event.event_id, "ambulance", etaMin)
+  } catch {
+    return
+  }
 }
 
 function osmLink(event: SimEvent): string {

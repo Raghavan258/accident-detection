@@ -16,4 +16,6 @@ mlops/artifacts/
 .dvc/cache/
 .dvc/tmp/
 datasets/processed/*.parquet
-models/
+models/*
+!models/production_v1/
+
