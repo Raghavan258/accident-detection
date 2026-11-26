@@ -71,37 +71,55 @@ export function UserPage() {
   }
 
   return (
-    <div className="space-y-4 rounded-xl bg-[#0b1120] p-4 text-[#e7ecf3]">
-      <ProvenanceBanner />
-      <div className="grid gap-4 xl:grid-cols-[1.15fr_0.85fr]">
-        <section className="space-y-4 rounded-lg bg-[#111827] p-4">
-          <h1 className="text-lg font-medium">Step A · Click-to-pin GPS</h1>
-          <GpsBar locality={place.locality} onZone={(name) => { const center = zoneCenter(name); move(center.lat, center.lng) }} onGps={() => readGps(move, setError)} />
-          <div className="h-64 overflow-hidden rounded-lg"><CityMap events={[]} pin={place} flyTo={{ ...place, zoom: 13 }} onPick={move} /></div>
-          <p className="rounded border border-[#14b8a6] px-3 py-2 text-xs text-[#99f6e4]">Recorded GPS Telemetry · Lat {place.lat.toFixed(5)} · Lng {place.lng.toFixed(5)} · Zone {place.locality} · {stamp}</p>
-          {schema ? <FeatureStep schema={schema} features={features} gyro={gyro} onFeatures={(next) => { setFeatures(next); void classify(false, next) }} onGyro={(value) => { setGyro(value); void classify(false, undefined, undefined, value) }} onApply={(item) => { setFeatures(item.features); setPreset(item); setGyro(item.gyro_deg_s); void classify(false, item.features, item, item.gyro_deg_s) }} /> : <p className="text-sm">Loading the 12 model columns…</p>}
-          <div className="flex gap-2">
-            <Button className="bg-[#14b8a6] text-[#042f2e]" disabled={pending || !schema} onClick={() => void classify(false)}>{pending ? "Scoring…" : "Simulate & Classify"}</Button>
-            <Button className="border-[#ef4444] text-[#ef4444]" disabled={pending || !schema} onClick={() => void classify(true)}>Send Emergency SOS Alert</Button>
-          </div>
-          {error ? <p className="text-sm text-[#ef4444]">{error}</p> : null}
-        </section>
+    <div className="grid gap-4 md:grid-cols-2">
+      <section className="space-y-3 rounded-lg border border-[rgba(148,163,184,0.12)] bg-[#0f1623] p-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.05)]">
+        <div className="flex items-center justify-between gap-2">
+          <h1 className="text-sm font-semibold tracking-wide">Tactical map</h1>
+          <ProvenanceBanner />
+        </div>
+        <GpsBar locality={place.locality} onZone={(name) => { const center = zoneCenter(name); move(center.lat, center.lng) }} onGps={() => readGps(move, setError)} />
+        <div className="h-[28rem] overflow-hidden rounded-lg"><CityMap events={[]} pin={place} zones flyTo={{ ...place, zoom: 13 }} onPick={move} /></div>
+        <p className="rounded border border-[#14b8a6]/40 px-3 py-2 font-mono text-xs tabular-nums text-[#99f6e4]">Lat {place.lat.toFixed(5)} · Lng {place.lng.toFixed(5)} · {place.locality} · {stamp}</p>
+      </section>
+      <section className="max-h-[52rem] space-y-3 overflow-auto rounded-lg border border-[rgba(148,163,184,0.12)] bg-[#0f1623] p-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.05)]">
+        {schema ? <FeatureStep schema={schema} features={features} gyro={gyro} onFeatures={(next) => { setFeatures(next); void classify(false, next) }} onGyro={(value) => { setGyro(value); void classify(false, undefined, undefined, value) }} onApply={(item) => { setFeatures(item.features); setPreset(item); setGyro(item.gyro_deg_s); void classify(false, item.features, item, item.gyro_deg_s) }} /> : <p className="text-sm">Loading the 12 model columns…</p>}
+        <div className="flex flex-wrap gap-2">
+          <Button className="border-[#14b8a6] bg-[#14b8a6] text-[#042f2e]" disabled={pending || !schema} onClick={() => void classify(false)}>{pending ? "Scoring…" : "Simulate & Classify"}</Button>
+          <Button className="border-[#ef4444] text-[#ef4444]" disabled={pending || !schema} onClick={() => void classify(true)}>Send Emergency SOS Alert</Button>
+        </div>
+        {error ? <p className="text-sm text-[#ef4444]">{error}</p> : null}
         <ExplainCard result={result} status={status} />
-      </div>
+        <DispatchStepper result={result} status={status} />
+      </section>
     </div>
   )
 }
 
 function GpsBar({ locality, onZone, onGps }: { locality: string; onZone: (name: string) => void; onGps: () => void }) {
   return (
-    <div className="flex flex-wrap gap-2">
+    <div className="flex flex-wrap gap-1.5">
       <Button onClick={onGps}>Use Browser GPS</Button>
-      <label className="text-sm">Jump to Zone
-        <select className="ml-2 rounded bg-[#0b1120] p-2" value={locality} onChange={(event) => onZone(event.target.value)}>
-          {ZONES.map((zone) => <option key={zone.name}>{zone.name}</option>)}
-        </select>
-      </label>
+      {ZONES.map((zone) => (
+        <button key={zone.name} className={`rounded-full border px-2 py-1 text-[11px] ${locality === zone.name ? "border-[#14b8a6] text-[#14b8a6]" : "border-[rgba(148,163,184,0.12)] text-[#9aa8bd]"}`} onClick={() => onZone(zone.name)}>
+          {zone.name}
+        </button>
+      ))}
     </div>
+  )
+}
+
+function DispatchStepper({ result, status }: { result: SimEvent | null; status: string }) {
+  const steps = [
+    ["1. Telemetry Scored", Boolean(result)],
+    ["2. Alert Broadcasted to Helper", Boolean(result?.broadcast || result?.sos_requested)],
+    ["3. Responder Dispatched", /en route|secured|ambulance/i.test(status)],
+  ] as const
+  return (
+    <ol className="grid gap-2">
+      {steps.map(([label, on]) => (
+        <li key={label} className={`rounded border px-3 py-2 text-xs ${on ? "border-[#10b981] text-[#10b981]" : "border-[rgba(148,163,184,0.12)] text-[#9aa8bd]"}`}>{label}</li>
+      ))}
+    </ol>
   )
 }
 

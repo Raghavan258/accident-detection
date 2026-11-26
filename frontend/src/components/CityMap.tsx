@@ -1,8 +1,11 @@
 import type { SimEvent } from "@/services/api"
+import { ZONES } from "@/sim/zones"
 import type { CircleMarker as CircleMarkerLayer } from "leaflet"
 import { useEffect, useRef } from "react"
-import { CircleMarker, MapContainer, Polyline, Popup, TileLayer, useMap, useMapEvents } from "react-leaflet"
+import { CircleMarker, MapContainer, Polyline, Popup, Rectangle, TileLayer, useMap, useMapEvents } from "react-leaflet"
 import "leaflet/dist/leaflet.css"
+
+const OSM = "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
 
 const COLORS: Record<string, string> = {
   crash: "#ef4444",
@@ -19,14 +22,17 @@ type MapProps = {
   hub?: { lat: number; lng: number; name: string } | null
   pin?: { lat: number; lng: number } | null
   flyTo?: FlyTarget
+  tiles?: "dark" | "osm"
+  zones?: boolean
   onPick?: (lat: number, lng: number) => void
   onSelect?: (eventId: string) => void
 }
 
-export function CityMap({ events, focusId, route, hub, pin, flyTo, onPick, onSelect }: MapProps) {
+export function CityMap({ events, focusId, route, hub, pin, flyTo, tiles = "dark", zones = false, onPick, onSelect }: MapProps) {
   return (
-    <MapContainer center={[12.97, 77.59]} zoom={11} className="h-full w-full rounded-lg" scrollWheelZoom>
-      <TileLayer attribution='&copy; OpenStreetMap' url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+    <MapContainer center={[12.97, 77.59]} zoom={11} className={`h-full w-full rounded-lg ${tiles === "dark" ? "dark-map" : ""}`} scrollWheelZoom>
+      <TileLayer attribution='&copy; OpenStreetMap' url={OSM} />
+      {zones ? ZONES.map((zone) => <Rectangle key={zone.name} bounds={[[zone.latMin, zone.lonMin], [zone.latMax, zone.lonMax]]} pathOptions={{ color: "#14b8a6", weight: 1, fillOpacity: 0.05 }} />) : null}
       <FlyTo target={flyTo ?? null} />
       {onPick ? <Picker onPick={onPick} /> : null}
       {events.map((event) => (
