@@ -35,6 +35,17 @@ def test_declared_gates_match_params():
     assert declared["drift_share_threshold"] == DRIFT_SHARE_THRESHOLD
 
 
+def test_published_reports_fill_an_empty_store(tmp_path: Path):
+    client = TestClient(create_app(f"sqlite:///{tmp_path / 'mlflow.db'}", ROOT / "reports" / "mlops"))
+    body = client.get("/mlops/status").json()
+    assert body["registry"]["production"] == "1"
+    assert body["registry"]["versions"][0]["tags"]["threshold"].startswith("0.6152")
+    assert body["test"]["precision_crash"] == pytest.approx(0.8243559718969555)
+    assert body["validation"]["recall_crash"] == pytest.approx(0.9156286721504113)
+    assert body["retraining"]["gate"]["passed"] is True
+    assert body["drift"]["drift_detected"] is True
+
+
 def test_schema_and_missing_drift_report(tmp_path: Path):
     from fastapi.testclient import TestClient
 

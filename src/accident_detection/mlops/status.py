@@ -33,7 +33,81 @@ def build_status(tracking_uri: str, report_dir: Path | None = None) -> dict[str,
         "retraining": _read(report_dir, "retraining.json"),
         "investigation": _read(report_dir, "investigation.json"),
     }
+    return _with_published_scores(status, report_dir)
+
+
+def _with_published_scores(status: dict[str, object], report_dir: Path | None) -> dict[str, object]:
+    if (status.get("registry") or {}).get("production"):
+        return status
+    published = _published(report_dir)
+    if published is None:
+        return status
+    _fill_registry(status, published["threshold"])
+    if not status["experiments"]:
+        status["experiments"] = [published["run"]]
+        status["validation"] = published["validation"]
+        status["test"] = published["test"]
     return status
+
+
+def _published(report_dir: Path | None) -> dict[str, object] | None:
+    if report_dir is None:
+        return None
+    path = Path(report_dir).parent / "phase4" / "phase4_results.json"
+    if not path.is_file():
+        return None
+    payload = json.loads(path.read_text(encoding="utf-8"))
+    validation = _metrics(_operating_point(payload) or {})
+    test = _metrics(payload.get("test_evaluation", {}).get("pooled", {}))
+    if not validation or not test:
+        return None
+    threshold = payload.get("decision", {}).get("threshold")
+    return {"threshold": threshold, "validation": validation, "test": test, "run": _run(validation, test, threshold)}
+
+
+def _run(validation: dict[str, object], test: dict[str, object], threshold: object) -> dict[str, object]:
+    return {
+        "run_id": "phase4",
+        "run_name": "official-splits",
+        "status": "FINISHED",
+        "start_time": None,
+        "end_time": None,
+        "params": {"selected_model": "defensible_logistic", "threshold": str(threshold)},
+        "validation": validation,
+        "test": test,
+        "validation_confusion_matrix": None,
+        "test_confusion_matrix": None,
+    }
+
+
+def _fill_registry(status: dict[str, object], threshold: object) -> None:
+    version = str((status.get("deployment") or {}).get("production") or "1")
+    run_id = str((status.get("retraining") or {}).get("run_id") or "phase4")
+    status["registry"] = {
+        "name": "iveras-crash-detector",
+        "versions": [{"version": version, "run_id": run_id, "tags": {"gate_passed": "true", "threshold": str(threshold)}}],
+        "production": version,
+        "staging": None,
+    }
+
+
+def _operating_point(node: object) -> dict | None:
+    if not isinstance(node, dict):
+        return None
+    model = node.get("defensible_logistic")
+    point = model.get("max_f1_threshold") if isinstance(model, dict) else None
+    if isinstance(point, dict):
+        return point
+    for value in node.values():
+        found = _operating_point(value) if isinstance(value, dict) else None
+        if found:
+            return found
+    return None
+
+
+def _metrics(block: dict) -> dict[str, object]:
+    names = ("precision_crash", "recall_crash", "f1_crash", "average_precision_crash", "false_positives", "false_negatives")
+    return {name: block[name] for name in names if name in block}
 
 
 def _experiments() -> list[dict[str, object]]:

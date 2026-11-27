@@ -139,8 +139,15 @@ def _predict(app: FastAPI, score) -> dict[str, object]:
 
 def _default_app() -> FastAPI:
     _link_default_store()
-    report = os.environ.get("IVERAS_REPORT_DIR")
-    return create_app(os.environ.get("MLFLOW_TRACKING_URI", DEFAULT_URI), Path(report) if report else None)
+    return create_app(os.environ.get("MLFLOW_TRACKING_URI", DEFAULT_URI), _report_dir())
+
+
+def _report_dir() -> Path | None:
+    chosen = os.environ.get("IVERAS_REPORT_DIR")
+    if chosen:
+        return Path(chosen)
+    bundled = Path(__file__).resolve().parents[3] / "reports" / "mlops"
+    return bundled if bundled.is_dir() else None
 
 
 def _link_default_store() -> None:
